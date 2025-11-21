@@ -4,7 +4,7 @@
     "source_file": "frmsupplier.frm",
     "source_lines_of_code": 296,
     "target_framework": "Angular",
-    "analysis_timestamp": "2025-11-20T23:39:32.529065",
+    "analysis_timestamp": "2025-11-21T11:53:59.510995",
     "analyzer_version": "2.1.0-langgraph",
     "parser_type": "langgraph-subagent",
     "confidence": 0.938,
@@ -48,26 +48,26 @@
     "controls": [
       {
         "_control_index": 9,
-        "_source_lines": "Lines 1-5",
+        "_source_lines": "Lines 14-19",
         "_what": "Dropdown for searching suppliers by name",
         "id": "Combo1",
-        "_id_source": "Line 1: Begin VB.ComboBox Combo1",
+        "_id_source": "Line 14: Begin VB.ComboBox Combo1",
         "type": "ComboBox",
-        "_type_source": "Line 1: VB.ComboBox",
+        "_type_source": "Line 14: VB.ComboBox",
         "_type_angular_mapping": "mat-select or mat-autocomplete",
         "caption": "",
-        "_caption_note": "comboboxes don't have captions, only text property (runtime value)",
+        "_caption_note": "comboboxes don't have captions, only text property",
         "position": {
           "left": 2400,
           "top": 6840,
           "width": 2415,
           "height": 315,
-          "_source": "Lines 2-5",
+          "_source": "Lines 15-19",
           "_units": "twips",
-          "_note": "position is relative to form's top-left corner"
+          "_note": "positioned below input fields for search functionality"
         },
         "tab_index": 15,
-        "_tab_index_source": "Line 3: TabIndex = 15",
+        "_tab_index_source": "Line 17: TabIndex = 15",
         "_tab_index_why": "last control in tab order",
         "enabled": true,
         "_enabled_default": "Not specified = True by default",
@@ -79,10 +79,10 @@
           "associated_label": "Label6",
           "_associated_label_why": "label6 ('search by name:') is positioned at same top (6840), to the left",
           "event_handler": "Combo1_Click",
-          "_event_handler_source": "Lines 117-121: Private Sub Combo1_Click()"
+          "_event_handler_source": "Lines 117-122: Private Sub Combo1_Click()"
         },
         "confidence": 0.98,
-        "_confidence_why": "all properties clearly defined"
+        "_confidence_why": "all properties clearly defined with event handler"
       },
       {
         "_control_index": 5,
@@ -106,7 +106,7 @@
           "_layout_note": "first button in vertical column of action buttons"
         },
         "tab_index": 11,
-        "_tab_index_source": "Line 27: TabIndex = 11",
+        "_tab_index_source": "Line 28: TabIndex = 11",
         "_tab_order": "Eleventh in tab order (after input fields)",
         "enabled": true,
         "visible": true,
@@ -141,7 +141,7 @@
           "_layout_note": "second button in vertical column of action buttons"
         },
         "tab_index": 12,
-        "_tab_index_source": "Line 21: TabIndex = 12",
+        "_tab_index_source": "Line 22: TabIndex = 12",
         "_tab_order": "Twelfth in tab order",
         "enabled": true,
         "visible": true,
@@ -176,7 +176,7 @@
           "_layout_note": "third button in vertical column of action buttons"
         },
         "tab_index": 13,
-        "_tab_index_source": "Line 15: TabIndex = 13",
+        "_tab_index_source": "Line 16: TabIndex = 13",
         "_tab_order": "Thirteenth in tab order",
         "enabled": true,
         "visible": true,
@@ -211,7 +211,7 @@
           "_layout_note": "fourth button in vertical column of action buttons"
         },
         "tab_index": 14,
-        "_tab_index_source": "Line 9: TabIndex = 14",
+        "_tab_index_source": "Line 10: TabIndex = 14",
         "_tab_order": "Fourteenth in tab order",
         "enabled": true,
         "visible": true,
@@ -245,35 +245,56 @@
           "_note": "large grid positioned to right of input fields"
         },
         "tab_index": 3,
-        "_tab_index_source": "Line 57: TabIndex = 3",
-        "_tab_index_why": "third control in tab order",
+        "_tab_index_source": "Line 59: TabIndex = 3",
+        "_tab_index_why": "third in tab order (before input fields)",
         "enabled": true,
         "_enabled_default": "Not specified = True by default",
         "visible": true,
         "_visible_default": "Not specified = True by default",
         "properties": {
           "column_count": 2,
-          "_column_count_source": "Line 82: ColumnCount = 2",
+          "_column_count_source": "Line 78: ColumnCount = 2",
           "head_lines": 1,
-          "_head_lines_source": "Line 61: HeadLines = 1",
+          "_head_lines_source": "Line 62: HeadLines = 1",
           "row_height": 15,
-          "_row_height_source": "Line 62: RowHeight = 15",
+          "_row_height_source": "Line 63: RowHeight = 15",
           "event_handler": "DataGrid1_Click",
-          "_event_handler_source": "Lines 123-128: Private Sub DataGrid1_Click()"
+          "_event_handler_source": "Lines 124-129: Private Sub DataGrid1_Click()"
+        },
+        "font": {
+          "_source_lines": "Lines 64-72",
+          "_what": "Font styling for grid headers",
+          "name": "MS Sans Serif",
+          "_name_source": "Line 65: Name = \"MS Sans Serif\"",
+          "size": 8.25,
+          "_size_source": "Line 66: Size = 8.25",
+          "weight": 400,
+          "_weight_source": "Line 69: Weight = 400",
+          "_weight_mapping": "400 = Normal",
+          "bold": false,
+          "_bold_derived": "Weight 400 = Normal",
+          "italic": false,
+          "_italic_source": "Line 71: Italic = 0 'False",
+          "underline": false,
+          "_underline_source": "Line 70: Underline = 0 'False",
+          "strikethrough": false,
+          "_strikethrough_source": "Line 72: Strikethrough = 0 'False",
+          "weight_mapping": "normal",
+          "bold_derived": false
         },
         "confidence": 0.95,
-        "_confidence_why": "complex control with many properties defined"
+        "_confidence_why": "complex control with font properties and event handler"
       },
       {
         "_control_index": 11,
         "_source_lines": "Lines 96-101",
-        "_what": "Title label for the form",
+        "_what": "Label for main form title",
         "id": "Label1",
         "_id_source": "Line 96: Begin VB.Label Label1",
-        "_naming_note": "generic name, not descriptive like 'lbltitle'",
+        "_naming_note": "generic name, descriptive would be 'lbltitle'",
         "type": "Label",
         "_type_source": "Line 96: VB.Label",
-        "_type_angular_mapping": "mat-label or h1/h2 heading element",
+        "_type_angular_mapping": "mat-label or h1 heading element",
         "caption": "SUPPLIER MANAGEMENT",
         "_caption_source": "Line 98: Caption = \"SUPPLIER MANAGEMENT\"",
         "position": {
@@ -282,31 +303,32 @@
           "width": 4935,
           "height": 375,
           "_source": "Lines 112-115",
+          "_units": "twips",
           "_layout_note": "centered title at top of form"
         },
         "tab_index": 0,
         "_tab_index_source": "Line 114: TabIndex = 0",
-        "_tab_index_note": "first in tab order (title label)",
+        "_tab_index_note": "first in tab order (though labels are non-interactive)",
         "enabled": true,
         "visible": true,
         "font": {
           "_source_lines": "Lines 99-107",
-          "_what": "Font styling for title label",
+          "_what": "Font styling for main title",
           "name": "MS Sans Serif",
           "_name_source": "Line 100: Name = \"MS Sans Serif\"",
           "size": 13.5,
-          "_size_source": "Line 101: Size = 13.5 (points)",
+          "_size_source": "Line 101: Size = 13.5",
           "weight": 700,
-          "_weight_source": "Line 103: Weight = 700",
+          "_weight_source": "Line 104: Weight = 700",
           "_weight_mapping": "700 = Bold",
           "bold": true,
           "_bold_derived": "Weight 700 = Bold",
           "italic": false,
-          "_italic_source": "Line 105: Italic = 0 (False)",
+          "_italic_source": "Line 106: Italic = 0 'False",
           "underline": false,
-          "_underline_source": "Line 104: Underline = 0 (False)",
+          "_underline_source": "Line 105: Underline = 0 'False",
           "strikethrough": false,
-          "_strikethrough_source": "Line 106: Strikethrough = 0 (False)",
+          "_strikethrough_source": "Line 107: Strikethrough = 0 'False",
           "weight_mapping": "bold",
           "bold_derived": true
         },
@@ -314,7 +336,7 @@
           "alignment": "Center",
           "_alignment_source": "Line 97: Alignment = 2 'Center",
           "for_control": "",
-          "_for_control_reasoning": "title label, not associated with any specific control"
+          "_for_control_reasoning": "main title label, not associated with specific control"
         },
         "confidence": 1.0,
         "_confidence_why": "complete definition including font properties and alignment"
@@ -325,7 +347,7 @@
         "_what": "Label for Supplier Name field",
         "id": "Label2",
         "_id_source": "Line 116: Begin VB.Label Label2",
-        "_naming_note": "generic name, not descriptive like 'lblsuppliername'",
+        "_naming_note": "generic name, descriptive would be 'lblsuppliername'",
         "type": "Label",
         "_type_source": "Line 116: VB.Label",
         "_type_angular_mapping": "mat-label or simple <label> element",
@@ -337,19 +359,20 @@
           "width": 1455,
           "height": 255,
           "_source": "Lines 118-121",
+          "_units": "twips",
           "_layout_note": "positioned to left of text1 (same top=1080)"
         },
         "tab_index": 1,
-        "_tab_index_source": "Line 119: TabIndex = 1",
+        "_tab_index_source": "Line 120: TabIndex = 1",
         "_tab_index_note": "second in tab order",
         "enabled": true,
         "visible": true,
         "properties": {
           "for_control": "Text1",
-          "_for_control_reasoning": "positioned directly left of text1, describes its purpose"
+          "_for_control_reasoning": "positioned directly left of text1, describes supplier name input"
         },
         "confidence": 1.0,
-        "_confidence_why": "complete definition with clear association"
+        "_confidence_why": "complete definition with clear association to text1"
       },
       {
         "_control_index": 13,
@@ -357,7 +380,7 @@
         "_what": "Label for Location field",
         "id": "Label3",
         "_id_source": "Line 122: Begin VB.Label Label3",
-        "_naming_note": "generic name, not descriptive like 'lbllocation'",
+        "_naming_note": "generic name, descriptive would be 'lbllocation'",
         "type": "Label",
         "_type_source": "Line 122: VB.Label",
         "_type_angular_mapping": "mat-label or simple <label> element",
@@ -369,19 +392,20 @@
           "width": 1215,
           "height": 255,
           "_source": "Lines 124-127",
+          "_units": "twips",
           "_layout_note": "positioned to left of text2 (same top=1680)"
         },
         "tab_index": 2,
-        "_tab_index_source": "Line 125: TabIndex = 2",
+        "_tab_index_source": "Line 126: TabIndex = 2",
         "_tab_index_note": "third in tab order",
         "enabled": true,
         "visible": true,
         "properties": {
           "for_control": "Text2",
-          "_for_control_reasoning": "positioned directly left of text2, describes its purpose"
+          "_for_control_reasoning": "positioned directly left of text2, describes location input"
         },
         "confidence": 1.0,
-        "_confidence_why": "complete definition with clear association"
+        "_confidence_why": "complete definition with clear association to text2"
       },
       {
         "_control_index": 14,
@@ -389,7 +413,7 @@
         "_what": "Label for Mobile Number field",
         "id": "Label4",
         "_id_source": "Line 128: Begin VB.Label Label4",
-        "_naming_note": "generic name, not descriptive like 'lblmobileno'",
+        "_naming_note": "generic name, descriptive would be 'lblmobileno'",
         "type": "Label",
         "_type_source": "Line 128: VB.Label",
         "_type_angular_mapping": "mat-label or simple <label> element",
@@ -401,19 +425,20 @@
           "width": 1215,
           "height": 255,
           "_source": "Lines 130-133",
+          "_units": "twips",
           "_layout_note": "positioned to left of text3 (same top=2280)"
         },
         "tab_index": 8,
-        "_tab_index_source": "Line 131: TabIndex = 8",
+        "_tab_index_source": "Line 132: TabIndex = 8",
         "_tab_index_note": "eighth in tab order",
         "enabled": true,
         "visible": true,
         "properties": {
           "for_control": "Text3",
-          "_for_control_reasoning": "positioned directly left of text3, describes its purpose"
+          "_for_control_reasoning": "positioned directly left of text3, describes mobile number input"
         },
         "confidence": 1.0,
-        "_confidence_why": "complete definition with clear association"
+        "_confidence_why": "complete definition with clear association to text3"
       },
       {
         "_control_index": 15,
@@ -421,7 +446,7 @@
         "_what": "Label for Email ID field",
         "id": "Label5",
         "_id_source": "Line 134: Begin VB.Label Label5",
-        "_naming_note": "generic name, not descriptive like 'lblemailid'",
+        "_naming_note": "generic name, descriptive would be 'lblemailid'",
         "type": "Label",
         "_type_source": "Line 134: VB.Label",
         "_type_angular_mapping": "mat-label or simple <label> element",
@@ -433,27 +458,28 @@
           "width": 1215,
           "height": 255,
           "_source": "Lines 136-139",
+          "_units": "twips",
           "_layout_note": "positioned to left of text4 (same top=2880)"
         },
         "tab_index": 9,
-        "_tab_index_source": "Line 137: TabIndex = 9",
+        "_tab_index_source": "Line 138: TabIndex = 9",
         "_tab_index_note": "ninth in tab order",
         "enabled": true,
         "visible": true,
         "properties": {
           "for_control": "Text4",
-          "_for_control_reasoning": "positioned directly left of text4, describes its purpose"
+          "_for_control_reasoning": "positioned directly left of text4, describes email input"
         },
         "confidence": 1.0,
-        "_confidence_why": "complete definition with clear association"
+        "_confidence_why": "complete definition with clear association to text4"
       },
       {
         "_control_index": 16,
         "_source_lines": "Lines 140-145",
-        "_what": "Label for search combo box",
+        "_what": "Label for search functionality",
         "id": "Label6",
         "_id_source": "Line 140: Begin VB.Label Label6",
-        "_naming_note": "generic name, not descriptive like 'lblsearch'",
+        "_naming_note": "generic name, descriptive would be 'lblsearch'",
         "type": "Label",
         "_type_source": "Line 140: VB.Label",
         "_type_angular_mapping": "mat-label or simple <label> element",
@@ -465,19 +491,20 @@
           "width": 1575,
           "height": 255,
           "_source": "Lines 142-145",
+          "_units": "twips",
           "_layout_note": "positioned to left of combo1 (same top=6840)"
         },
         "tab_index": 10,
-        "_tab_index_source": "Line 143: TabIndex = 10",
+        "_tab_index_source": "Line 144: TabIndex = 10",
         "_tab_index_note": "tenth in tab order",
         "enabled": true,
         "visible": true,
         "properties": {
           "for_control": "Combo1",
-          "_for_control_reasoning": "positioned directly left of combo1, describes its purpose"
+          "_for_control_reasoning": "positioned directly left of combo1, describes search functionality"
         },
         "confidence": 1.0,
-        "_confidence_why": "complete definition with clear association"
+        "_confidence_why": "complete definition with clear association to combo1"
       },
       {
         "_control_index": 1,
@@ -772,15 +799,22 @@
             "_angular_equivalent": "this.supplierService.getSupplier(selectedId)"
           },
           {
+            "step_type": "validation",
+            "description": "Check if record exists",
+            "code_snippet": "If Not rs.EOF Then",
+            "_line": 134,
+            "_angular_equivalent": "if (supplier) { ... }"
+          },
+          {
             "step_type": "method_call",
-            "description": "Update supplier fields",
-            "code_snippet": "rs.Fields(\"sname\") = Text1.Text",
-            "_line": 135,
-            "_angular_equivalent": "this.supplierService.updateSupplier(supplierId, supplierData)"
+            "description": "Update record fields",
+            "code_snippet": "rs.Update",
+            "_line": 140,
+            "_angular_equivalent": "this.supplierService.updateSupplier(supplierData)"
           }
         ],
         "confidence": 0.88,
-        "_confidence_why": "standard update operation, but lacks validation before update"
+        "_confidence_why": "standard update operation, missing validation for required fields"
       },
       {
         "_handler_index": 4,
@@ -813,14 +847,14 @@
         "logic_steps": [
           {
             "step_type": "method_call",
-            "description": "Filter suppliers by name using LIKE query",
+            "description": "Execute search query with LIKE operator",
             "code_snippet": "rs.Open \"select * from suppliers where sname like '%\" & Combo1.Text & \"%'\", con",
             "_line": 155,
             "_angular_equivalent": "this.supplierService.searchByName(searchTerm)"
           }
         ],
         "confidence": 0.85,
-        "_confidence_why": "search functionality but no input validation"
+        "_confidence_why": "basic search functionality, potential sql injection vulnerability"
       },
       {
         "_handler_index": 6,
@@ -832,8 +866,8 @@
         "_handler_signature": "Private Sub DataGrid1_Click()",
         "logic_steps": [
           {
-            "step_type": "method_call",
-            "description": "Fill text boxes with selected row data",
+            "step_type": "other",
+            "description": "Copy grid data to text fields",
             "code_snippet": "Text1.Text = DataGrid1.Columns(1).Text",
             "_line": 161,
             "_angular_equivalent": "this.selectedSupplier = this.suppliers[selectedIndex]"
@@ -844,7 +878,7 @@
       },
       {
         "_handler_index": 7,
-        "_source_lines": "Lines 167-170",
+        "_source_lines": "Lines 167-171",
         "_what": "Initialize form on load",
         "control_id": "frmsupplier",
         "event_type": "Load",
@@ -855,14 +889,14 @@
             "step_type": "method_call",
             "description": "Load supplier data into grid",
             "code_snippet": "Call loadgrid",
-            "_line": 168,
-            "_angular_equivalent": "this.ngOnInit() - load suppliers"
+            "_line": 169,
+            "_angular_equivalent": "this.loadSuppliers()"
           },
           {
             "step_type": "method_call",
-            "description": "Populate search combo box",
+            "description": "Populate search dropdown",
             "code_snippet": "Call fillcombo",
-            "_line": 169,
+            "_line": 170,
             "_angular_equivalent": "this.loadSearchOptions()"
           }
         ],
@@ -885,21 +919,37 @@
         "_error_message_source": "Line 101: MsgBox \"All fields are required!\", vbExclamation",
         "original_code": "If Text1.Text = \"\" Or Text2.Text = \"\" Or Text3.Text = \"\" Or Text4.Text = \"\" Then\n    MsgBox \"All fields are required!\", vbExclamation\n    Exit Sub\nEnd If",
         "confidence": 0.95,
-        "_confidence_why": "explicit validation with clear error message and exit logic"
+        "_confidence_why": "explicit validation with clear error message and early exit"
       },
       {
         "_validation_index": 2,
-        "_source_lines": "Lines 120-121",
-        "_what": "Confirm delete operation before proceeding",
+        "_source_lines": "Lines 134-143",
+        "_what": "Validate record exists before updating",
+        "_implicit": true,
+        "field": "DataGrid1.Columns(0)",
+        "_field_why": "selected supplier id from grid",
+        "rule_type": "custom",
+        "_rule_subtype": "record_exists",
+        "rule_value": "Supplier record must exist in database",
+        "error_message": "No error message shown",
+        "_error_message_note": "silent failure if record not found",
+        "original_code": "If Not rs.EOF Then",
+        "confidence": 0.75,
+        "_confidence_why": "validation exists but no user feedback for failure case"
+      },
+      {
+        "_validation_index": 3,
+        "_source_lines": "Line 120",
+        "_what": "User confirmation before delete operation",
         "_implicit": false,
-        "field": "delete_confirmation",
-        "_field_why": "user must confirm destructive delete operation",
+        "field": "user_confirmation",
+        "_field_why": "prevents accidental deletion",
         "rule_type": "custom",
         "_rule_subtype": "user_confirmation",
-        "rule_value": "User must click Yes to proceed",
-        "error_message": "Operation cancelled by user",
-        "_error_message_note": "implicit - operation simply doesn't proceed if no is selected",
-        "original_code": "response = MsgBox(\"Are you sure you want to delete this supplier?\", vbYesNo + vbQuestion)\nIf response = vbYes Then",
+        "rule_value": "User must confirm delete action",
+        "error_message": "Are you sure you want to delete this supplier?",
+        "_error_message_source": "Line 120: MsgBox confirmation dialog",
+        "original_code": "response = MsgBox(\"Are you sure you want to delete this supplier?\", vbYesNo + vbQuestion)",
         "confidence": 0.9,
         "_confidence_why": "standard confirmation pattern for destructive operations"
       }
@@ -911,11 +961,11 @@
         "_workflow_index": 1,
         "_what": "Complete supplier creation workflow",
         "name": "create_supplier",
-        "condition": "User clicks Add button after filling form",
+        "condition": "User clicks Add button",
         "actions": [
           {
             "action_type": "validation",
-            "description": "Validate all required fields are filled",
+            "description": "Validate all required fields",
             "parameters": {
               "fields": [
                 "supplier_name",
@@ -928,7 +978,7 @@
           },
           {
             "action_type": "data_operation",
-            "description": "Insert new supplier record into database",
+            "description": "Insert new supplier record",
             "parameters": {
               "operation": "insert",
               "table": "suppliers"
@@ -938,44 +988,56 @@
             "action_type": "other",
             "description": "Refresh grid and clear form",
             "parameters": {
-              "refresh_grid": true,
-              "clear_form": true
+              "actions": [
+                "refresh_grid",
+                "clear_form"
+              ]
             }
           }
         ],
-        "confidence": 0.92
+        "confidence": 0.95
       },
       {
         "_workflow_index": 2,
         "_what": "Supplier deletion workflow with confirmation",
         "name": "delete_supplier",
-        "condition": "User clicks Delete button with supplier selected",
+        "condition": "User clicks Delete button",
         "actions": [
           {
             "action_type": "validation",
-            "description": "Show confirmation dialog",
+            "description": "Get user confirmation",
             "parameters": {
-              "type": "confirmation",
-              "message": "Are you sure you want to delete this supplier?"
+              "type": "confirmation_dialog",
+              "message": "delete_confirmation"
             }
           },
           {
             "action_type": "data_operation",
-            "description": "Delete supplier from database",
+            "description": "Delete selected supplier",
             "parameters": {
               "operation": "delete",
               "table": "suppliers",
-              "condition": "by_id"
+              "condition": "selected_id"
+            }
+          },
+          {
+            "action_type": "other",
+            "description": "Refresh display",
+            "parameters": {
+              "actions": [
+                "refresh_grid",
+                "clear_form"
+              ]
             }
           }
         ],
-        "confidence": 0.88
+        "confidence": 0.9
       },
       {
         "_workflow_index": 3,
         "_what": "Search suppliers by name workflow",
         "name": "search_suppliers",
-        "condition": "User selects item from search combo box",
+        "condition": "User selects item from search combo",
         "actions": [
           {
             "action_type": "data_operation",
@@ -983,14 +1045,14 @@
             "parameters": {
               "operation": "search",
               "field": "sname",
-              "pattern": "like_wildcard"
+              "pattern": "contains"
             }
           },
           {
             "action_type": "other",
             "description": "Update grid with filtered results",
             "parameters": {
-              "update_grid": true
+              "target": "DataGrid1"
             }
           }
         ],
@@ -1004,19 +1066,29 @@
         "type": "validation_with_exit",
         "scope": "Command2_Click",
         "handler": "Show error message and exit subroutine",
-        "_security_issue": "None - proper validation",
-        "_angular_equivalent": "Form validators with error display",
-        "_recommendation": "Good pattern - validates before processing"
+        "_security_issue": "None",
+        "_angular_equivalent": "Form validation with error display",
+        "_recommendation": "Good pattern - validates and provides user feedback"
       },
       {
-        "_source_lines": "Lines 120-126",
-        "_what": "User confirmation for destructive operations",
-        "type": "user_confirmation",
-        "scope": "Command3_Click",
-        "handler": "Check user response before proceeding with delete",
-        "_security_issue": "None - prevents accidental deletions",
-        "_angular_equivalent": "Confirmation dialog with async response handling",
-        "_recommendation": "Good UX pattern for destructive operations"
+        "_source_lines": "Lines 134-143",
+        "_what": "Silent handling of missing records",
+        "type": "conditional_check",
+        "scope": "Command4_Click",
+        "handler": "Check EOF before updating",
+        "_security_issue": "No user feedback when record not found",
+        "_angular_equivalent": "Should use try-catch with user notification",
+        "_recommendation": "Add error message when supplier not found"
+      },
+      {
+        "_source_lines": "Throughout database operations",
+        "_what": "No explicit error handling for database operations",
+        "type": "none",
+        "scope": "All database operations",
+        "handler": "Relies on VB6 default error handling",
+        "_security_issue": "Database errors may crash application or expose sensitive information",
+        "_angular_equivalent": "Should wrap all database calls in try-catch blocks",
+        "_recommendation": "Add On Error GoTo statements or proper exception handling"
       }
     ]
   },
@@ -1070,13 +1142,13 @@
         ],
         "_fields_note": "all fields identified from sql operations and form field mappings",
         "source": "defined",
-        "_source_reasoning": "complete table structure evident from sql statements and field assignments"
+        "_source_reasoning": "complete table structure evident from crud operations"
       }
     ],
     "operations": [
       {
         "_operation_index": 1,
-        "_source_lines": "Lines 2-3",
+        "_source_lines": "Lines 4-5",
         "_what": "Select all suppliers for adding new record",
         "type": "SELECT",
         "_type_reasoning": "opens recordset for adding new record",
@@ -1090,7 +1162,7 @@
         "query": "select * from suppliers",
         "_query_note": "used to create recordset for adding new records",
         "method": "Command2_Click",
-        "_method_line": 2,
+        "_method_line": 4,
         "security_flags": [],
         "_security_note": "no user input in this query",
         "confidence": 0.9,
@@ -1098,7 +1170,7 @@
       },
       {
         "_operation_index": 2,
-        "_source_lines": "Lines 9-13",
+        "_source_lines": "Lines 11-15",
         "_what": "Insert new supplier record",
         "type": "INSERT",
         "_type_reasoning": "uses rs.addnew and rs.update to insert record",
@@ -1109,21 +1181,21 @@
           "smobno",
           "smailid"
         ],
-        "_fields_note": "all supplier fields except id (auto-generated)",
+        "_fields_note": "all supplier fields except primary key",
         "where_clause": null,
         "_where_reasoning": "insert operation does not use where clause",
         "query": null,
-        "_query_note": "uses ado recordset methods instead of direct sql",
+        "_query_note": "uses ado recordset addnew method instead of direct sql",
         "method": "Command2_Click",
-        "_method_line": 9,
+        "_method_line": 11,
         "security_flags": [],
         "_security_note": "uses parameterized recordset fields, not string concatenation",
         "confidence": 0.95,
-        "_confidence_why": "clear insert operation using ado recordset methods"
+        "_confidence_why": "clear insert operation using ado recordset"
       },
       {
         "_operation_index": 3,
-        "_source_lines": "Lines 7-3",
+        "_source_lines": "Lines 9-3",
         "_what": "Delete supplier by ID",
         "type": "DELETE",
         "_type_reasoning": "delete sql statement",
@@ -1132,49 +1204,49 @@
           "*"
         ],
         "_fields_note": "deletes entire record",
-        "where_clause": "sid = <DataGrid_Value>",
-        "_where_reasoning": "deletes based on supplier id from grid selection",
-        "query": "delete from suppliers where sid=",
-        "_query_note": "sql injection risk - concatenates grid value directly",
+        "where_clause": "sid = <DataGrid_value>",
+        "_where_reasoning": "filters by supplier id from selected grid row",
+        "query": "delete from suppliers where sid=<value>",
+        "_query_note": "direct sql delete with where clause",
         "method": "Command3_Click",
-        "_method_line": 7,
+        "_method_line": 9,
         "security_flags": [
           "SQL_INJECTION_RISK"
         ],
-        "_security_note": "direct string concatenation with grid value",
+        "_security_note": "direct string concatenation with datagrid1.columns(0).text",
         "confidence": 0.95,
         "_confidence_why": "clear delete operation with security concern"
       },
       {
         "_operation_index": 4,
-        "_source_lines": "Lines 2-4",
+        "_source_lines": "Lines 4-4",
         "_what": "Select supplier for editing",
         "type": "SELECT",
-        "_type_reasoning": "select statement to get specific supplier",
+        "_type_reasoning": "select statement to retrieve specific supplier",
         "entity": "suppliers",
         "fields": [
           "*"
         ],
         "_fields_note": "all fields selected for editing",
-        "where_clause": "sid = <DataGrid_Value>",
-        "_where_reasoning": "selects specific supplier by id from grid",
-        "query": "select * from suppliers where sid=",
-        "_query_note": "sql injection risk - concatenates grid value directly",
+        "where_clause": "sid = <DataGrid_value>",
+        "_where_reasoning": "filters by supplier id from selected grid row",
+        "query": "select * from suppliers where sid=<value>",
+        "_query_note": "retrieves specific supplier for editing",
         "method": "Command4_Click",
-        "_method_line": 2,
+        "_method_line": 4,
         "security_flags": [
           "SQL_INJECTION_RISK"
         ],
-        "_security_note": "direct string concatenation with grid value",
+        "_security_note": "direct string concatenation with datagrid1.columns(0).text",
         "confidence": 0.95,
         "_confidence_why": "clear select operation with security concern"
       },
       {
         "_operation_index": 5,
-        "_source_lines": "Lines 4-8",
+        "_source_lines": "Lines 6-11",
         "_what": "Update supplier record",
         "type": "UPDATE",
-        "_type_reasoning": "uses recordset update method to modify record",
+        "_type_reasoning": "uses recordset update method to modify existing record",
         "entity": "suppliers",
         "fields": [
           "sname",
@@ -1183,20 +1255,20 @@
           "smailid"
         ],
         "_fields_note": "updates all editable supplier fields",
-        "where_clause": "sid = <DataGrid_Value>",
-        "_where_reasoning": "updates specific record selected from grid",
+        "where_clause": "sid = <DataGrid_value>",
+        "_where_reasoning": "record already filtered by previous select",
         "query": null,
-        "_query_note": "uses ado recordset methods instead of direct sql",
+        "_query_note": "uses ado recordset update method instead of direct sql",
         "method": "Command4_Click",
-        "_method_line": 4,
+        "_method_line": 6,
         "security_flags": [],
         "_security_note": "uses parameterized recordset fields for update values",
         "confidence": 0.95,
-        "_confidence_why": "clear update operation using ado recordset methods"
+        "_confidence_why": "clear update operation using ado recordset"
       },
       {
         "_operation_index": 6,
-        "_source_lines": "Lines 3-1",
+        "_source_lines": "Lines 4-1",
         "_what": "Search suppliers by name pattern",
         "type": "SELECT",
         "_type_reasoning": "select with like clause for searching",
@@ -1206,17 +1278,17 @@
         ],
         "_fields_note": "all fields selected for search results",
         "where_clause": "sname LIKE '%<search_term>%'",
-        "_where_reasoning": "pattern matching search on supplier name",
-        "query": "select * from suppliers where sname like '%",
-        "_query_note": "sql injection risk - concatenates user input directly",
+        "_where_reasoning": "pattern matching on supplier name",
+        "query": "select * from suppliers where sname like '%<value>%'",
+        "_query_note": "search query with wildcard pattern matching",
         "method": "Combo1_Click",
-        "_method_line": 3,
+        "_method_line": 4,
         "security_flags": [
           "SQL_INJECTION_RISK"
         ],
-        "_security_note": "direct string concatenation with user input from combo box",
+        "_security_note": "direct string concatenation with combo1.text",
         "confidence": 0.95,
-        "_confidence_why": "clear select operation with like clause and security concern"
+        "_confidence_why": "clear search select operation with security concern"
       },
       {
         "_operation_index": 7,
@@ -1230,37 +1302,37 @@
         ],
         "_fields_note": "all fields selected for grid display",
         "where_clause": null,
-        "_where_reasoning": "no where clause - loads all suppliers",
+        "_where_reasoning": "no filtering - loads all suppliers",
         "query": "select * from suppliers",
-        "_query_note": "simple select all query",
+        "_query_note": "loads complete supplier list for grid",
         "method": "loadgrid",
         "_method_line": 3,
         "security_flags": [],
         "_security_note": "no user input in this query",
         "confidence": 0.95,
-        "_confidence_why": "clear select all operation"
+        "_confidence_why": "clear select operation for data loading"
       },
       {
         "_operation_index": 8,
         "_source_lines": "Line 3 in fillcombo",
-        "_what": "Load supplier names for search combo",
+        "_what": "Load supplier names for search dropdown",
         "type": "SELECT",
-        "_type_reasoning": "select supplier names for combo box population",
+        "_type_reasoning": "select specific field for combo population",
         "entity": "suppliers",
         "fields": [
           "sname"
         ],
         "_fields_note": "only supplier name field selected",
         "where_clause": null,
-        "_where_reasoning": "no where clause - gets all supplier names",
+        "_where_reasoning": "no filtering - loads all supplier names",
         "query": "select sname from suppliers",
-        "_query_note": "selects only name field for combo box",
+        "_query_note": "populates search combo with supplier names",
         "method": "fillcombo",
         "_method_line": 3,
         "security_flags": [],
         "_security_note": "no user input in this query",
         "confidence": 0.95,
-        "_confidence_why": "clear select operation for specific field"
+        "_confidence_why": "clear select operation for combo population"
       }
     ],
     "cobol_files": [],
@@ -1268,33 +1340,33 @@
     "data_transformations": [
       {
         "_transformation_index": 1,
-        "_source_lines": "Lines 9-13",
-        "_what": "Text box values to database fields",
+        "_source_lines": "Lines 11-15",
+        "_what": "Map form text fields to database fields",
         "from_field": "Text1.Text, Text2.Text, Text3.Text, Text4.Text",
         "to_field": "sname, splace, smobno, smailid",
         "transformation": "Direct string assignment from UI controls to database fields",
         "original_code": "rs.Fields(\"sname\") = Text1.Text",
-        "_angular_equivalent": "formData.sname = this.supplierForm.get('sname').value"
+        "_angular_equivalent": "formData.sname = this.supplierForm.get('name').value"
       },
       {
         "_transformation_index": 2,
-        "_source_lines": "Lines 4-8",
-        "_what": "Text box values to database fields for update",
+        "_source_lines": "Lines 6-11",
+        "_what": "Map form text fields to database fields for update",
         "from_field": "Text1.Text, Text2.Text, Text3.Text, Text4.Text",
         "to_field": "sname, splace, smobno, smailid",
         "transformation": "Direct string assignment from UI controls to database fields",
         "original_code": "rs.Fields(\"sname\") = Text1.Text",
-        "_angular_equivalent": "updateData.sname = this.supplierForm.get('sname').value"
+        "_angular_equivalent": "updateData.sname = this.supplierForm.get('name').value"
       },
       {
         "_transformation_index": 3,
         "_source_lines": "Lines 2-5",
-        "_what": "Grid column values to text boxes",
+        "_what": "Map database grid columns to form text fields",
         "from_field": "DataGrid1.Columns(1-4).Text",
         "to_field": "Text1.Text, Text2.Text, Text3.Text, Text4.Text",
-        "transformation": "Grid selection to form field population",
+        "transformation": "Direct assignment from grid columns to UI text controls",
         "original_code": "Text1.Text = DataGrid1.Columns(1).Text",
-        "_angular_equivalent": "this.supplierForm.patchValue({sname: selectedRow.sname})"
+        "_angular_equivalent": "this.supplierForm.patchValue({name: selectedRow.sname})"
       }
     ]
   },
@@ -1319,19 +1391,29 @@
       "issue_type": "OTHER",
       "severity": "medium",
       "location": "Command2_Click",
-      "description": "None - proper validation",
-      "recommendation": "Good pattern - validates before processing",
-      "_angular_code": "Form validators with error display"
+      "description": "None",
+      "recommendation": "Good pattern - validates and provides user feedback",
+      "_angular_code": "Form validation with error display"
     },
     {
-      "_source_lines": "Lines 120-126",
-      "_what": "User confirmation for destructive operations",
+      "_source_lines": "Lines 134-143",
+      "_what": "Silent handling of missing records",
       "issue_type": "OTHER",
       "severity": "medium",
-      "location": "Command3_Click",
-      "description": "None - prevents accidental deletions",
-      "recommendation": "Good UX pattern for destructive operations",
-      "_angular_code": "Confirmation dialog with async response handling"
+      "location": "Command4_Click",
+      "description": "No user feedback when record not found",
+      "recommendation": "Add error message when supplier not found",
+      "_angular_code": "Should use try-catch with user notification"
+    },
+    {
+      "_source_lines": "Throughout database operations",
+      "_what": "No explicit error handling for database operations",
+      "issue_type": "OTHER",
+      "severity": "medium",
+      "location": "All database operations",
+      "description": "Database errors may crash application or expose sensitive information",
+      "recommendation": "Add On Error GoTo statements or proper exception handling",
+      "_angular_code": "Should wrap all database calls in try-catch blocks"
     }
   ],
   "generation_metadata": {
@@ -1341,7 +1423,7 @@
     "recommended_template": "angular-basic-component",
     "generation_notes": [
       "Create interfaces/services for: ADODB.Recordset",
-      "Fix 2 security issue(s)",
+      "Fix 3 security issue(s)",
       "Use Angular Material Dialog for modal behavior",
       "Use Reactive Forms with validation"
     ]

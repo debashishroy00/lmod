@@ -4,7 +4,7 @@
     "source_file": "StartForm.frm",
     "source_lines_of_code": 99,
     "target_framework": "Angular",
-    "analysis_timestamp": "2025-11-20T23:37:16.332087",
+    "analysis_timestamp": "2025-11-21T12:09:50.475129",
     "analyzer_version": "2.1.0-langgraph",
     "parser_type": "langgraph-subagent",
     "confidence": 0.872,
@@ -176,12 +176,12 @@
           "top": 360,
           "width": 1095,
           "height": 255,
-          "_source": "Lines 54-58",
+          "_source": "Lines 53-57",
           "_units": "twips",
           "_layout_note": "positioned to left of txtid (same top=360)"
         },
         "tab_index": 4,
-        "_tab_index_source": "Line 56: TabIndex = 4",
+        "_tab_index_source": "Line 55: TabIndex = 4",
         "_tab_index_note": "labels typically last in tab order (non-interactive)",
         "enabled": true,
         "_enabled_default": "Not specified = True by default",
@@ -560,13 +560,13 @@
   "external_references": {
     "classes": [
       {
-        "name": "Client",
+        "name": "ClientEdit",
         "source": "external",
         "_source_note": "Referenced but not defined in this file",
         "methods_called": []
       },
       {
-        "name": "ClientEdit",
+        "name": "Client",
         "source": "external",
         "_source_note": "Referenced but not defined in this file",
         "methods_called": []
@@ -604,7 +604,7 @@
     "complexity_score": 2,
     "recommended_template": "angular-dialog-form",
     "generation_notes": [
-      "Create interfaces/services for: Client, ClientEdit",
+      "Create interfaces/services for: ClientEdit, Client",
       "Fix 1 security issue(s)",
       "Use Angular Material Dialog for modal behavior",
       "Use Reactive Forms with validation"
