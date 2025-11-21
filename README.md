@@ -56,8 +56,10 @@ ls -la output/angular/start-form/
 | **VB6 Controls** | 5 | 16 | 10.5 |
 | **Angular LOC** | 397 | 824 | 610 |
 | **Generation Time** | 15s | 20s | 17.5s |
-| **API Cost** | $0.30 | $0.60 | $0.45 |
+| **API Cost** | $0.03 | $0.05 | $0.04 |
 | **Validation** | ✅ PASS | ✅ PASS | 100% |
+
+**Note**: Using Claude Haiku for cost optimization (92% cheaper than Sonnet 4). See [COST_OPTIMIZATION.md](COST_OPTIMIZATION.md) for details.
 
 **ROI for 650 forms**: $260K-$520K savings (99.9% cost reduction vs manual migration)
 
@@ -96,7 +98,7 @@ ls -la output/angular/start-form/
 
 **Architecture**: LLM-powered code generation with validation
 - **Prompt Builder**: Creates comprehensive prompts from IR
-- **Code Generator**: Uses Claude Sonnet 4 for intelligent generation
+- **Code Generator**: Uses Claude Haiku for fast, cost-effective generation
 - **Validator**: Syntax checks + quality gates
 - **File Writer**: Outputs Angular files + traceability reports
 

@@ -76,7 +76,7 @@ class AngularGenerator:
         print(f"   Prompt size: {len(prompt)} characters")
 
         # Step 2: Call Claude API
-        print("🤖 Calling Claude Sonnet 4...")
+        print("🤖 Calling Claude Haiku...")
         try:
             generated_code = self._call_claude_api(prompt)
             print(f"   Response size: {len(generated_code)} characters")
@@ -128,8 +128,8 @@ class AngularGenerator:
             Raw response text
         """
         response = self.client.messages.create(
-            model="claude-sonnet-4-20250514",
-            max_tokens=16000,  # Increased for larger components
+            model="claude-3-5-haiku-20241022",
+            max_tokens=8192,  # Haiku's maximum output token limit
             temperature=0.0,  # Deterministic for code generation
             messages=[{
                 "role": "user",
