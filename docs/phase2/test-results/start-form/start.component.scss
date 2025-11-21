@@ -1,0 +1,78 @@
+.start-form-card {
+  // VB6 form dimensions: 4050x1500 twips ≈ 253x94 px
+  max-width: 400px;
+  min-height: 200px;
+  margin: 24px auto;
+  padding: 16px;
+  
+  // Fixed dialog style (VB6 BorderStyle = 3)
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.input-section {
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.client-id-field {
+  width: 100%;
+  
+  // VB6 Label1 font styling - Bold MS Sans Serif 8.25pt
+  mat-label {
+    font-weight: 700;
+    font-family: 'Segoe UI', 'MS Sans Serif', sans-serif;
+  }
+}
+
+.action-buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  
+  // VB6 button positioning - row of 3 buttons
+  @media (max-width: 480px) {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+.action-button {
+  // VB6 button dimensions approximation
+  min-width: 80px;
+  height: 36px;
+  
+  // Ensure buttons are evenly distributed
+  flex: 1;
+  max-width: 120px;
+}
+
+// Loading state styling
+.start-form-card[data-loading="true"] {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+// Responsive design
+@media (max-width: 600px) {
+  .start-form-card {
+    margin: 16px;
+    max-width: none;
+  }
+}
+
+// High contrast mode support
+@media (prefers-contrast: high) {
+  .start-form-card {
+    border: 2px solid;
+  }
+}
+
+// Focus indicators for accessibility
+.action-button:focus,
+.client-id-field input:focus {
+  outline: 2px solid #1976d2;
+  outline-offset: 2px;
+}

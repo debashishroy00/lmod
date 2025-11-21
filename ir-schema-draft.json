@@ -1,0 +1,764 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Universal Legacy Code Intermediate Representation",
+  "description": "Schema for capturing VB6, COBOL, and other legacy code in a technology-agnostic format",
+  "version": "1.0.0",
+  "type": "object",
+  "required": ["metadata", "ui", "logic", "data"],
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "description": "Source file and analysis metadata",
+      "required": ["source_language", "source_file", "target_framework", "analysis_timestamp"],
+      "properties": {
+        "source_language": {
+          "type": "string",
+          "enum": ["VB6", "COBOL", "PowerBuilder", "VB.NET", "ASP", "Other"],
+          "description": "Original programming language"
+        },
+        "source_file": {
+          "type": "string",
+          "description": "Path to original source file"
+        },
+        "source_file_size": {
+          "type": "integer",
+          "description": "File size in bytes"
+        },
+        "source_lines_of_code": {
+          "type": "integer",
+          "description": "Total lines of code (including comments)"
+        },
+        "target_framework": {
+          "type": "string",
+          "enum": ["Angular", "React", "SpringBoot", "ASP.NET_Core", "Node.js"],
+          "description": "Target modernization framework"
+        },
+        "analysis_timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When analysis was performed"
+        },
+        "analyzer_version": {
+          "type": "string",
+          "description": "Version of the analysis tool"
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Overall confidence in IR completeness (0-1)"
+        },
+        "complexity": {
+          "type": "string",
+          "enum": ["simple", "medium", "complex"],
+          "description": "Assessed complexity level"
+        },
+        "subagents_used": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of subagent names that contributed to this IR"
+        }
+      }
+    },
+
+    "ui": {
+      "type": "object",
+      "description": "User interface structure (VB6 forms, web pages, etc.)",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["form", "dialog", "mdi_child", "web_page", "console", "none"],
+          "description": "Type of user interface"
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Confidence in UI extraction accuracy"
+        },
+        "form": {
+          "type": "object",
+          "description": "Form/window properties",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Form class/object name"
+            },
+            "caption": {
+              "type": "string",
+              "description": "Window title/caption"
+            },
+            "width": {
+              "type": "integer",
+              "description": "Form width (twips or pixels)"
+            },
+            "height": {
+              "type": "integer",
+              "description": "Form height (twips or pixels)"
+            },
+            "border_style": {
+              "type": "string",
+              "description": "Border style (FixedDialog, Sizable, etc.)"
+            },
+            "start_position": {
+              "type": "string",
+              "description": "Initial window position"
+            },
+            "properties": {
+              "type": "object",
+              "description": "Additional form properties",
+              "additionalProperties": true
+            }
+          }
+        },
+        "controls": {
+          "type": "array",
+          "description": "UI controls/widgets on the form",
+          "items": {
+            "type": "object",
+            "required": ["id", "type"],
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Control name/identifier"
+              },
+              "type": {
+                "type": "string",
+                "enum": ["TextBox", "Label", "CommandButton", "ComboBox", "ListBox", "DataGrid", "CheckBox", "RadioButton", "Frame", "PictureBox", "Other"],
+                "description": "Control type"
+              },
+              "caption": {
+                "type": "string",
+                "description": "Control caption/text"
+              },
+              "position": {
+                "type": "object",
+                "properties": {
+                  "left": {"type": "number"},
+                  "top": {"type": "number"},
+                  "width": {"type": "number"},
+                  "height": {"type": "number"}
+                }
+              },
+              "tab_index": {
+                "type": "integer",
+                "description": "Tab order"
+              },
+              "enabled": {
+                "type": "boolean",
+                "description": "Control enabled state"
+              },
+              "visible": {
+                "type": "boolean",
+                "description": "Control visibility"
+              },
+              "font": {
+                "type": "object",
+                "properties": {
+                  "name": {"type": "string"},
+                  "size": {"type": "number"},
+                  "weight": {"type": "integer"},
+                  "bold": {"type": "boolean"},
+                  "italic": {"type": "boolean"}
+                }
+              },
+              "data_field": {
+                "type": "string",
+                "description": "Bound database field (if data-bound)"
+              },
+              "properties": {
+                "type": "object",
+                "description": "Additional control-specific properties",
+                "additionalProperties": true
+              },
+              "confidence": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1,
+                "description": "Confidence in control extraction"
+              }
+            }
+          }
+        },
+        "layout": {
+          "type": "object",
+          "description": "Layout information for code generation",
+          "properties": {
+            "grid_based": {
+              "type": "boolean",
+              "description": "Whether layout uses grid positioning"
+            },
+            "responsive": {
+              "type": "boolean",
+              "description": "Whether layout should be responsive"
+            },
+            "groups": {
+              "type": "array",
+              "description": "Logical groupings of controls",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {"type": "string"},
+                  "control_ids": {
+                    "type": "array",
+                    "items": {"type": "string"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "logic": {
+      "type": "object",
+      "description": "Business logic, validations, calculations, and workflows",
+      "properties": {
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Confidence in logic extraction accuracy"
+        },
+        "event_handlers": {
+          "type": "array",
+          "description": "Event handler methods (Click, Load, etc.)",
+          "items": {
+            "type": "object",
+            "required": ["control_id", "event_type"],
+            "properties": {
+              "control_id": {
+                "type": "string",
+                "description": "Control that triggers event (or 'Form' for form events)"
+              },
+              "event_type": {
+                "type": "string",
+                "enum": ["Click", "Load", "Change", "DoubleClick", "KeyPress", "GotFocus", "LostFocus", "MouseMove", "Other"],
+                "description": "Type of event"
+              },
+              "handler_name": {
+                "type": "string",
+                "description": "Original handler method name"
+              },
+              "logic_steps": {
+                "type": "array",
+                "description": "High-level steps performed in handler",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "step_type": {
+                      "type": "string",
+                      "enum": ["validation", "calculation", "data_operation", "navigation", "message", "object_creation", "method_call", "other"]
+                    },
+                    "description": {"type": "string"},
+                    "code_snippet": {"type": "string"}
+                  }
+                }
+              },
+              "confidence": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            }
+          }
+        },
+        "validations": {
+          "type": "array",
+          "description": "Validation rules extracted from code",
+          "items": {
+            "type": "object",
+            "required": ["field", "rule_type"],
+            "properties": {
+              "field": {
+                "type": "string",
+                "description": "Field/control being validated"
+              },
+              "rule_type": {
+                "type": "string",
+                "enum": ["required", "max_length", "min_length", "pattern", "range", "email", "numeric", "date", "custom"],
+                "description": "Type of validation"
+              },
+              "rule_value": {
+                "type": ["string", "number", "object"],
+                "description": "Value for the rule (e.g., max length = 100)"
+              },
+              "error_message": {
+                "type": "string",
+                "description": "Error message to display"
+              },
+              "original_code": {
+                "type": "string",
+                "description": "Original validation code snippet"
+              },
+              "confidence": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            }
+          }
+        },
+        "calculations": {
+          "type": "array",
+          "description": "Calculations and business rule computations",
+          "items": {
+            "type": "object",
+            "required": ["name", "formula"],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Calculated field/variable name"
+              },
+              "formula": {
+                "type": "string",
+                "description": "Calculation formula (e.g., 'price * quantity')"
+              },
+              "trigger": {
+                "type": "string",
+                "description": "What triggers calculation (e.g., 'on_quantity_change')"
+              },
+              "inputs": {
+                "type": "array",
+                "items": {"type": "string"},
+                "description": "Input variables/fields"
+              },
+              "output_type": {
+                "type": "string",
+                "description": "Data type of result"
+              },
+              "original_code": {
+                "type": "string",
+                "description": "Original calculation code"
+              },
+              "confidence": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            }
+          }
+        },
+        "workflows": {
+          "type": "array",
+          "description": "Business workflows and state transitions",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Workflow name"
+              },
+              "condition": {
+                "type": "string",
+                "description": "Condition that triggers workflow"
+              },
+              "actions": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "action_type": {
+                      "type": "string",
+                      "enum": ["enable_controls", "disable_controls", "show_form", "close_form", "refresh_data", "clear_fields", "other"]
+                    },
+                    "description": {"type": "string"},
+                    "parameters": {
+                      "type": "object",
+                      "additionalProperties": true
+                    }
+                  }
+                }
+              },
+              "confidence": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            }
+          }
+        },
+        "error_handling": {
+          "type": "array",
+          "description": "Error handling patterns found",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": ["on_error_resume_next", "try_catch", "error_goto", "at_end_clause", "other"]
+              },
+              "scope": {
+                "type": "string",
+                "description": "Where error handling applies"
+              },
+              "handler": {
+                "type": "string",
+                "description": "Error handler code/label"
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "data": {
+      "type": "object",
+      "description": "Data structures, operations, and database interactions",
+      "properties": {
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Confidence in data extraction accuracy"
+        },
+        "data_source": {
+          "type": "object",
+          "description": "Database/file connection information",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": ["ADO", "DAO", "ODBC", "sequential_file", "indexed_file", "VSAM", "DB2", "IMS", "none", "other"],
+              "description": "Data source technology"
+            },
+            "connection_string": {
+              "type": "string",
+              "description": "Connection string (if found)"
+            },
+            "connection_variable": {
+              "type": "string",
+              "description": "Variable name holding connection (e.g., 'con')"
+            },
+            "is_external": {
+              "type": "boolean",
+              "description": "Whether connection is defined externally"
+            }
+          }
+        },
+        "entities": {
+          "type": "array",
+          "description": "Data entities/tables used",
+          "items": {
+            "type": "object",
+            "required": ["name"],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Entity/table name"
+              },
+              "type": {
+                "type": "string",
+                "enum": ["table", "view", "file", "record", "object"],
+                "description": "Type of entity"
+              },
+              "fields": {
+                "type": "array",
+                "description": "Fields/columns in entity",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {"type": "string"},
+                    "data_type": {"type": "string"},
+                    "length": {"type": "integer"},
+                    "nullable": {"type": "boolean"},
+                    "primary_key": {"type": "boolean"},
+                    "cobol_picture": {
+                      "type": "string",
+                      "description": "COBOL PICTURE clause if applicable"
+                    }
+                  }
+                }
+              },
+              "source": {
+                "type": "string",
+                "description": "Where entity definition came from (inferred, explicit, etc.)"
+              }
+            }
+          }
+        },
+        "operations": {
+          "type": "array",
+          "description": "Data operations (CRUD, file I/O)",
+          "items": {
+            "type": "object",
+            "required": ["type", "entity"],
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": ["SELECT", "INSERT", "UPDATE", "DELETE", "READ", "WRITE", "OPEN", "CLOSE", "REWRITE"],
+                "description": "Operation type"
+              },
+              "entity": {
+                "type": "string",
+                "description": "Target entity/table/file"
+              },
+              "fields": {
+                "type": "array",
+                "items": {"type": "string"},
+                "description": "Fields involved in operation"
+              },
+              "where_clause": {
+                "type": "string",
+                "description": "Filter/where condition"
+              },
+              "query": {
+                "type": "string",
+                "description": "Full SQL query or file operation"
+              },
+              "method": {
+                "type": "string",
+                "description": "Method where operation occurs"
+              },
+              "security_flags": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": ["sql_injection_risk", "no_parameterization", "unsafe_concatenation"]
+                },
+                "description": "Security concerns identified"
+              },
+              "confidence": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            }
+          }
+        },
+        "cobol_files": {
+          "type": "array",
+          "description": "COBOL file definitions (if applicable)",
+          "items": {
+            "type": "object",
+            "properties": {
+              "select_name": {
+                "type": "string",
+                "description": "Internal file name (SELECT clause)"
+              },
+              "assign_to": {
+                "type": "string",
+                "description": "External file name (ASSIGN clause)"
+              },
+              "organization": {
+                "type": "string",
+                "enum": ["SEQUENTIAL", "INDEXED", "RELATIVE", "LINE SEQUENTIAL"],
+                "description": "File organization"
+              },
+              "access_mode": {
+                "type": "string",
+                "enum": ["SEQUENTIAL", "RANDOM", "DYNAMIC"],
+                "description": "Access mode"
+              },
+              "record_layout": {
+                "type": "string",
+                "description": "Record structure name (FD)"
+              },
+              "file_status": {
+                "type": "string",
+                "description": "File status variable"
+              }
+            }
+          }
+        },
+        "data_transformations": {
+          "type": "array",
+          "description": "Data mapping and transformations (COBOL MOVE, etc.)",
+          "items": {
+            "type": "object",
+            "properties": {
+              "from_field": {"type": "string"},
+              "to_field": {"type": "string"},
+              "transformation": {
+                "type": "string",
+                "description": "Type of transformation applied"
+              },
+              "original_code": {"type": "string"}
+            }
+          }
+        }
+      }
+    },
+
+    "patterns": {
+      "type": "array",
+      "description": "Design patterns detected in the code",
+      "items": {
+        "type": "object",
+        "required": ["pattern_type", "confidence"],
+        "properties": {
+          "pattern_type": {
+            "type": "string",
+            "enum": [
+              "CRUD_FORM",
+              "SEARCH_FORM",
+              "VALIDATION_REQUIRED",
+              "ADO_CRUD",
+              "GRID_MASTER_DETAIL",
+              "MODAL_DIALOG",
+              "FILE_SEQUENTIAL_READ",
+              "FILE_SEQUENTIAL_WRITE",
+              "LOOP_UNTIL_EOF",
+              "ETL_PATTERN",
+              "NESTED_DATA_STRUCTURE",
+              "FILE_CRUD",
+              "OTHER"
+            ],
+            "description": "Type of pattern detected"
+          },
+          "pattern_name": {
+            "type": "string",
+            "description": "Human-readable pattern name"
+          },
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Confidence in pattern match"
+          },
+          "template_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "UUID of template in pattern library"
+          },
+          "matched_elements": {
+            "type": "object",
+            "description": "Elements that matched pattern signature",
+            "additionalProperties": true
+          },
+          "generation_hints": {
+            "type": "object",
+            "description": "Hints for code generator",
+            "additionalProperties": true
+          }
+        }
+      }
+    },
+
+    "external_references": {
+      "type": "object",
+      "description": "Dependencies on external code/resources",
+      "properties": {
+        "classes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {"type": "string"},
+              "source": {"type": "string"},
+              "methods_called": {
+                "type": "array",
+                "items": {"type": "string"}
+              }
+            }
+          },
+          "description": "External class dependencies"
+        },
+        "modules": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {"type": "string"},
+              "type": {"type": "string"},
+              "functions_called": {
+                "type": "array",
+                "items": {"type": "string"}
+              }
+            }
+          },
+          "description": "External module dependencies"
+        },
+        "copybooks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {"type": "string"},
+              "type": {
+                "type": "string",
+                "enum": ["DATA", "PROCEDURE", "MIXED"]
+              }
+            }
+          },
+          "description": "COBOL copybook inclusions"
+        },
+        "controls": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {"type": "string"},
+              "ocx_file": {"type": "string"},
+              "guid": {"type": "string"}
+            }
+          },
+          "description": "Third-party ActiveX/OCX controls"
+        }
+      }
+    },
+
+    "security_issues": {
+      "type": "array",
+      "description": "Security vulnerabilities identified",
+      "items": {
+        "type": "object",
+        "properties": {
+          "issue_type": {
+            "type": "string",
+            "enum": ["SQL_INJECTION", "BUFFER_OVERFLOW", "INSECURE_ERROR_HANDLING", "HARDCODED_CREDENTIALS", "OTHER"]
+          },
+          "severity": {
+            "type": "string",
+            "enum": ["critical", "high", "medium", "low"]
+          },
+          "location": {
+            "type": "string",
+            "description": "Where in code issue was found"
+          },
+          "description": {
+            "type": "string"
+          },
+          "recommendation": {
+            "type": "string",
+            "description": "How to fix in modern code"
+          }
+        }
+      }
+    },
+
+    "generation_metadata": {
+      "type": "object",
+      "description": "Metadata for code generation phase",
+      "properties": {
+        "estimated_automation_rate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Estimated % of code that can be auto-generated"
+        },
+        "estimated_manual_effort_hours": {
+          "type": "number",
+          "description": "Estimated hours of manual work needed"
+        },
+        "complexity_score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10,
+          "description": "Complexity rating (0-10)"
+        },
+        "recommended_template": {
+          "type": "string",
+          "description": "Recommended generation template"
+        },
+        "generation_notes": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Notes for developer performing manual work"
+        }
+      }
+    }
+  }
+}

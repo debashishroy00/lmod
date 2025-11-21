@@ -1,0 +1,51 @@
+{
+  "generated_at": "2025-11-21T04:41:20.538332Z",
+  "source_ir": "frmsupplier.frm",
+  "form_name": "frmsupplier",
+  "generated_files": [
+    "frmsupplier.component.ts",
+    "frmsupplier.component.html",
+    "frmsupplier.component.scss",
+    "frmsupplier.component.spec.ts"
+  ],
+  "file_sizes": {
+    "frmsupplier.component.ts": 7858,
+    "frmsupplier.component.html": 6567,
+    "frmsupplier.component.scss": 2576,
+    "frmsupplier.component.spec.ts": 7254
+  },
+  "ir_metadata": {
+    "source_language": "VB6",
+    "source_file": "frmsupplier.frm",
+    "source_lines_of_code": 296,
+    "target_framework": "Angular",
+    "analysis_timestamp": "2025-11-20T23:39:32.529065",
+    "analyzer_version": "2.1.0-langgraph",
+    "parser_type": "langgraph-subagent",
+    "confidence": 0.938,
+    "complexity": "medium",
+    "subagents_used": [
+      "vb6-ui-agent",
+      "vb6-logic-agent",
+      "vb6-data-agent"
+    ]
+  },
+  "generation_metadata": {
+    "estimated_automation_rate": 0.85,
+    "estimated_manual_effort_hours": 1.7,
+    "complexity_score": 4,
+    "recommended_template": "angular-basic-component",
+    "generation_notes": [
+      "Create interfaces/services for: ADODB.Recordset",
+      "Fix 2 security issue(s)",
+      "Use Angular Material Dialog for modal behavior",
+      "Use Reactive Forms with validation"
+    ]
+  },
+  "statistics": {
+    "controls_count": 16,
+    "event_handlers_count": 7,
+    "validations_count": 2,
+    "data_operations_count": 8
+  }
+}

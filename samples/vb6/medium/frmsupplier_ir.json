@@ -1,0 +1,1349 @@
+{
+  "metadata": {
+    "source_language": "VB6",
+    "source_file": "frmsupplier.frm",
+    "source_lines_of_code": 296,
+    "target_framework": "Angular",
+    "analysis_timestamp": "2025-11-20T23:39:32.529065",
+    "analyzer_version": "2.1.0-langgraph",
+    "parser_type": "langgraph-subagent",
+    "confidence": 0.938,
+    "complexity": "medium",
+    "subagents_used": [
+      "vb6-ui-agent",
+      "vb6-logic-agent",
+      "vb6-data-agent"
+    ]
+  },
+  "ui": {
+    "_source_lines": "Lines 3-164",
+    "_what": "User interface structure - form and controls",
+    "_why": "defines what angular component ui should look like",
+    "type": "window",
+    "_type_reasoning": "mdichild=true, windowstate=maximized, standard form window",
+    "confidence": 0.95,
+    "_confidence_why": "all ui elements clearly defined, standard vb6 format",
+    "form": {
+      "name": "frmsupplier",
+      "_name_source": "Line 3: Begin VB.Form frmsupplier",
+      "caption": "Supplier Management",
+      "_caption_source": "Line 4: Caption = \"Supplier Management\"",
+      "width": 15375,
+      "_width_source": "Line 8: ClientWidth = 15375",
+      "height": 8145,
+      "_height_source": "Line 5: ClientHeight = 8145",
+      "border_style": "Sizable",
+      "_border_style_source": "Default sizable (not specified)",
+      "start_position": "Manual",
+      "_start_position_source": "Default manual (not specified)",
+      "properties": {
+        "mdi_child": true,
+        "_mdi_child_source": "Line 10: MDIChild = -1 'True",
+        "window_state": "Maximized",
+        "_window_state_source": "Line 13: WindowState = 2 'Maximized",
+        "link_topic": "Form1",
+        "_link_topic_source": "Line 9: LinkTopic = \"Form1\""
+      }
+    },
+    "controls": [
+      {
+        "_control_index": 9,
+        "_source_lines": "Lines 1-5",
+        "_what": "Dropdown for searching suppliers by name",
+        "id": "Combo1",
+        "_id_source": "Line 1: Begin VB.ComboBox Combo1",
+        "type": "ComboBox",
+        "_type_source": "Line 1: VB.ComboBox",
+        "_type_angular_mapping": "mat-select or mat-autocomplete",
+        "caption": "",
+        "_caption_note": "comboboxes don't have captions, only text property (runtime value)",
+        "position": {
+          "left": 2400,
+          "top": 6840,
+          "width": 2415,
+          "height": 315,
+          "_source": "Lines 2-5",
+          "_units": "twips",
+          "_note": "position is relative to form's top-left corner"
+        },
+        "tab_index": 15,
+        "_tab_index_source": "Line 3: TabIndex = 15",
+        "_tab_index_why": "last control in tab order",
+        "enabled": true,
+        "_enabled_default": "Not specified = True by default",
+        "visible": true,
+        "_visible_default": "Not specified = True by default",
+        "properties": {
+          "style": "Dropdown Combo",
+          "_style_note": "default style (not specified)",
+          "associated_label": "Label6",
+          "_associated_label_why": "label6 ('search by name:') is positioned at same top (6840), to the left",
+          "event_handler": "Combo1_Click",
+          "_event_handler_source": "Lines 117-121: Private Sub Combo1_Click()"
+        },
+        "confidence": 0.98,
+        "_confidence_why": "all properties clearly defined"
+      },
+      {
+        "_control_index": 5,
+        "_source_lines": "Lines 24-29",
+        "_what": "Button to add new supplier",
+        "id": "Command2",
+        "_id_source": "Line 24: Begin VB.CommandButton Command2",
+        "_naming_convention": "Command = CommandButton prefix (generic naming)",
+        "type": "CommandButton",
+        "_type_source": "Line 24: VB.CommandButton",
+        "_type_angular_mapping": "mat-button or button with (click) event",
+        "caption": "Add",
+        "_caption_source": "Line 25: Caption = \"Add\"",
+        "_caption_angular": "Button text/label",
+        "position": {
+          "left": 11520,
+          "top": 1080,
+          "width": 1575,
+          "height": 495,
+          "_source": "Lines 26-29",
+          "_layout_note": "first button in vertical column of action buttons"
+        },
+        "tab_index": 11,
+        "_tab_index_source": "Line 27: TabIndex = 11",
+        "_tab_order": "Eleventh in tab order (after input fields)",
+        "enabled": true,
+        "visible": true,
+        "properties": {
+          "default": false,
+          "_default_note": "not the default button (not triggered by enter key)",
+          "event_handler": "Command2_Click",
+          "_event_handler_source": "Lines 66-84: Private Sub Command2_Click()"
+        },
+        "confidence": 0.99,
+        "_confidence_why": "complete definition with event handler"
+      },
+      {
+        "_control_index": 6,
+        "_source_lines": "Lines 18-23",
+        "_what": "Button to delete supplier",
+        "id": "Command3",
+        "_id_source": "Line 18: Begin VB.CommandButton Command3",
+        "_naming_convention": "Command = CommandButton prefix (generic naming)",
+        "type": "CommandButton",
+        "_type_source": "Line 18: VB.CommandButton",
+        "_type_angular_mapping": "mat-button or button with (click) event",
+        "caption": "Delete",
+        "_caption_source": "Line 19: Caption = \"Delete\"",
+        "_caption_angular": "Button text/label",
+        "position": {
+          "left": 11520,
+          "top": 1920,
+          "width": 1575,
+          "height": 495,
+          "_source": "Lines 20-23",
+          "_layout_note": "second button in vertical column of action buttons"
+        },
+        "tab_index": 12,
+        "_tab_index_source": "Line 21: TabIndex = 12",
+        "_tab_order": "Twelfth in tab order",
+        "enabled": true,
+        "visible": true,
+        "properties": {
+          "default": false,
+          "_default_note": "not the default button (not triggered by enter key)",
+          "event_handler": "Command3_Click",
+          "_event_handler_source": "Lines 86-96: Private Sub Command3_Click()"
+        },
+        "confidence": 0.99,
+        "_confidence_why": "complete definition with event handler"
+      },
+      {
+        "_control_index": 7,
+        "_source_lines": "Lines 12-17",
+        "_what": "Button to edit supplier",
+        "id": "Command4",
+        "_id_source": "Line 12: Begin VB.CommandButton Command4",
+        "_naming_convention": "Command = CommandButton prefix (generic naming)",
+        "type": "CommandButton",
+        "_type_source": "Line 12: VB.CommandButton",
+        "_type_angular_mapping": "mat-button or button with (click) event",
+        "caption": "Edit",
+        "_caption_source": "Line 13: Caption = \"Edit\"",
+        "_caption_angular": "Button text/label",
+        "position": {
+          "left": 11520,
+          "top": 2760,
+          "width": 1575,
+          "height": 495,
+          "_source": "Lines 14-17",
+          "_layout_note": "third button in vertical column of action buttons"
+        },
+        "tab_index": 13,
+        "_tab_index_source": "Line 15: TabIndex = 13",
+        "_tab_order": "Thirteenth in tab order",
+        "enabled": true,
+        "visible": true,
+        "properties": {
+          "default": false,
+          "_default_note": "not the default button (not triggered by enter key)",
+          "event_handler": "Command4_Click",
+          "_event_handler_source": "Lines 98-111: Private Sub Command4_Click()"
+        },
+        "confidence": 0.99,
+        "_confidence_why": "complete definition with event handler"
+      },
+      {
+        "_control_index": 8,
+        "_source_lines": "Lines 6-11",
+        "_what": "Button to reset/clear fields",
+        "id": "Command5",
+        "_id_source": "Line 6: Begin VB.CommandButton Command5",
+        "_naming_convention": "Command = CommandButton prefix (generic naming)",
+        "type": "CommandButton",
+        "_type_source": "Line 6: VB.CommandButton",
+        "_type_angular_mapping": "mat-button or button with (click) event",
+        "caption": "Reset",
+        "_caption_source": "Line 7: Caption = \"Reset\"",
+        "_caption_angular": "Button text/label",
+        "position": {
+          "left": 11520,
+          "top": 3720,
+          "width": 1575,
+          "height": 495,
+          "_source": "Lines 8-11",
+          "_layout_note": "fourth button in vertical column of action buttons"
+        },
+        "tab_index": 14,
+        "_tab_index_source": "Line 9: TabIndex = 14",
+        "_tab_order": "Fourteenth in tab order",
+        "enabled": true,
+        "visible": true,
+        "properties": {
+          "default": false,
+          "_default_note": "not the default button (not triggered by enter key)",
+          "event_handler": "Command5_Click",
+          "_event_handler_source": "Lines 113-115: Private Sub Command5_Click()"
+        },
+        "confidence": 0.99,
+        "_confidence_why": "complete definition with event handler"
+      },
+      {
+        "_control_index": 10,
+        "_source_lines": "Lines 54-95",
+        "_what": "Data grid to display supplier records",
+        "id": "DataGrid1",
+        "_id_source": "Line 54: Begin MSDataGridLib.DataGrid DataGrid1",
+        "type": "DataGrid",
+        "_type_source": "Line 54: MSDataGridLib.DataGrid",
+        "_type_angular_mapping": "mat-table or ag-grid",
+        "caption": "",
+        "_caption_note": "datagrids don't have captions",
+        "position": {
+          "left": 5760,
+          "top": 1080,
+          "width": 4935,
+          "height": 4095,
+          "_source": "Lines 55-58",
+          "_units": "twips",
+          "_note": "large grid positioned to right of input fields"
+        },
+        "tab_index": 3,
+        "_tab_index_source": "Line 57: TabIndex = 3",
+        "_tab_index_why": "third control in tab order",
+        "enabled": true,
+        "_enabled_default": "Not specified = True by default",
+        "visible": true,
+        "_visible_default": "Not specified = True by default",
+        "properties": {
+          "column_count": 2,
+          "_column_count_source": "Line 82: ColumnCount = 2",
+          "head_lines": 1,
+          "_head_lines_source": "Line 61: HeadLines = 1",
+          "row_height": 15,
+          "_row_height_source": "Line 62: RowHeight = 15",
+          "event_handler": "DataGrid1_Click",
+          "_event_handler_source": "Lines 123-128: Private Sub DataGrid1_Click()"
+        },
+        "confidence": 0.95,
+        "_confidence_why": "complex control with many properties defined"
+      },
+      {
+        "_control_index": 11,
+        "_source_lines": "Lines 96-101",
+        "_what": "Title label for the form",
+        "id": "Label1",
+        "_id_source": "Line 96: Begin VB.Label Label1",
+        "_naming_note": "generic name, not descriptive like 'lbltitle'",
+        "type": "Label",
+        "_type_source": "Line 96: VB.Label",
+        "_type_angular_mapping": "mat-label or h1/h2 heading element",
+        "caption": "SUPPLIER MANAGEMENT",
+        "_caption_source": "Line 98: Caption = \"SUPPLIER MANAGEMENT\"",
+        "position": {
+          "left": 5760,
+          "top": 240,
+          "width": 4935,
+          "height": 375,
+          "_source": "Lines 112-115",
+          "_layout_note": "centered title at top of form"
+        },
+        "tab_index": 0,
+        "_tab_index_source": "Line 114: TabIndex = 0",
+        "_tab_index_note": "first in tab order (title label)",
+        "enabled": true,
+        "visible": true,
+        "font": {
+          "_source_lines": "Lines 99-107",
+          "_what": "Font styling for title label",
+          "name": "MS Sans Serif",
+          "_name_source": "Line 100: Name = \"MS Sans Serif\"",
+          "size": 13.5,
+          "_size_source": "Line 101: Size = 13.5 (points)",
+          "weight": 700,
+          "_weight_source": "Line 103: Weight = 700",
+          "_weight_mapping": "700 = Bold",
+          "bold": true,
+          "_bold_derived": "Weight 700 = Bold",
+          "italic": false,
+          "_italic_source": "Line 105: Italic = 0 (False)",
+          "underline": false,
+          "_underline_source": "Line 104: Underline = 0 (False)",
+          "strikethrough": false,
+          "_strikethrough_source": "Line 106: Strikethrough = 0 (False)",
+          "weight_mapping": "bold",
+          "bold_derived": true
+        },
+        "properties": {
+          "alignment": "Center",
+          "_alignment_source": "Line 97: Alignment = 2 'Center",
+          "for_control": "",
+          "_for_control_reasoning": "title label, not associated with any specific control"
+        },
+        "confidence": 1.0,
+        "_confidence_why": "complete definition including font properties and alignment"
+      },
+      {
+        "_control_index": 12,
+        "_source_lines": "Lines 116-121",
+        "_what": "Label for Supplier Name field",
+        "id": "Label2",
+        "_id_source": "Line 116: Begin VB.Label Label2",
+        "_naming_note": "generic name, not descriptive like 'lblsuppliername'",
+        "type": "Label",
+        "_type_source": "Line 116: VB.Label",
+        "_type_angular_mapping": "mat-label or simple <label> element",
+        "caption": "Supplier Name:",
+        "_caption_source": "Line 117: Caption = \"Supplier Name:\"",
+        "position": {
+          "left": 480,
+          "top": 1080,
+          "width": 1455,
+          "height": 255,
+          "_source": "Lines 118-121",
+          "_layout_note": "positioned to left of text1 (same top=1080)"
+        },
+        "tab_index": 1,
+        "_tab_index_source": "Line 119: TabIndex = 1",
+        "_tab_index_note": "second in tab order",
+        "enabled": true,
+        "visible": true,
+        "properties": {
+          "for_control": "Text1",
+          "_for_control_reasoning": "positioned directly left of text1, describes its purpose"
+        },
+        "confidence": 1.0,
+        "_confidence_why": "complete definition with clear association"
+      },
+      {
+        "_control_index": 13,
+        "_source_lines": "Lines 122-127",
+        "_what": "Label for Location field",
+        "id": "Label3",
+        "_id_source": "Line 122: Begin VB.Label Label3",
+        "_naming_note": "generic name, not descriptive like 'lbllocation'",
+        "type": "Label",
+        "_type_source": "Line 122: VB.Label",
+        "_type_angular_mapping": "mat-label or simple <label> element",
+        "caption": "Location:",
+        "_caption_source": "Line 123: Caption = \"Location:\"",
+        "position": {
+          "left": 480,
+          "top": 1680,
+          "width": 1215,
+          "height": 255,
+          "_source": "Lines 124-127",
+          "_layout_note": "positioned to left of text2 (same top=1680)"
+        },
+        "tab_index": 2,
+        "_tab_index_source": "Line 125: TabIndex = 2",
+        "_tab_index_note": "third in tab order",
+        "enabled": true,
+        "visible": true,
+        "properties": {
+          "for_control": "Text2",
+          "_for_control_reasoning": "positioned directly left of text2, describes its purpose"
+        },
+        "confidence": 1.0,
+        "_confidence_why": "complete definition with clear association"
+      },
+      {
+        "_control_index": 14,
+        "_source_lines": "Lines 128-133",
+        "_what": "Label for Mobile Number field",
+        "id": "Label4",
+        "_id_source": "Line 128: Begin VB.Label Label4",
+        "_naming_note": "generic name, not descriptive like 'lblmobileno'",
+        "type": "Label",
+        "_type_source": "Line 128: VB.Label",
+        "_type_angular_mapping": "mat-label or simple <label> element",
+        "caption": "Mobile No:",
+        "_caption_source": "Line 129: Caption = \"Mobile No:\"",
+        "position": {
+          "left": 480,
+          "top": 2280,
+          "width": 1215,
+          "height": 255,
+          "_source": "Lines 130-133",
+          "_layout_note": "positioned to left of text3 (same top=2280)"
+        },
+        "tab_index": 8,
+        "_tab_index_source": "Line 131: TabIndex = 8",
+        "_tab_index_note": "eighth in tab order",
+        "enabled": true,
+        "visible": true,
+        "properties": {
+          "for_control": "Text3",
+          "_for_control_reasoning": "positioned directly left of text3, describes its purpose"
+        },
+        "confidence": 1.0,
+        "_confidence_why": "complete definition with clear association"
+      },
+      {
+        "_control_index": 15,
+        "_source_lines": "Lines 134-139",
+        "_what": "Label for Email ID field",
+        "id": "Label5",
+        "_id_source": "Line 134: Begin VB.Label Label5",
+        "_naming_note": "generic name, not descriptive like 'lblemailid'",
+        "type": "Label",
+        "_type_source": "Line 134: VB.Label",
+        "_type_angular_mapping": "mat-label or simple <label> element",
+        "caption": "Email ID:",
+        "_caption_source": "Line 135: Caption = \"Email ID:\"",
+        "position": {
+          "left": 480,
+          "top": 2880,
+          "width": 1215,
+          "height": 255,
+          "_source": "Lines 136-139",
+          "_layout_note": "positioned to left of text4 (same top=2880)"
+        },
+        "tab_index": 9,
+        "_tab_index_source": "Line 137: TabIndex = 9",
+        "_tab_index_note": "ninth in tab order",
+        "enabled": true,
+        "visible": true,
+        "properties": {
+          "for_control": "Text4",
+          "_for_control_reasoning": "positioned directly left of text4, describes its purpose"
+        },
+        "confidence": 1.0,
+        "_confidence_why": "complete definition with clear association"
+      },
+      {
+        "_control_index": 16,
+        "_source_lines": "Lines 140-145",
+        "_what": "Label for search combo box",
+        "id": "Label6",
+        "_id_source": "Line 140: Begin VB.Label Label6",
+        "_naming_note": "generic name, not descriptive like 'lblsearch'",
+        "type": "Label",
+        "_type_source": "Line 140: VB.Label",
+        "_type_angular_mapping": "mat-label or simple <label> element",
+        "caption": "Search by Name:",
+        "_caption_source": "Line 141: Caption = \"Search by Name:\"",
+        "position": {
+          "left": 480,
+          "top": 6840,
+          "width": 1575,
+          "height": 255,
+          "_source": "Lines 142-145",
+          "_layout_note": "positioned to left of combo1 (same top=6840)"
+        },
+        "tab_index": 10,
+        "_tab_index_source": "Line 143: TabIndex = 10",
+        "_tab_index_note": "tenth in tab order",
+        "enabled": true,
+        "visible": true,
+        "properties": {
+          "for_control": "Combo1",
+          "_for_control_reasoning": "positioned directly left of combo1, describes its purpose"
+        },
+        "confidence": 1.0,
+        "_confidence_why": "complete definition with clear association"
+      },
+      {
+        "_control_index": 1,
+        "_source_lines": "Lines 48-53",
+        "_what": "Text input for Supplier Name",
+        "id": "Text1",
+        "_id_source": "Line 48: Begin VB.TextBox Text1",
+        "type": "TextBox",
+        "_type_source": "Line 48: VB.TextBox",
+        "_type_angular_mapping": "mat-form-field with input type='text'",
+        "caption": "",
+        "_caption_note": "textboxes don't have captions, only text property (runtime value)",
+        "position": {
+          "left": 2400,
+          "top": 1080,
+          "width": 2415,
+          "height": 375,
+          "_source": "Lines 49-53",
+          "_units": "twips",
+          "_note": "position is relative to form's top-left corner"
+        },
+        "tab_index": 4,
+        "_tab_index_source": "Line 51: TabIndex = 4",
+        "_tab_index_why": "fourth control in tab order",
+        "enabled": true,
+        "_enabled_default": "Not specified = True by default",
+        "visible": true,
+        "_visible_default": "Not specified = True by default",
+        "properties": {
+          "max_length": 0,
+          "_max_length_note": "not specified, defaults to 0 (unlimited)",
+          "text": "",
+          "_text_note": "default empty, filled at runtime",
+          "associated_label": "Label2",
+          "_associated_label_why": "label2 ('supplier name:') is positioned at same top (1080), to the left"
+        },
+        "confidence": 0.98,
+        "_confidence_why": "all properties clearly defined"
+      },
+      {
+        "_control_index": 2,
+        "_source_lines": "Lines 42-47",
+        "_what": "Text input for Location",
+        "id": "Text2",
+        "_id_source": "Line 42: Begin VB.TextBox Text2",
+        "type": "TextBox",
+        "_type_source": "Line 42: VB.TextBox",
+        "_type_angular_mapping": "mat-form-field with input type='text'",
+        "caption": "",
+        "_caption_note": "textboxes don't have captions, only text property (runtime value)",
+        "position": {
+          "left": 2400,
+          "top": 1680,
+          "width": 2415,
+          "height": 375,
+          "_source": "Lines 43-47",
+          "_units": "twips",
+          "_note": "position is relative to form's top-left corner"
+        },
+        "tab_index": 5,
+        "_tab_index_source": "Line 45: TabIndex = 5",
+        "_tab_index_why": "fifth control in tab order",
+        "enabled": true,
+        "_enabled_default": "Not specified = True by default",
+        "visible": true,
+        "_visible_default": "Not specified = True by default",
+        "properties": {
+          "max_length": 0,
+          "_max_length_note": "not specified, defaults to 0 (unlimited)",
+          "text": "",
+          "_text_note": "default empty, filled at runtime",
+          "associated_label": "Label3",
+          "_associated_label_why": "label3 ('location:') is positioned at same top (1680), to the left"
+        },
+        "confidence": 0.98,
+        "_confidence_why": "all properties clearly defined"
+      },
+      {
+        "_control_index": 3,
+        "_source_lines": "Lines 36-41",
+        "_what": "Text input for Mobile Number",
+        "id": "Text3",
+        "_id_source": "Line 36: Begin VB.TextBox Text3",
+        "type": "TextBox",
+        "_type_source": "Line 36: VB.TextBox",
+        "_type_angular_mapping": "mat-form-field with input type='text'",
+        "caption": "",
+        "_caption_note": "textboxes don't have captions, only text property (runtime value)",
+        "position": {
+          "left": 2400,
+          "top": 2280,
+          "width": 2415,
+          "height": 375,
+          "_source": "Lines 37-41",
+          "_units": "twips",
+          "_note": "position is relative to form's top-left corner"
+        },
+        "tab_index": 6,
+        "_tab_index_source": "Line 39: TabIndex = 6",
+        "_tab_index_why": "sixth control in tab order",
+        "enabled": true,
+        "_enabled_default": "Not specified = True by default",
+        "visible": true,
+        "_visible_default": "Not specified = True by default",
+        "properties": {
+          "max_length": 0,
+          "_max_length_note": "not specified, defaults to 0 (unlimited)",
+          "text": "",
+          "_text_note": "default empty, filled at runtime",
+          "associated_label": "Label4",
+          "_associated_label_why": "label4 ('mobile no:') is positioned at same top (2280), to the left"
+        },
+        "confidence": 0.98,
+        "_confidence_why": "all properties clearly defined"
+      },
+      {
+        "_control_index": 4,
+        "_source_lines": "Lines 30-35",
+        "_what": "Text input for Email ID",
+        "id": "Text4",
+        "_id_source": "Line 30: Begin VB.TextBox Text4",
+        "type": "TextBox",
+        "_type_source": "Line 30: VB.TextBox",
+        "_type_angular_mapping": "mat-form-field with input type='email'",
+        "caption": "",
+        "_caption_note": "textboxes don't have captions, only text property (runtime value)",
+        "position": {
+          "left": 2400,
+          "top": 2880,
+          "width": 2415,
+          "height": 375,
+          "_source": "Lines 31-35",
+          "_units": "twips",
+          "_note": "position is relative to form's top-left corner"
+        },
+        "tab_index": 7,
+        "_tab_index_source": "Line 33: TabIndex = 7",
+        "_tab_index_why": "seventh control in tab order",
+        "enabled": true,
+        "_enabled_default": "Not specified = True by default",
+        "visible": true,
+        "_visible_default": "Not specified = True by default",
+        "properties": {
+          "max_length": 0,
+          "_max_length_note": "not specified, defaults to 0 (unlimited)",
+          "text": "",
+          "_text_note": "default empty, filled at runtime",
+          "associated_label": "Label5",
+          "_associated_label_why": "label5 ('email id:') is positioned at same top (2880), to the left"
+        },
+        "confidence": 0.98,
+        "_confidence_why": "all properties clearly defined"
+      }
+    ],
+    "layout": {
+      "grid_based": false,
+      "responsive": false,
+      "groups": [
+        {
+          "name": "title_section",
+          "control_ids": [
+            "Label1"
+          ]
+        },
+        {
+          "name": "input_section",
+          "control_ids": [
+            "Label2",
+            "Text1",
+            "Label3",
+            "Text2",
+            "Label4",
+            "Text3",
+            "Label5",
+            "Text4"
+          ]
+        },
+        {
+          "name": "data_display",
+          "control_ids": [
+            "DataGrid1"
+          ]
+        },
+        {
+          "name": "action_buttons",
+          "control_ids": [
+            "Command2",
+            "Command3",
+            "Command4",
+            "Command5"
+          ]
+        },
+        {
+          "name": "search_section",
+          "control_ids": [
+            "Label6",
+            "Combo1"
+          ]
+        }
+      ]
+    }
+  },
+  "logic": {
+    "_source_lines": "Lines 95-200",
+    "_what": "Business logic, event handlers, validations for supplier management",
+    "_why": "defines crud operations, form behavior and validation rules for supplier data",
+    "confidence": 0.92,
+    "_confidence_why": "clear business logic with standard crud patterns, well-defined event handlers",
+    "event_handlers": [
+      {
+        "_handler_index": 1,
+        "_source_lines": "Lines 95-113",
+        "_what": "Add new supplier to database",
+        "control_id": "Command2",
+        "event_type": "Click",
+        "handler_name": "Command2_Click",
+        "_handler_signature": "Private Sub Command2_Click()",
+        "logic_steps": [
+          {
+            "step_type": "object_creation",
+            "description": "Create new recordset for suppliers table",
+            "code_snippet": "Dim rs As New ADODB.Recordset",
+            "_line": 97,
+            "_angular_equivalent": "this.supplierService.create()"
+          },
+          {
+            "step_type": "validation",
+            "description": "Check all required fields are filled",
+            "code_snippet": "If Text1.Text = \"\" Or Text2.Text = \"\" Or Text3.Text = \"\" Or Text4.Text = \"\" Then",
+            "_line": 100,
+            "_angular_equivalent": "Form validation with required validators"
+          },
+          {
+            "step_type": "method_call",
+            "description": "Add new record to database",
+            "code_snippet": "rs.AddNew",
+            "_line": 105,
+            "_angular_equivalent": "this.supplierService.addSupplier(supplierData)"
+          },
+          {
+            "step_type": "message",
+            "description": "Show success confirmation",
+            "code_snippet": "MsgBox \"Supplier added successfully!\", vbInformation",
+            "_line": 112,
+            "_angular_equivalent": "this.snackBar.open('Supplier added successfully!')"
+          }
+        ],
+        "confidence": 0.95,
+        "_confidence_why": "complete crud operation with clear validation and feedback"
+      },
+      {
+        "_handler_index": 2,
+        "_source_lines": "Lines 115-127",
+        "_what": "Delete selected supplier with confirmation",
+        "control_id": "Command3",
+        "event_type": "Click",
+        "handler_name": "Command3_Click",
+        "_handler_signature": "Private Sub Command3_Click()",
+        "logic_steps": [
+          {
+            "step_type": "validation",
+            "description": "Show confirmation dialog",
+            "code_snippet": "response = MsgBox(\"Are you sure you want to delete this supplier?\", vbYesNo + vbQuestion)",
+            "_line": 120,
+            "_angular_equivalent": "const dialogRef = this.dialog.open(ConfirmDialogComponent)"
+          },
+          {
+            "step_type": "method_call",
+            "description": "Execute delete SQL command",
+            "code_snippet": "rs.Open \"delete from suppliers where sid=\" & DataGrid1.Columns(0).Text, con",
+            "_line": 123,
+            "_angular_equivalent": "this.supplierService.deleteSupplier(selectedId)"
+          }
+        ],
+        "confidence": 0.9,
+        "_confidence_why": "standard delete operation with user confirmation"
+      },
+      {
+        "_handler_index": 3,
+        "_source_lines": "Lines 129-145",
+        "_what": "Update existing supplier record",
+        "control_id": "Command4",
+        "event_type": "Click",
+        "handler_name": "Command4_Click",
+        "_handler_signature": "Private Sub Command4_Click()",
+        "logic_steps": [
+          {
+            "step_type": "method_call",
+            "description": "Open recordset for selected supplier",
+            "code_snippet": "rs.Open \"select * from suppliers where sid=\" & DataGrid1.Columns(0).Text, con, adOpenDynamic, adLockOptimistic",
+            "_line": 132,
+            "_angular_equivalent": "this.supplierService.getSupplier(selectedId)"
+          },
+          {
+            "step_type": "method_call",
+            "description": "Update supplier fields",
+            "code_snippet": "rs.Fields(\"sname\") = Text1.Text",
+            "_line": 135,
+            "_angular_equivalent": "this.supplierService.updateSupplier(supplierId, supplierData)"
+          }
+        ],
+        "confidence": 0.88,
+        "_confidence_why": "standard update operation, but lacks validation before update"
+      },
+      {
+        "_handler_index": 4,
+        "_source_lines": "Lines 147-150",
+        "_what": "Clear all input fields",
+        "control_id": "Command5",
+        "event_type": "Click",
+        "handler_name": "Command5_Click",
+        "_handler_signature": "Private Sub Command5_Click()",
+        "logic_steps": [
+          {
+            "step_type": "method_call",
+            "description": "Reset form fields to empty",
+            "code_snippet": "Call clearfields",
+            "_line": 149,
+            "_angular_equivalent": "this.supplierForm.reset()"
+          }
+        ],
+        "confidence": 0.95,
+        "_confidence_why": "simple utility function with clear purpose"
+      },
+      {
+        "_handler_index": 5,
+        "_source_lines": "Lines 152-157",
+        "_what": "Search suppliers by name",
+        "control_id": "Combo1",
+        "event_type": "Click",
+        "handler_name": "Combo1_Click",
+        "_handler_signature": "Private Sub Combo1_Click()",
+        "logic_steps": [
+          {
+            "step_type": "method_call",
+            "description": "Filter suppliers by name using LIKE query",
+            "code_snippet": "rs.Open \"select * from suppliers where sname like '%\" & Combo1.Text & \"%'\", con",
+            "_line": 155,
+            "_angular_equivalent": "this.supplierService.searchByName(searchTerm)"
+          }
+        ],
+        "confidence": 0.85,
+        "_confidence_why": "search functionality but no input validation"
+      },
+      {
+        "_handler_index": 6,
+        "_source_lines": "Lines 159-165",
+        "_what": "Populate form fields when grid row is selected",
+        "control_id": "DataGrid1",
+        "event_type": "Click",
+        "handler_name": "DataGrid1_Click",
+        "_handler_signature": "Private Sub DataGrid1_Click()",
+        "logic_steps": [
+          {
+            "step_type": "method_call",
+            "description": "Fill text boxes with selected row data",
+            "code_snippet": "Text1.Text = DataGrid1.Columns(1).Text",
+            "_line": 161,
+            "_angular_equivalent": "this.selectedSupplier = this.suppliers[selectedIndex]"
+          }
+        ],
+        "confidence": 0.9,
+        "_confidence_why": "standard grid selection handling"
+      },
+      {
+        "_handler_index": 7,
+        "_source_lines": "Lines 167-170",
+        "_what": "Initialize form on load",
+        "control_id": "frmsupplier",
+        "event_type": "Load",
+        "handler_name": "Form_Load",
+        "_handler_signature": "Private Sub Form_Load()",
+        "logic_steps": [
+          {
+            "step_type": "method_call",
+            "description": "Load supplier data into grid",
+            "code_snippet": "Call loadgrid",
+            "_line": 168,
+            "_angular_equivalent": "this.ngOnInit() - load suppliers"
+          },
+          {
+            "step_type": "method_call",
+            "description": "Populate search combo box",
+            "code_snippet": "Call fillcombo",
+            "_line": 169,
+            "_angular_equivalent": "this.loadSearchOptions()"
+          }
+        ],
+        "confidence": 0.95,
+        "_confidence_why": "standard form initialization pattern"
+      }
+    ],
+    "validations": [
+      {
+        "_validation_index": 1,
+        "_source_lines": "Lines 100-103",
+        "_what": "Validate all required fields are filled before adding supplier",
+        "_implicit": false,
+        "field": "Text1, Text2, Text3, Text4",
+        "_field_why": "all supplier input fields must be non-empty",
+        "rule_type": "required",
+        "_rule_subtype": "all_fields_required",
+        "rule_value": "All fields must have values",
+        "error_message": "All fields are required!",
+        "_error_message_source": "Line 101: MsgBox \"All fields are required!\", vbExclamation",
+        "original_code": "If Text1.Text = \"\" Or Text2.Text = \"\" Or Text3.Text = \"\" Or Text4.Text = \"\" Then\n    MsgBox \"All fields are required!\", vbExclamation\n    Exit Sub\nEnd If",
+        "confidence": 0.95,
+        "_confidence_why": "explicit validation with clear error message and exit logic"
+      },
+      {
+        "_validation_index": 2,
+        "_source_lines": "Lines 120-121",
+        "_what": "Confirm delete operation before proceeding",
+        "_implicit": false,
+        "field": "delete_confirmation",
+        "_field_why": "user must confirm destructive delete operation",
+        "rule_type": "custom",
+        "_rule_subtype": "user_confirmation",
+        "rule_value": "User must click Yes to proceed",
+        "error_message": "Operation cancelled by user",
+        "_error_message_note": "implicit - operation simply doesn't proceed if no is selected",
+        "original_code": "response = MsgBox(\"Are you sure you want to delete this supplier?\", vbYesNo + vbQuestion)\nIf response = vbYes Then",
+        "confidence": 0.9,
+        "_confidence_why": "standard confirmation pattern for destructive operations"
+      }
+    ],
+    "calculations": [],
+    "_calculations_note": "no mathematical calculations in this supplier management form",
+    "workflows": [
+      {
+        "_workflow_index": 1,
+        "_what": "Complete supplier creation workflow",
+        "name": "create_supplier",
+        "condition": "User clicks Add button after filling form",
+        "actions": [
+          {
+            "action_type": "validation",
+            "description": "Validate all required fields are filled",
+            "parameters": {
+              "fields": [
+                "supplier_name",
+                "location",
+                "mobile",
+                "email"
+              ],
+              "rule": "all_required"
+            }
+          },
+          {
+            "action_type": "data_operation",
+            "description": "Insert new supplier record into database",
+            "parameters": {
+              "operation": "insert",
+              "table": "suppliers"
+            }
+          },
+          {
+            "action_type": "other",
+            "description": "Refresh grid and clear form",
+            "parameters": {
+              "refresh_grid": true,
+              "clear_form": true
+            }
+          }
+        ],
+        "confidence": 0.92
+      },
+      {
+        "_workflow_index": 2,
+        "_what": "Supplier deletion workflow with confirmation",
+        "name": "delete_supplier",
+        "condition": "User clicks Delete button with supplier selected",
+        "actions": [
+          {
+            "action_type": "validation",
+            "description": "Show confirmation dialog",
+            "parameters": {
+              "type": "confirmation",
+              "message": "Are you sure you want to delete this supplier?"
+            }
+          },
+          {
+            "action_type": "data_operation",
+            "description": "Delete supplier from database",
+            "parameters": {
+              "operation": "delete",
+              "table": "suppliers",
+              "condition": "by_id"
+            }
+          }
+        ],
+        "confidence": 0.88
+      },
+      {
+        "_workflow_index": 3,
+        "_what": "Search suppliers by name workflow",
+        "name": "search_suppliers",
+        "condition": "User selects item from search combo box",
+        "actions": [
+          {
+            "action_type": "data_operation",
+            "description": "Filter suppliers by name pattern",
+            "parameters": {
+              "operation": "search",
+              "field": "sname",
+              "pattern": "like_wildcard"
+            }
+          },
+          {
+            "action_type": "other",
+            "description": "Update grid with filtered results",
+            "parameters": {
+              "update_grid": true
+            }
+          }
+        ],
+        "confidence": 0.85
+      }
+    ],
+    "error_handling": [
+      {
+        "_source_lines": "Lines 100-103",
+        "_what": "Validation error handling for required fields",
+        "type": "validation_with_exit",
+        "scope": "Command2_Click",
+        "handler": "Show error message and exit subroutine",
+        "_security_issue": "None - proper validation",
+        "_angular_equivalent": "Form validators with error display",
+        "_recommendation": "Good pattern - validates before processing"
+      },
+      {
+        "_source_lines": "Lines 120-126",
+        "_what": "User confirmation for destructive operations",
+        "type": "user_confirmation",
+        "scope": "Command3_Click",
+        "handler": "Check user response before proceeding with delete",
+        "_security_issue": "None - prevents accidental deletions",
+        "_angular_equivalent": "Confirmation dialog with async response handling",
+        "_recommendation": "Good UX pattern for destructive operations"
+      }
+    ]
+  },
+  "data": {
+    "_source_lines": "Lines 1-150",
+    "_what": "Complete CRUD operations for supplier management with database table access",
+    "confidence": 0.95,
+    "_confidence_why": "clear sql statements and database operations with well-defined entity structure",
+    "data_source": {
+      "type": "ado",
+      "_type_note": "uses adodb.recordset for database access",
+      "connection_string": null,
+      "_connection_note": "uses global 'con' variable defined elsewhere",
+      "connection_variable": "con",
+      "is_external": false,
+      "_external_note": "direct sql operations in this form"
+    },
+    "entities": [
+      {
+        "_entity_index": 1,
+        "_what": "Supplier database table with complete field structure",
+        "name": "suppliers",
+        "type": "table",
+        "_type_note": "database table accessed via sql statements",
+        "fields": [
+          {
+            "name": "sid",
+            "type": "integer",
+            "_type_note": "primary key, used in where clauses"
+          },
+          {
+            "name": "sname",
+            "type": "string",
+            "_type_note": "supplier name field"
+          },
+          {
+            "name": "splace",
+            "type": "string",
+            "_type_note": "supplier location field"
+          },
+          {
+            "name": "smobno",
+            "type": "string",
+            "_type_note": "supplier mobile number field"
+          },
+          {
+            "name": "smailid",
+            "type": "string",
+            "_type_note": "supplier email field"
+          }
+        ],
+        "_fields_note": "all fields identified from sql operations and form field mappings",
+        "source": "defined",
+        "_source_reasoning": "complete table structure evident from sql statements and field assignments"
+      }
+    ],
+    "operations": [
+      {
+        "_operation_index": 1,
+        "_source_lines": "Lines 2-3",
+        "_what": "Select all suppliers for adding new record",
+        "type": "SELECT",
+        "_type_reasoning": "opens recordset for adding new record",
+        "entity": "suppliers",
+        "fields": [
+          "*"
+        ],
+        "_fields_note": "all fields selected for recordset operations",
+        "where_clause": null,
+        "_where_reasoning": "no where clause - selects all for structure",
+        "query": "select * from suppliers",
+        "_query_note": "used to create recordset for adding new records",
+        "method": "Command2_Click",
+        "_method_line": 2,
+        "security_flags": [],
+        "_security_note": "no user input in this query",
+        "confidence": 0.9,
+        "_confidence_why": "clear sql statement for recordset creation"
+      },
+      {
+        "_operation_index": 2,
+        "_source_lines": "Lines 9-13",
+        "_what": "Insert new supplier record",
+        "type": "INSERT",
+        "_type_reasoning": "uses rs.addnew and rs.update to insert record",
+        "entity": "suppliers",
+        "fields": [
+          "sname",
+          "splace",
+          "smobno",
+          "smailid"
+        ],
+        "_fields_note": "all supplier fields except id (auto-generated)",
+        "where_clause": null,
+        "_where_reasoning": "insert operation does not use where clause",
+        "query": null,
+        "_query_note": "uses ado recordset methods instead of direct sql",
+        "method": "Command2_Click",
+        "_method_line": 9,
+        "security_flags": [],
+        "_security_note": "uses parameterized recordset fields, not string concatenation",
+        "confidence": 0.95,
+        "_confidence_why": "clear insert operation using ado recordset methods"
+      },
+      {
+        "_operation_index": 3,
+        "_source_lines": "Lines 7-3",
+        "_what": "Delete supplier by ID",
+        "type": "DELETE",
+        "_type_reasoning": "delete sql statement",
+        "entity": "suppliers",
+        "fields": [
+          "*"
+        ],
+        "_fields_note": "deletes entire record",
+        "where_clause": "sid = <DataGrid_Value>",
+        "_where_reasoning": "deletes based on supplier id from grid selection",
+        "query": "delete from suppliers where sid=",
+        "_query_note": "sql injection risk - concatenates grid value directly",
+        "method": "Command3_Click",
+        "_method_line": 7,
+        "security_flags": [
+          "SQL_INJECTION_RISK"
+        ],
+        "_security_note": "direct string concatenation with grid value",
+        "confidence": 0.95,
+        "_confidence_why": "clear delete operation with security concern"
+      },
+      {
+        "_operation_index": 4,
+        "_source_lines": "Lines 2-4",
+        "_what": "Select supplier for editing",
+        "type": "SELECT",
+        "_type_reasoning": "select statement to get specific supplier",
+        "entity": "suppliers",
+        "fields": [
+          "*"
+        ],
+        "_fields_note": "all fields selected for editing",
+        "where_clause": "sid = <DataGrid_Value>",
+        "_where_reasoning": "selects specific supplier by id from grid",
+        "query": "select * from suppliers where sid=",
+        "_query_note": "sql injection risk - concatenates grid value directly",
+        "method": "Command4_Click",
+        "_method_line": 2,
+        "security_flags": [
+          "SQL_INJECTION_RISK"
+        ],
+        "_security_note": "direct string concatenation with grid value",
+        "confidence": 0.95,
+        "_confidence_why": "clear select operation with security concern"
+      },
+      {
+        "_operation_index": 5,
+        "_source_lines": "Lines 4-8",
+        "_what": "Update supplier record",
+        "type": "UPDATE",
+        "_type_reasoning": "uses recordset update method to modify record",
+        "entity": "suppliers",
+        "fields": [
+          "sname",
+          "splace",
+          "smobno",
+          "smailid"
+        ],
+        "_fields_note": "updates all editable supplier fields",
+        "where_clause": "sid = <DataGrid_Value>",
+        "_where_reasoning": "updates specific record selected from grid",
+        "query": null,
+        "_query_note": "uses ado recordset methods instead of direct sql",
+        "method": "Command4_Click",
+        "_method_line": 4,
+        "security_flags": [],
+        "_security_note": "uses parameterized recordset fields for update values",
+        "confidence": 0.95,
+        "_confidence_why": "clear update operation using ado recordset methods"
+      },
+      {
+        "_operation_index": 6,
+        "_source_lines": "Lines 3-1",
+        "_what": "Search suppliers by name pattern",
+        "type": "SELECT",
+        "_type_reasoning": "select with like clause for searching",
+        "entity": "suppliers",
+        "fields": [
+          "*"
+        ],
+        "_fields_note": "all fields selected for search results",
+        "where_clause": "sname LIKE '%<search_term>%'",
+        "_where_reasoning": "pattern matching search on supplier name",
+        "query": "select * from suppliers where sname like '%",
+        "_query_note": "sql injection risk - concatenates user input directly",
+        "method": "Combo1_Click",
+        "_method_line": 3,
+        "security_flags": [
+          "SQL_INJECTION_RISK"
+        ],
+        "_security_note": "direct string concatenation with user input from combo box",
+        "confidence": 0.95,
+        "_confidence_why": "clear select operation with like clause and security concern"
+      },
+      {
+        "_operation_index": 7,
+        "_source_lines": "Line 3 in loadgrid",
+        "_what": "Load all suppliers into grid",
+        "type": "SELECT",
+        "_type_reasoning": "select all suppliers for grid display",
+        "entity": "suppliers",
+        "fields": [
+          "*"
+        ],
+        "_fields_note": "all fields selected for grid display",
+        "where_clause": null,
+        "_where_reasoning": "no where clause - loads all suppliers",
+        "query": "select * from suppliers",
+        "_query_note": "simple select all query",
+        "method": "loadgrid",
+        "_method_line": 3,
+        "security_flags": [],
+        "_security_note": "no user input in this query",
+        "confidence": 0.95,
+        "_confidence_why": "clear select all operation"
+      },
+      {
+        "_operation_index": 8,
+        "_source_lines": "Line 3 in fillcombo",
+        "_what": "Load supplier names for search combo",
+        "type": "SELECT",
+        "_type_reasoning": "select supplier names for combo box population",
+        "entity": "suppliers",
+        "fields": [
+          "sname"
+        ],
+        "_fields_note": "only supplier name field selected",
+        "where_clause": null,
+        "_where_reasoning": "no where clause - gets all supplier names",
+        "query": "select sname from suppliers",
+        "_query_note": "selects only name field for combo box",
+        "method": "fillcombo",
+        "_method_line": 3,
+        "security_flags": [],
+        "_security_note": "no user input in this query",
+        "confidence": 0.95,
+        "_confidence_why": "clear select operation for specific field"
+      }
+    ],
+    "cobol_files": [],
+    "_cobol_note": "not applicable for vb6",
+    "data_transformations": [
+      {
+        "_transformation_index": 1,
+        "_source_lines": "Lines 9-13",
+        "_what": "Text box values to database fields",
+        "from_field": "Text1.Text, Text2.Text, Text3.Text, Text4.Text",
+        "to_field": "sname, splace, smobno, smailid",
+        "transformation": "Direct string assignment from UI controls to database fields",
+        "original_code": "rs.Fields(\"sname\") = Text1.Text",
+        "_angular_equivalent": "formData.sname = this.supplierForm.get('sname').value"
+      },
+      {
+        "_transformation_index": 2,
+        "_source_lines": "Lines 4-8",
+        "_what": "Text box values to database fields for update",
+        "from_field": "Text1.Text, Text2.Text, Text3.Text, Text4.Text",
+        "to_field": "sname, splace, smobno, smailid",
+        "transformation": "Direct string assignment from UI controls to database fields",
+        "original_code": "rs.Fields(\"sname\") = Text1.Text",
+        "_angular_equivalent": "updateData.sname = this.supplierForm.get('sname').value"
+      },
+      {
+        "_transformation_index": 3,
+        "_source_lines": "Lines 2-5",
+        "_what": "Grid column values to text boxes",
+        "from_field": "DataGrid1.Columns(1-4).Text",
+        "to_field": "Text1.Text, Text2.Text, Text3.Text, Text4.Text",
+        "transformation": "Grid selection to form field population",
+        "original_code": "Text1.Text = DataGrid1.Columns(1).Text",
+        "_angular_equivalent": "this.supplierForm.patchValue({sname: selectedRow.sname})"
+      }
+    ]
+  },
+  "patterns": [],
+  "external_references": {
+    "classes": [
+      {
+        "name": "ADODB.Recordset",
+        "source": "external",
+        "_source_note": "Referenced but not defined in this file",
+        "methods_called": []
+      }
+    ],
+    "modules": [],
+    "copybooks": [],
+    "controls": []
+  },
+  "security_issues": [
+    {
+      "_source_lines": "Lines 100-103",
+      "_what": "Validation error handling for required fields",
+      "issue_type": "OTHER",
+      "severity": "medium",
+      "location": "Command2_Click",
+      "description": "None - proper validation",
+      "recommendation": "Good pattern - validates before processing",
+      "_angular_code": "Form validators with error display"
+    },
+    {
+      "_source_lines": "Lines 120-126",
+      "_what": "User confirmation for destructive operations",
+      "issue_type": "OTHER",
+      "severity": "medium",
+      "location": "Command3_Click",
+      "description": "None - prevents accidental deletions",
+      "recommendation": "Good UX pattern for destructive operations",
+      "_angular_code": "Confirmation dialog with async response handling"
+    }
+  ],
+  "generation_metadata": {
+    "estimated_automation_rate": 0.85,
+    "estimated_manual_effort_hours": 1.7,
+    "complexity_score": 4,
+    "recommended_template": "angular-basic-component",
+    "generation_notes": [
+      "Create interfaces/services for: ADODB.Recordset",
+      "Fix 2 security issue(s)",
+      "Use Angular Material Dialog for modal behavior",
+      "Use Reactive Forms with validation"
+    ]
+  }
+}

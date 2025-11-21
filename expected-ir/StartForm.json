@@ -1,0 +1,925 @@
+{
+  "_comment": "GOLDEN TEST FIXTURE - Expected IR for StartForm.frm",
+  "_what": "Hand-crafted perfect IR extraction from StartForm.frm",
+  "_why": "Parser validation baseline - automated parser output must match this",
+  "_how": "Line-by-line manual mapping from source to IR schema",
+
+  "metadata": {
+    "_source_lines": "Lines 1-2, 65-69",
+    "_what": "File metadata and analysis information",
+    "_why": "Tracks source file, confidence, complexity for metrics",
+
+    "source_language": "VB6",
+    "source_file": "samples/vb6/simple/StartForm.frm",
+    "source_file_size": 2560,
+    "source_lines_of_code": 99,
+    "target_framework": "Angular",
+    "analysis_timestamp": "2025-11-19T22:30:00Z",
+    "analyzer_version": "1.0.0-manual",
+    "confidence": 0.92,
+    "_confidence_why": "High confidence - simple structure, but 2 external dependencies (Client, ClientEdit) not in file",
+
+    "complexity": "simple",
+    "_complexity_reasoning": "5 controls, 3 event handlers, minimal logic, no database operations",
+
+    "subagents_used": ["manual-analysis"],
+    "_note": "When automated: would be ['vb6-ui-agent', 'vb6-logic-agent', 'vb6-data-agent']"
+  },
+
+  "ui": {
+    "_source_lines": "Lines 2-64",
+    "_what": "User interface structure - form and controls",
+    "_why": "Defines what Angular component UI should look like",
+
+    "type": "dialog",
+    "_type_reasoning": "BorderStyle=3 (Fixed Dialog), no maximize/minimize buttons",
+
+    "confidence": 0.95,
+    "_confidence_why": "All UI elements clearly defined, standard VB6 format",
+
+    "form": {
+      "_source_lines": "Lines 2-15",
+      "_what": "Form-level properties",
+
+      "name": "StartForm",
+      "_name_source": "Line 2: 'Begin VB.Form StartForm' and Line 65: 'Attribute VB_Name'",
+
+      "caption": "Start",
+      "_caption_source": "Line 4: Caption = \"Start\"",
+
+      "width": 4050,
+      "_width_source": "Line 8: ClientWidth = 4050 (in twips)",
+      "_width_note": "VB6 uses twips (1/1440 inch). Angular will use pixels.",
+
+      "height": 1500,
+      "_height_source": "Line 5: ClientHeight = 1500 (in twips)",
+
+      "border_style": "FixedDialog",
+      "_border_style_source": "Line 3: BorderStyle = 3",
+      "_border_style_mapping": "3 = Fixed Dialog (not resizable)",
+
+      "start_position": "CenterOwner",
+      "_start_position_source": "Line 15: StartUpPosition = 1",
+      "_start_position_mapping": "1 = CenterOwner (center on parent window)",
+
+      "properties": {
+        "max_button": false,
+        "_max_button_source": "Line 10: MaxButton = 0 (False)",
+
+        "min_button": false,
+        "_min_button_source": "Line 11: MinButton = 0 (False)",
+
+        "show_in_taskbar": false,
+        "_show_in_taskbar_source": "Line 14: ShowInTaskbar = 0 (False)",
+
+        "link_topic": "Form1",
+        "_link_topic_source": "Line 9: LinkTopic = \"Form1\"",
+        "_link_topic_note": "Legacy DDE property, not relevant for Angular"
+      }
+    },
+
+    "controls": [
+      {
+        "_control_index": 1,
+        "_source_lines": "Lines 40-46",
+        "_what": "Text input for Client ID",
+
+        "id": "txtID",
+        "_id_source": "Line 40: Begin VB.TextBox txtID",
+
+        "type": "TextBox",
+        "_type_source": "Line 40: VB.TextBox",
+        "_type_angular_mapping": "mat-form-field with input type='text'",
+
+        "caption": "",
+        "_caption_note": "TextBoxes don't have captions, only Text property (runtime value)",
+
+        "position": {
+          "left": 1320,
+          "top": 360,
+          "width": 2535,
+          "height": 285,
+          "_source": "Lines 41-45",
+          "_units": "twips",
+          "_note": "Position is relative to form's top-left corner"
+        },
+
+        "tab_index": 0,
+        "_tab_index_source": "Line 43: TabIndex = 0",
+        "_tab_index_why": "First control in tab order (user enters ID first)",
+
+        "enabled": true,
+        "_enabled_default": "Not specified = True by default",
+
+        "visible": true,
+        "_visible_default": "Not specified = True by default",
+
+        "properties": {
+          "max_length": 0,
+          "_max_length_note": "Not specified, defaults to 0 (unlimited)",
+
+          "text": "",
+          "_text_note": "Default empty, filled at runtime",
+
+          "associated_label": "Label1",
+          "_associated_label_why": "Label1 ('Client ID') is positioned at same Top (360), to the left"
+        },
+
+        "confidence": 0.98,
+        "_confidence_why": "All properties clearly defined"
+      },
+
+      {
+        "_control_index": 2,
+        "_source_lines": "Lines 32-39",
+        "_what": "Button to create new client",
+
+        "id": "cmdNew",
+        "_id_source": "Line 32: Begin VB.CommandButton cmdNew",
+        "_naming_convention": "cmd = CommandButton prefix",
+
+        "type": "CommandButton",
+        "_type_source": "Line 32: VB.CommandButton",
+        "_type_angular_mapping": "mat-button or button with (click) event",
+
+        "caption": "New",
+        "_caption_source": "Line 33: Caption = \"New\"",
+        "_caption_angular": "Button text/label",
+
+        "position": {
+          "left": 120,
+          "top": 960,
+          "width": 1095,
+          "height": 375,
+          "_source": "Lines 34-38",
+          "_layout_note": "First button in row of 3 buttons at Y=960"
+        },
+
+        "tab_index": 1,
+        "_tab_index_source": "Line 36: TabIndex = 1",
+        "_tab_order": "Second in tab order (after txtID)",
+
+        "enabled": true,
+        "visible": true,
+
+        "properties": {
+          "default": false,
+          "_default_note": "Not the default button (not triggered by Enter key)",
+
+          "event_handler": "cmdNew_Click",
+          "_event_handler_source": "Lines 71-78: Private Sub cmdNew_Click()"
+        },
+
+        "confidence": 0.99,
+        "_confidence_why": "Complete definition with event handler"
+      },
+
+      {
+        "_control_index": 3,
+        "_source_lines": "Lines 24-31",
+        "_what": "Button to open existing client by ID",
+
+        "id": "cmdOpen",
+        "type": "CommandButton",
+        "caption": "Open",
+        "_caption_source": "Line 25: Caption = \"Open\"",
+
+        "position": {
+          "left": 1320,
+          "top": 960,
+          "width": 1215,
+          "height": 375,
+          "_source": "Lines 26-30",
+          "_layout_note": "Middle button, aligned with txtID (same Left=1320)"
+        },
+
+        "tab_index": 2,
+        "_tab_index_source": "Line 28: TabIndex = 2",
+
+        "enabled": true,
+        "visible": true,
+
+        "properties": {
+          "event_handler": "cmdOpen_Click",
+          "_event_handler_source": "Lines 80-94: Private Sub cmdOpen_Click()",
+          "_validation_dependency": "Depends on txtID having value"
+        },
+
+        "confidence": 0.99
+      },
+
+      {
+        "_control_index": 4,
+        "_source_lines": "Lines 16-23",
+        "_what": "Button to close the form",
+
+        "id": "cmdClose",
+        "type": "CommandButton",
+        "caption": "Close",
+        "_caption_source": "Line 17: Caption = \"Close\"",
+
+        "position": {
+          "left": 2640,
+          "top": 960,
+          "width": 1215,
+          "height": 375,
+          "_source": "Lines 18-22",
+          "_layout_note": "Rightmost button in row"
+        },
+
+        "tab_index": 3,
+        "_tab_index_source": "Line 20: TabIndex = 3",
+
+        "enabled": true,
+        "visible": true,
+
+        "properties": {
+          "event_handler": "cmdClose_Click",
+          "_event_handler_source": "Lines 96-98: Private Sub cmdClose_Click()",
+          "_action": "Unloads form (closes dialog)"
+        },
+
+        "confidence": 1.0,
+        "_confidence_why": "Simple, complete definition"
+      },
+
+      {
+        "_control_index": 5,
+        "_source_lines": "Lines 47-63",
+        "_what": "Label for Client ID textbox",
+
+        "id": "Label1",
+        "_id_source": "Line 47: Begin VB.Label Label1",
+        "_naming_note": "Generic name, not descriptive like 'lblClientID'",
+
+        "type": "Label",
+        "_type_source": "Line 47: VB.Label",
+        "_type_angular_mapping": "mat-label or simple <label> element",
+
+        "caption": "Client ID",
+        "_caption_source": "Line 48: Caption = \"Client ID\"",
+
+        "position": {
+          "left": 120,
+          "top": 360,
+          "width": 1095,
+          "height": 255,
+          "_source": "Lines 58-62",
+          "_layout_note": "Positioned to left of txtID (same Top=360)"
+        },
+
+        "tab_index": 4,
+        "_tab_index_source": "Line 60: TabIndex = 4",
+        "_tab_index_note": "Labels typically last in tab order (non-interactive)",
+
+        "enabled": true,
+        "visible": true,
+
+        "font": {
+          "_source_lines": "Lines 49-57",
+          "_what": "Font styling for label",
+
+          "name": "MS Sans Serif",
+          "_name_source": "Line 50: Name = \"MS Sans Serif\"",
+
+          "size": 8.25,
+          "_size_source": "Line 51: Size = 8.25 (points)",
+
+          "weight": 700,
+          "_weight_source": "Line 53: Weight = 700",
+          "_weight_mapping": "700 = Bold",
+
+          "bold": true,
+          "_bold_derived": "Weight 700 = Bold",
+
+          "italic": false,
+          "_italic_source": "Line 55: Italic = 0 (False)",
+
+          "underline": false,
+          "_underline_source": "Line 54: Underline = 0 (False)",
+
+          "strikethrough": false,
+          "_strikethrough_source": "Line 56: Strikethrough = 0 (False)"
+        },
+
+        "properties": {
+          "for_control": "txtID",
+          "_for_control_reasoning": "Positioned directly left of txtID, describes its purpose"
+        },
+
+        "confidence": 1.0,
+        "_confidence_why": "Complete definition including font properties"
+      }
+    ],
+
+    "layout": {
+      "_what": "Layout analysis for responsive generation",
+      "_why": "Helps Angular generator create proper layout structure",
+
+      "grid_based": false,
+      "_grid_reasoning": "Uses absolute positioning (Left/Top), not grid",
+
+      "responsive": false,
+      "_responsive_reasoning": "Fixed dialog size, absolute positioning",
+      "_responsive_angular": "Angular version should be responsive (use flex layout)",
+
+      "groups": [
+        {
+          "name": "input_section",
+          "_what": "Client ID input area",
+          "control_ids": ["Label1", "txtID"],
+          "_layout": "Horizontal pair - label on left, textbox on right",
+          "_position": "Top of form (Y=360)"
+        },
+        {
+          "name": "action_buttons",
+          "_what": "Row of action buttons",
+          "control_ids": ["cmdNew", "cmdOpen", "cmdClose"],
+          "_layout": "Horizontal row of 3 buttons",
+          "_position": "Bottom of form (Y=960)",
+          "_spacing": "Evenly distributed across form width"
+        }
+      ]
+    }
+  },
+
+  "logic": {
+    "_source_lines": "Lines 71-98",
+    "_what": "Business logic, event handlers, validations",
+    "_why": "Defines component behavior and validation rules",
+
+    "confidence": 0.88,
+    "_confidence_why": "Logic is clear, but depends on external Client class and GetClient function",
+
+    "event_handlers": [
+      {
+        "_handler_index": 1,
+        "_source_lines": "Lines 71-78",
+        "_what": "Create new client handler",
+
+        "control_id": "cmdNew",
+        "event_type": "Click",
+        "handler_name": "cmdNew_Click",
+        "_handler_signature": "Private Sub cmdNew_Click()",
+
+        "logic_steps": [
+          {
+            "step_type": "object_creation",
+            "description": "Create new Client object",
+            "code_snippet": "Dim objClient As New Client",
+            "_line": 72,
+            "_angular_equivalent": "const objClient = new Client(); or this.clientService.createNew()"
+          },
+          {
+            "step_type": "object_creation",
+            "description": "Create ClientEdit form instance",
+            "code_snippet": "Dim frm As New ClientEdit",
+            "_line": 73,
+            "_angular_equivalent": "Open dialog/modal component"
+          },
+          {
+            "step_type": "method_call",
+            "description": "Pass client to form",
+            "code_snippet": "Set frm.Client = objClient",
+            "_line": 75,
+            "_angular_equivalent": "Pass data via dialog config or @Input"
+          },
+          {
+            "step_type": "navigation",
+            "description": "Show form as modal dialog",
+            "code_snippet": "frm.Show vbModal",
+            "_line": 76,
+            "_angular_equivalent": "this.dialog.open(ClientEditComponent, { data: objClient })",
+            "_modal_note": "vbModal = blocks parent until closed"
+          },
+          {
+            "step_type": "other",
+            "description": "Clean up form reference",
+            "code_snippet": "Set frm = Nothing",
+            "_line": 77,
+            "_angular_equivalent": "Not needed (garbage collection)",
+            "_why": "VB6 manual memory management"
+          }
+        ],
+
+        "confidence": 0.85,
+        "_confidence_why": "Logic clear, but Client and ClientEdit are external dependencies"
+      },
+
+      {
+        "_handler_index": 2,
+        "_source_lines": "Lines 80-94",
+        "_what": "Open existing client handler",
+
+        "control_id": "cmdOpen",
+        "event_type": "Click",
+        "handler_name": "cmdOpen_Click",
+
+        "logic_steps": [
+          {
+            "step_type": "object_creation",
+            "description": "Declare client variable (not instantiated yet)",
+            "code_snippet": "Dim objClient As Client",
+            "_line": 81,
+            "_note": "No 'New' keyword - will be assigned from GetClient()"
+          },
+          {
+            "step_type": "object_creation",
+            "description": "Create ClientEdit form",
+            "code_snippet": "Dim frm As New ClientEdit",
+            "_line": 82
+          },
+          {
+            "step_type": "other",
+            "description": "Enable error handling",
+            "code_snippet": "On Error Resume Next",
+            "_line": 84,
+            "_security_concern": "Suppresses errors - could hide issues",
+            "_angular_equivalent": "try-catch block",
+            "_why": "Handles case where GetClient fails or ID is invalid"
+          },
+          {
+            "step_type": "method_call",
+            "description": "Retrieve client by ID from database/service",
+            "code_snippet": "Set objClient = GetClient(CLng(txtID.Text))",
+            "_line": 85,
+            "_data_operation": "READ operation via GetClient function",
+            "_type_conversion": "CLng() converts text to Long integer",
+            "_input_field": "txtID",
+            "_angular_equivalent": "this.clientService.getById(+this.form.value.clientId)"
+          },
+          {
+            "step_type": "validation",
+            "description": "Check if client was found",
+            "code_snippet": "If objClient Is Nothing Then",
+            "_line": 87,
+            "_validation_type": "not_null check",
+            "_why": "GetClient returns Nothing if ID not found"
+          },
+          {
+            "step_type": "message",
+            "description": "Show error if not found",
+            "code_snippet": "MsgBox \"Client ID not found\"",
+            "_line": 88,
+            "_message_type": "error",
+            "_angular_equivalent": "this.snackBar.open('Client ID not found', 'Error')"
+          },
+          {
+            "step_type": "navigation",
+            "description": "Show client edit form if found",
+            "code_snippet": "Set frm.Client = objClient\nfrm.Show vbModal",
+            "_lines": "90-91",
+            "_conditional": "Only executed if objClient Is Not Nothing"
+          },
+          {
+            "step_type": "other",
+            "description": "Clean up form reference",
+            "code_snippet": "Set frm = Nothing",
+            "_line": 93
+          }
+        ],
+
+        "confidence": 0.82,
+        "_confidence_why": "Logic clear, but GetClient() function implementation unknown, error handling is weak"
+      },
+
+      {
+        "_handler_index": 3,
+        "_source_lines": "Lines 96-98",
+        "_what": "Close form handler",
+
+        "control_id": "cmdClose",
+        "event_type": "Click",
+        "handler_name": "cmdClose_Click",
+
+        "logic_steps": [
+          {
+            "step_type": "navigation",
+            "description": "Unload (close) the form",
+            "code_snippet": "Unload Me",
+            "_line": 97,
+            "_me_keyword": "'Me' refers to current form instance (StartForm)",
+            "_angular_equivalent": "this.dialogRef.close() or this.router.navigate(['..'])"
+          }
+        ],
+
+        "confidence": 1.0,
+        "_confidence_why": "Simple, standard close operation"
+      }
+    ],
+
+    "validations": [
+      {
+        "_validation_index": 1,
+        "_source_lines": "Lines 87-88",
+        "_what": "Validate client ID exists in database",
+        "_implicit": true,
+
+        "field": "txtID",
+        "_field_why": "Input comes from txtID.Text",
+
+        "rule_type": "custom",
+        "_rule_subtype": "database_lookup",
+
+        "rule_value": "Client must exist in database",
+
+        "error_message": "Client ID not found",
+        "_error_message_source": "Line 88: MsgBox \"Client ID not found\"",
+
+        "original_code": "If objClient Is Nothing Then\n  MsgBox \"Client ID not found\"",
+
+        "confidence": 0.90,
+        "_confidence_why": "Validation logic is clear"
+      },
+      {
+        "_validation_index": 2,
+        "_what": "Implicit type validation - ID must be numeric",
+        "_source_lines": "Line 85",
+        "_implicit": true,
+
+        "field": "txtID",
+
+        "rule_type": "numeric",
+        "_rule_reasoning": "CLng() function requires numeric string",
+
+        "rule_value": "Must convert to Long integer",
+
+        "error_message": "Type mismatch",
+        "_error_message_note": "VB6 runtime error if CLng() fails, suppressed by 'On Error Resume Next'",
+        "_security_issue": "Error suppression could hide invalid input",
+
+        "original_code": "CLng(txtID.Text)",
+
+        "confidence": 0.75,
+        "_confidence_why": "Implicit validation, error is suppressed so user may not see it"
+      }
+    ],
+
+    "calculations": [],
+    "_calculations_note": "No calculations in this form",
+
+    "workflows": [
+      {
+        "_workflow_index": 1,
+        "_what": "New client creation workflow",
+
+        "name": "create_new_client",
+        "condition": "User clicks 'New' button",
+        "actions": [
+          {
+            "action_type": "show_form",
+            "description": "Open ClientEdit dialog with new client",
+            "parameters": {
+              "form": "ClientEdit",
+              "mode": "create",
+              "modal": true
+            }
+          }
+        ],
+        "confidence": 0.85
+      },
+      {
+        "_workflow_index": 2,
+        "_what": "Open existing client workflow",
+
+        "name": "open_existing_client",
+        "condition": "User enters ID and clicks 'Open'",
+        "actions": [
+          {
+            "action_type": "other",
+            "description": "Retrieve client from database",
+            "parameters": {
+              "function": "GetClient",
+              "input": "txtID"
+            }
+          },
+          {
+            "action_type": "show_form",
+            "description": "Open ClientEdit dialog if found",
+            "parameters": {
+              "form": "ClientEdit",
+              "mode": "edit",
+              "modal": true,
+              "conditional": "client found"
+            }
+          }
+        ],
+        "confidence": 0.82
+      }
+    ],
+
+    "error_handling": [
+      {
+        "_source_lines": "Line 84",
+        "_what": "Error suppression for GetClient operation",
+
+        "type": "on_error_resume_next",
+        "scope": "cmdOpen_Click",
+        "handler": "Resume next statement (suppress errors)",
+        "_security_issue": "Hides errors instead of handling them properly",
+        "_angular_equivalent": "Should use try-catch with proper error handling",
+        "_recommendation": "Replace with explicit error handling and user feedback"
+      }
+    ]
+  },
+
+  "data": {
+    "_source_lines": "Lines 72, 81, 85",
+    "_what": "Data access patterns and external dependencies",
+    "_why": "Defines what data services Angular component needs",
+
+    "confidence": 0.70,
+    "_confidence_why": "No direct database code in this form - all via external functions/classes",
+
+    "data_source": {
+      "type": "other",
+      "_type_note": "Data access delegated to external Client class and GetClient function",
+
+      "connection_string": null,
+      "_connection_note": "No connection string in this file",
+
+      "connection_variable": null,
+
+      "is_external": true,
+      "_external_note": "All data operations via external dependencies"
+    },
+
+    "entities": [
+      {
+        "_entity_index": 1,
+        "_what": "Client entity (inferred from usage)",
+
+        "name": "Client",
+        "type": "object",
+        "_type_note": "VB6 class, not database table directly",
+
+        "fields": [],
+        "_fields_note": "Field structure unknown - Client class not in this file",
+
+        "source": "inferred",
+        "_source_reasoning": "Referenced in lines 72, 81, 85 but not defined"
+      }
+    ],
+
+    "operations": [
+      {
+        "_operation_index": 1,
+        "_source_lines": "Line 85",
+        "_what": "Retrieve client by ID",
+
+        "type": "SELECT",
+        "_type_reasoning": "GetClient() performs database lookup",
+
+        "entity": "Client",
+
+        "fields": ["*"],
+        "_fields_note": "Unknown which fields are retrieved",
+
+        "where_clause": "ID = <value>",
+        "_where_reasoning": "GetClient(CLng(txtID.Text)) passes ID as parameter",
+
+        "query": null,
+        "_query_note": "Actual SQL unknown - inside GetClient() function",
+
+        "method": "cmdOpen_Click",
+        "_method_line": 85,
+
+        "security_flags": [],
+        "_security_note": "GetClient() likely parameterized (function call), not direct SQL concatenation",
+
+        "confidence": 0.75,
+        "_confidence_why": "Operation inferred from function call, actual implementation unknown"
+      }
+    ],
+
+    "cobol_files": [],
+    "_cobol_note": "Not applicable for VB6",
+
+    "data_transformations": [
+      {
+        "_transformation_index": 1,
+        "_source_lines": "Line 85",
+        "_what": "Convert text input to Long integer",
+
+        "from_field": "txtID.Text",
+        "to_field": "CLng() result",
+        "transformation": "String to Long integer conversion",
+        "original_code": "CLng(txtID.Text)",
+        "_angular_equivalent": "Number() or parseInt() or unary + operator"
+      }
+    ]
+  },
+
+  "patterns": [
+    {
+      "_pattern_index": 1,
+      "_what": "Search/lookup form pattern detected",
+
+      "pattern_type": "SEARCH_FORM",
+      "pattern_name": "Simple ID Lookup Dialog",
+
+      "confidence": 0.88,
+      "_confidence_reasoning": "Has input field (txtID), lookup action (cmdOpen), but missing results grid",
+
+      "template_id": "00000000-0000-0000-0000-000000000001",
+      "_template_note": "Placeholder UUID - would reference pattern library",
+
+      "matched_elements": {
+        "search_input": "txtID",
+        "search_button": "cmdOpen",
+        "create_button": "cmdNew",
+        "close_button": "cmdClose",
+        "results_display": "none",
+        "_results_note": "Opens modal instead of showing results in grid"
+      },
+
+      "generation_hints": {
+        "angular_template": "search-dialog",
+        "use_material_dialog": true,
+        "use_reactive_forms": true,
+        "include_validation": ["required", "numeric"],
+        "_hint_why": "Dialog pattern best implemented with Angular Material dialog + reactive forms"
+      }
+    },
+    {
+      "_pattern_index": 2,
+      "_what": "Modal dialog pattern",
+
+      "pattern_type": "MODAL_DIALOG",
+      "pattern_name": "Startup/Launcher Dialog",
+
+      "confidence": 0.95,
+      "_confidence_reasoning": "Fixed dialog, modal display, blocks parent, action buttons",
+
+      "template_id": "00000000-0000-0000-0000-000000000002",
+
+      "matched_elements": {
+        "dialog_type": "FixedDialog",
+        "modal": true,
+        "_modal_evidence": "Lines 76, 91: frm.Show vbModal",
+        "action_buttons": ["cmdNew", "cmdOpen", "cmdClose"],
+        "no_maximize": true,
+        "no_minimize": true,
+        "centered": true
+      },
+
+      "generation_hints": {
+        "angular_template": "mat-dialog",
+        "dialog_width": "400px",
+        "_width_calculation": "4050 twips ≈ 400px",
+        "disable_close": false,
+        "has_backdrop": true
+      }
+    },
+    {
+      "_pattern_index": 3,
+      "_what": "Validation with user feedback",
+
+      "pattern_type": "VALIDATION_REQUIRED",
+      "pattern_name": "Not-Null Check with Message",
+
+      "confidence": 0.92,
+      "_confidence_reasoning": "Clear validation pattern: check for Nothing, show MsgBox",
+
+      "template_id": "00000000-0000-0000-0000-000000000003",
+
+      "matched_elements": {
+        "check_type": "Is Nothing",
+        "error_display": "MsgBox",
+        "validated_field": "objClient (result of GetClient)"
+      },
+
+      "generation_hints": {
+        "angular_validation": "Use reactive forms validators",
+        "error_display": "MatSnackBar",
+        "validation_trigger": "on_submit",
+        "_hint": "Show snackbar if service returns null/undefined"
+      }
+    }
+  ],
+
+  "external_references": {
+    "_what": "Dependencies on code not in this file",
+    "_why": "Parser must flag these for manual stub generation",
+
+    "classes": [
+      {
+        "name": "Client",
+        "_source_lines": "Lines 72, 81, 85",
+        "_what": "Business object representing a client",
+
+        "source": "external",
+        "_source_note": "Not defined in StartForm.frm - likely in Client.cls",
+
+        "methods_called": [],
+        "_methods_note": "Used as data container, no methods called in this file",
+
+        "_angular_equivalent": "Client interface or class in client.model.ts"
+      },
+      {
+        "name": "ClientEdit",
+        "_source_lines": "Lines 73, 82",
+        "_what": "Form for editing client details",
+
+        "source": "external",
+        "_source_note": "Separate form file - ClientEdit.frm",
+
+        "methods_called": ["Show"],
+        "_methods_note": "Show method is built-in VB6 form method",
+
+        "_angular_equivalent": "ClientEditComponent - dialog or route"
+      }
+    ],
+
+    "modules": [
+      {
+        "name": "unknown_module",
+        "_what": "Module containing GetClient function",
+
+        "type": "standard_module",
+        "_type_note": "Likely .bas file",
+
+        "functions_called": ["GetClient"],
+        "_functions": [
+          {
+            "name": "GetClient",
+            "_source_line": 85,
+            "signature": "Function GetClient(clientId As Long) As Client",
+            "_signature_inferred": "Based on usage: CLng() arg, returns Client object",
+            "_angular_equivalent": "ClientService.getById(id: number): Observable<Client>"
+          }
+        ]
+      }
+    ],
+
+    "copybooks": [],
+    "_copybooks_note": "Not applicable for VB6",
+
+    "controls": [],
+    "_controls_note": "All controls are standard VB6 controls - no third-party OCX"
+  },
+
+  "security_issues": [
+    {
+      "_issue_index": 1,
+      "_source_lines": "Line 84",
+      "_what": "Error suppression hides failures",
+
+      "issue_type": "INSECURE_ERROR_HANDLING",
+      "severity": "medium",
+
+      "location": "cmdOpen_Click, line 84",
+
+      "description": "'On Error Resume Next' suppresses all errors in GetClient call and subsequent operations. Invalid input could cause silent failures.",
+
+      "recommendation": "Use try-catch in Angular with explicit error handling and user feedback. Validate input before API call.",
+      "_angular_code": "try { const client = await this.clientService.getById(id); } catch (error) { this.snackBar.open('Error loading client', 'Error'); }"
+    },
+    {
+      "_issue_index": 2,
+      "_source_lines": "Line 85",
+      "_what": "No input validation before type conversion",
+
+      "issue_type": "OTHER",
+      "severity": "low",
+
+      "location": "cmdOpen_Click, line 85",
+
+      "description": "CLng(txtID.Text) could fail if user enters non-numeric text. Error is suppressed, so user gets no feedback.",
+
+      "recommendation": "Add reactive form validation: Validators.required and Validators.pattern(/^[0-9]+$/) before attempting conversion",
+      "_angular_code": "this.form = this.fb.group({ clientId: ['', [Validators.required, Validators.pattern(/^[0-9]+$/)]] });"
+    }
+  ],
+
+  "generation_metadata": {
+    "_what": "Hints for code generator",
+    "_why": "Helps estimate effort and select templates",
+
+    "estimated_automation_rate": 0.88,
+    "_automation_reasoning": "UI: 95% auto, Logic: 85% auto (need stubs for Client/ClientEdit), Data: 75% auto (GetClient needs implementation)",
+
+    "estimated_manual_effort_hours": 0.5,
+    "_manual_effort_breakdown": "0.2h for Client service, 0.2h for ClientEdit component, 0.1h for integration",
+
+    "complexity_score": 2,
+    "_complexity_scale": "0-10, where 0=trivial, 10=extremely complex",
+    "_complexity_reasoning": "Simple UI, minimal logic, no database code, but has external dependencies",
+
+    "recommended_template": "angular-dialog-form",
+    "_template_reasoning": "Best matches MODAL_DIALOG + SEARCH_FORM patterns",
+
+    "generation_notes": [
+      "Create Client interface with at least 'id' property",
+      "Create ClientService with getById(id: number) method returning Observable<Client>",
+      "Create stub ClientEditComponent accepting Client as dialog data",
+      "Use Angular Material Dialog for modal behavior",
+      "Use Reactive Forms with validation (required, numeric)",
+      "Use MatSnackBar for error messages",
+      "Map vbModal to dialog with backdrop and prevent closing on backdrop click",
+      "Convert twips to pixels: width ≈ 400px, height ≈ 150px",
+      "Implement proper error handling (no error suppression)",
+      "Consider adding loading state while GetClient executes"
+    ]
+  }
+}

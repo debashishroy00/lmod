@@ -1,0 +1,51 @@
+{
+  "generated_at": "2025-11-21T04:38:09.387712Z",
+  "source_ir": "StartForm.frm",
+  "form_name": "StartForm",
+  "generated_files": [
+    "start.component.ts",
+    "start.component.html",
+    "start.component.scss",
+    "start.component.spec.ts"
+  ],
+  "file_sizes": {
+    "start.component.ts": 4016,
+    "start.component.html": 1413,
+    "start.component.scss": 1430,
+    "start.component.spec.ts": 6531
+  },
+  "ir_metadata": {
+    "source_language": "VB6",
+    "source_file": "StartForm.frm",
+    "source_lines_of_code": 99,
+    "target_framework": "Angular",
+    "analysis_timestamp": "2025-11-20T23:37:16.332087",
+    "analyzer_version": "2.1.0-langgraph",
+    "parser_type": "langgraph-subagent",
+    "confidence": 0.872,
+    "complexity": "simple",
+    "subagents_used": [
+      "vb6-ui-agent",
+      "vb6-logic-agent",
+      "vb6-data-agent"
+    ]
+  },
+  "generation_metadata": {
+    "estimated_automation_rate": 0.85,
+    "estimated_manual_effort_hours": 0.8,
+    "complexity_score": 2,
+    "recommended_template": "angular-dialog-form",
+    "generation_notes": [
+      "Create interfaces/services for: Client, ClientEdit",
+      "Fix 1 security issue(s)",
+      "Use Angular Material Dialog for modal behavior",
+      "Use Reactive Forms with validation"
+    ]
+  },
+  "statistics": {
+    "controls_count": 5,
+    "event_handlers_count": 3,
+    "validations_count": 2,
+    "data_operations_count": 1
+  }
+}
