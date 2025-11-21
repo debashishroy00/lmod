@@ -1,0 +1,1064 @@
+{
+  "metadata": {
+    "source_language": "VB6",
+    "source_file": "frmMain.frm",
+    "source_lines_of_code": 1539,
+    "target_framework": "Angular",
+    "analysis_timestamp": "2025-11-21T11:57:06.190107",
+    "analyzer_version": "2.1.0-langgraph",
+    "parser_type": "langgraph-subagent",
+    "confidence": 0.918,
+    "complexity": "medium",
+    "subagents_used": [
+      "vb6-ui-agent",
+      "vb6-logic-agent",
+      "vb6-data-agent"
+    ]
+  },
+  "ui": {
+    "_source_lines": "Lines 4-64",
+    "_what": "User interface structure - form and controls",
+    "_why": "defines what angular component ui should look like",
+    "type": "dialog",
+    "_type_reasoning": "borderstyle=1 (fixed single), no maximize/minimize buttons",
+    "confidence": 0.95,
+    "_confidence_why": "all ui elements clearly defined, standard vb6 format",
+    "form": {
+      "name": "frmMain",
+      "_name_source": "Line 4: Begin VB.Form frmMain",
+      "caption": "",
+      "_caption_note": "no caption specified, set at runtime in form_load",
+      "width": 10440,
+      "_width_source": "Line 10: ClientWidth = 10440",
+      "height": 8280,
+      "_height_source": "Line 6: ClientHeight = 8280",
+      "border_style": "FixedSingle",
+      "_border_style_source": "Line 5: BorderStyle = 1",
+      "start_position": "Manual",
+      "_start_position_note": "not specified, defaults to manual",
+      "properties": {
+        "max_button": false,
+        "_max_button_source": "Line 12: MaxButton = 0 'False",
+        "min_button": false,
+        "_min_button_source": "Line 13: MinButton = 0 'False",
+        "show_in_taskbar": true,
+        "_show_in_taskbar_default": "Not specified = True by default",
+        "link_topic": "Form1",
+        "_link_topic_source": "Line 11: LinkTopic = \"Form1\""
+      }
+    },
+    "controls": [
+      {
+        "_control_index": 4,
+        "_source_lines": "Lines 64-71",
+        "_what": "Button to end current game",
+        "id": "cmdEnd",
+        "_id_source": "Line 64: Begin VB.CommandButton cmdEnd",
+        "_naming_convention": "cmd = CommandButton prefix",
+        "type": "CommandButton",
+        "_type_source": "Line 64: VB.CommandButton",
+        "_type_angular_mapping": "mat-button or button with (click) event",
+        "caption": "&End Game",
+        "_caption_source": "Line 65: Caption = \"&End Game\"",
+        "_caption_angular": "Button text with keyboard shortcut (Alt+E)",
+        "position": {
+          "left": 1920,
+          "top": 6780,
+          "width": 1335,
+          "height": 315,
+          "_source": "Lines 66-70",
+          "_layout_note": "middle area, near bottom"
+        },
+        "tab_index": 31,
+        "_tab_index_source": "Line 68: TabIndex = 31",
+        "_tab_order": "High in tab order",
+        "enabled": true,
+        "visible": true,
+        "properties": {
+          "default": false,
+          "_default_note": "not the default button",
+          "event_handler": "cmdEnd_Click",
+          "_event_handler_source": "Private Sub cmdEnd_Click() in code"
+        },
+        "confidence": 0.99,
+        "_confidence_why": "complete definition with event handler"
+      },
+      {
+        "_control_index": 12,
+        "_source_lines": "Lines 121-127",
+        "_what": "Exit button to close application",
+        "id": "cmdExit",
+        "_id_source": "Line 121: Begin VB.CommandButton cmdExit",
+        "_naming_convention": "cmd = CommandButton prefix",
+        "type": "CommandButton",
+        "_type_source": "Line 121: VB.CommandButton",
+        "_type_angular_mapping": "mat-button or button with (click) event",
+        "caption": "E&xit",
+        "_caption_source": "Line 122: Caption = \"E&xit\"",
+        "_caption_angular": "Button text with keyboard shortcut (Alt+X)",
+        "position": {
+          "left": 9300,
+          "top": 7620,
+          "width": 1035,
+          "height": 315,
+          "_source": "Lines 123-127",
+          "_layout_note": "bottom right corner of form"
+        },
+        "tab_index": 23,
+        "_tab_index_source": "Line 125: TabIndex = 23",
+        "_tab_order": "Exit button in tab order",
+        "enabled": true,
+        "visible": true,
+        "properties": {
+          "default": false,
+          "_default_note": "not the default button",
+          "event_handler": "cmdExit_Click",
+          "_event_handler_source": "Private Sub cmdExit_Click() in code"
+        },
+        "confidence": 0.99,
+        "_confidence_why": "complete definition with event handler"
+      },
+      {
+        "_control_index": 3,
+        "_source_lines": "Lines 57-63",
+        "_what": "Common dialog for file operations",
+        "id": "dlgFile",
+        "_id_source": "Line 57: Begin MSComDlg.CommonDialog dlgFile",
+        "type": "CommonDialog",
+        "_type_source": "Line 57: MSComDlg.CommonDialog",
+        "_type_angular_mapping": "Angular file input or custom file dialog service",
+        "caption": "",
+        "_caption_note": "commondialog doesn't have visible caption",
+        "position": {
+          "left": 120,
+          "top": 7380,
+          "width": 847,
+          "height": 847,
+          "_source": "Lines 58-62",
+          "_units": "twips",
+          "_layout_note": "bottom left corner, small size (dialog control)"
+        },
+        "tab_index": 0,
+        "_tab_index_note": "no tabindex specified for commondialog (not interactive ui element)",
+        "enabled": true,
+        "_enabled_default": "Not specified = True by default",
+        "visible": false,
+        "_visible_note": "commondialog is invisible until shown programmatically",
+        "properties": {
+          "dialog_type": "file",
+          "_dialog_type_note": "used for file open/save operations"
+        },
+        "confidence": 0.95,
+        "_confidence_why": "standard commondialog definition"
+      },
+      {
+        "_control_index": 5,
+        "_source_lines": "Lines 72-95",
+        "_what": "Frame containing program performance statistics",
+        "id": "fraScore",
+        "_id_source": "Line 72: Begin VB.Frame fraScore",
+        "_naming_convention": "fra = Frame prefix",
+        "type": "Frame",
+        "_type_source": "Line 72: VB.Frame",
+        "_type_angular_mapping": "mat-card or fieldset with legend",
+        "caption": "Program Performance",
+        "_caption_source": "Line 73: Caption = \"Program Performance\"",
+        "position": {
+          "left": 60,
+          "top": 1380,
+          "width": 1755,
+          "height": 1335,
+          "_source": "Lines 74-78",
+          "_units": "twips",
+          "_layout_note": "left side, upper middle area"
+        },
+        "tab_index": 24,
+        "_tab_index_source": "Line 76: TabIndex = 24",
+        "_tab_index_note": "frame container for performance controls",
+        "enabled": true,
+        "visible": true,
+        "properties": {
+          "container": true,
+          "_container_note": "contains child controls for wins/losses/ties"
+        },
+        "confidence": 0.98,
+        "_confidence_why": "complete frame definition with child controls"
+      },
+      {
+        "_control_index": 11,
+        "_source_lines": "Lines 114-120",
+        "_what": "Label for wins count",
+        "id": "Label5",
+        "_id_source": "Line 114: Begin VB.Label Label5",
+        "_naming_note": "generic name, not descriptive like 'lblwins'",
+        "type": "Label",
+        "_type_source": "Line 114: VB.Label",
+        "_type_angular_mapping": "mat-label or simple <label> element",
+        "caption": "Wins:",
+        "_caption_source": "Line 115: Caption = \"Wins:\"",
+        "position": {
+          "left": 180,
+          "top": 300,
+          "width": 555,
+          "height": 255,
+          "_source": "Lines 116-120",
+          "_units": "twips",
+          "_layout_note": "positioned to left of txtprogramwins (same top=300)"
+        },
+        "tab_index": 28,
+        "_tab_index_source": "Line 118: TabIndex = 28",
+        "_tab_index_note": "labels typically last in tab order (non-interactive)",
+        "enabled": true,
+        "visible": true,
+        "properties": {
+          "for_control": "txtProgramWins",
+          "_for_control_reasoning": "positioned directly left of txtprogramwins, describes its purpose"
+        },
+        "confidence": 1.0,
+        "_confidence_why": "complete definition with clear association"
+      },
+      {
+        "_control_index": 10,
+        "_source_lines": "Lines 107-113",
+        "_what": "Label for losses count",
+        "id": "Label6",
+        "_id_source": "Line 107: Begin VB.Label Label6",
+        "_naming_note": "generic name, not descriptive like 'lbllosses'",
+        "type": "Label",
+        "_type_source": "Line 107: VB.Label",
+        "_type_angular_mapping": "mat-label or simple <label> element",
+        "caption": "Losses:",
+        "_caption_source": "Line 108: Caption = \"Losses:\"",
+        "position": {
+          "left": 180,
+          "top": 600,
+          "width": 615,
+          "height": 315,
+          "_source": "Lines 109-113",
+          "_units": "twips",
+          "_layout_note": "positioned to left of txtprogramlosses (same top=600)"
+        },
+        "tab_index": 29,
+        "_tab_index_source": "Line 111: TabIndex = 29",
+        "_tab_index_note": "labels typically last in tab order (non-interactive)",
+        "enabled": true,
+        "visible": true,
+        "properties": {
+          "for_control": "txtProgramLosses",
+          "_for_control_reasoning": "positioned directly left of txtprogramlosses, describes its purpose"
+        },
+        "confidence": 1.0,
+        "_confidence_why": "complete definition with clear association"
+      },
+      {
+        "_control_index": 9,
+        "_source_lines": "Lines 100-106",
+        "_what": "Label for ties count",
+        "id": "Label9",
+        "_id_source": "Line 100: Begin VB.Label Label9",
+        "_naming_note": "generic name, not descriptive like 'lblties'",
+        "type": "Label",
+        "_type_source": "Line 100: VB.Label",
+        "_type_angular_mapping": "mat-label or simple <label> element",
+        "caption": "Ties:",
+        "_caption_source": "Line 101: Caption = \"Ties:\"",
+        "position": {
+          "left": 180,
+          "top": 900,
+          "width": 495,
+          "height": 195,
+          "_source": "Lines 102-106",
+          "_units": "twips",
+          "_layout_note": "positioned to left of txtprogramties (same top=900)"
+        },
+        "tab_index": 30,
+        "_tab_index_source": "Line 104: TabIndex = 30",
+        "_tab_index_note": "labels typically last in tab order (non-interactive)",
+        "enabled": true,
+        "visible": true,
+        "properties": {
+          "for_control": "txtProgramTies",
+          "_for_control_reasoning": "positioned directly left of txtprogramties, describes its purpose"
+        },
+        "confidence": 1.0,
+        "_confidence_why": "complete definition with clear association"
+      },
+      {
+        "_control_index": 1,
+        "_source_lines": "Lines 16-31",
+        "_what": "Status bar at bottom of form showing game info",
+        "id": "staInfo",
+        "_id_source": "Line 16: Begin MSComctlLib.StatusBar staInfo",
+        "type": "StatusBar",
+        "_type_source": "Line 16: MSComctlLib.StatusBar",
+        "_type_angular_mapping": "mat-toolbar or custom status component",
+        "caption": "",
+        "_caption_note": "statusbar uses panels for text, not caption",
+        "position": {
+          "left": 0,
+          "top": 7965,
+          "width": 10440,
+          "height": 315,
+          "_source": "Lines 17-21",
+          "_units": "twips",
+          "_layout_note": "aligned to bottom of form (align = 2)"
+        },
+        "tab_index": 33,
+        "_tab_index_source": "Line 20: TabIndex = 33",
+        "_tab_index_note": "last in tab order (status bars typically non-interactive)",
+        "enabled": true,
+        "_enabled_default": "Not specified = True by default",
+        "visible": true,
+        "_visible_default": "Not specified = True by default",
+        "properties": {
+          "align": "bottom",
+          "_align_source": "Line 17: Align = 2 'Align Bottom",
+          "panels": 3,
+          "_panels_source": "Lines 24-31: NumPanels = 3"
+        },
+        "confidence": 0.98,
+        "_confidence_why": "complete definition with panel configuration"
+      },
+      {
+        "_control_index": 2,
+        "_source_lines": "Lines 32-56",
+        "_what": "Tab strip for displaying different information views",
+        "id": "tabInfo",
+        "_id_source": "Line 32: Begin MSComctlLib.TabStrip tabInfo",
+        "type": "TabStrip",
+        "_type_source": "Line 32: MSComctlLib.TabStrip",
+        "_type_angular_mapping": "mat-tab-group with mat-tab components",
+        "caption": "",
+        "_caption_note": "tabstrip uses tab captions, not control caption",
+        "position": {
+          "left": 4080,
+          "top": 0,
+          "width": 6255,
+          "height": 7575,
+          "_source": "Lines 33-37",
+          "_units": "twips",
+          "_layout_note": "right side of form, full height"
+        },
+        "tab_index": 32,
+        "_tab_index_source": "Line 35: TabIndex = 32",
+        "_tab_index_note": "second to last in tab order",
+        "enabled": true,
+        "_enabled_default": "Not specified = True by default",
+        "visible": true,
+        "_visible_default": "Not specified = True by default",
+        "properties": {
+          "tabs": 3,
+          "_tabs_source": "Line 41: NumTabs = 3",
+          "tab_captions": [
+            "Variables",
+            "Game File",
+            "AI Knowledge"
+          ],
+          "_tab_captions_source": "Lines 42-56: Tab captions defined"
+        },
+        "confidence": 0.99,
+        "_confidence_why": "complete definition with all tabs specified"
+      },
+      {
+        "_control_index": 7,
+        "_source_lines": "Lines 86-92",
+        "_what": "Text input for program losses count",
+        "id": "txtProgramLosses",
+        "_id_source": "Line 86: Begin VB.TextBox txtProgramLosses",
+        "type": "TextBox",
+        "_type_source": "Line 86: VB.TextBox",
+        "_type_angular_mapping": "mat-form-field with input type='text'",
+        "caption": "",
+        "_caption_note": "textboxes don't have captions, only text property",
+        "position": {
+          "left": 840,
+          "top": 600,
+          "width": 735,
+          "height": 285,
+          "_source": "Lines 87-91",
+          "_units": "twips",
+          "_note": "position relative to parent frame frascore"
+        },
+        "tab_index": 26,
+        "_tab_index_source": "Line 89: TabIndex = 26",
+        "_tab_index_why": "second textbox in performance group",
+        "enabled": true,
+        "_enabled_default": "Not specified = True by default",
+        "visible": true,
+        "_visible_default": "Not specified = True by default",
+        "properties": {
+          "max_length": 0,
+          "_max_length_note": "not specified, defaults to 0 (unlimited)",
+          "text": "",
+          "_text_note": "default empty, filled at runtime",
+          "associated_label": "Label6",
+          "_associated_label_why": "label6 ('losses:') is positioned at same top (600), to the left"
+        },
+        "confidence": 0.98,
+        "_confidence_why": "all properties clearly defined"
+      },
+      {
+        "_control_index": 6,
+        "_source_lines": "Lines 79-85",
+        "_what": "Text input for program ties count",
+        "id": "txtProgramTies",
+        "_id_source": "Line 79: Begin VB.TextBox txtProgramTies",
+        "type": "TextBox",
+        "_type_source": "Line 79: VB.TextBox",
+        "_type_angular_mapping": "mat-form-field with input type='text'",
+        "caption": "",
+        "_caption_note": "textboxes don't have captions, only text property",
+        "position": {
+          "left": 840,
+          "top": 900,
+          "width": 735,
+          "height": 285,
+          "_source": "Lines 80-84",
+          "_units": "twips",
+          "_note": "position relative to parent frame frascore"
+        },
+        "tab_index": 27,
+        "_tab_index_source": "Line 82: TabIndex = 27",
+        "_tab_index_why": "third textbox in performance group",
+        "enabled": true,
+        "_enabled_default": "Not specified = True by default",
+        "visible": true,
+        "_visible_default": "Not specified = True by default",
+        "properties": {
+          "max_length": 0,
+          "_max_length_note": "not specified, defaults to 0 (unlimited)",
+          "text": "",
+          "_text_note": "default empty, filled at runtime",
+          "associated_label": "Label9",
+          "_associated_label_why": "label9 ('ties:') is positioned at same top (900), to the left"
+        },
+        "confidence": 0.98,
+        "_confidence_why": "all properties clearly defined"
+      },
+      {
+        "_control_index": 8,
+        "_source_lines": "Lines 93-99",
+        "_what": "Text input for program wins count",
+        "id": "txtProgramWins",
+        "_id_source": "Line 93: Begin VB.TextBox txtProgramWins",
+        "type": "TextBox",
+        "_type_source": "Line 93: VB.TextBox",
+        "_type_angular_mapping": "mat-form-field with input type='text'",
+        "caption": "",
+        "_caption_note": "textboxes don't have captions, only text property",
+        "position": {
+          "left": 840,
+          "top": 300,
+          "width": 735,
+          "height": 285,
+          "_source": "Lines 94-98",
+          "_units": "twips",
+          "_note": "position relative to parent frame frascore"
+        },
+        "tab_index": 25,
+        "_tab_index_source": "Line 96: TabIndex = 25",
+        "_tab_index_why": "first textbox in performance group",
+        "enabled": true,
+        "_enabled_default": "Not specified = True by default",
+        "visible": true,
+        "_visible_default": "Not specified = True by default",
+        "properties": {
+          "max_length": 0,
+          "_max_length_note": "not specified, defaults to 0 (unlimited)",
+          "text": "",
+          "_text_note": "default empty, filled at runtime",
+          "associated_label": "Label5",
+          "_associated_label_why": "label5 ('wins:') is positioned at same top (300), to the left"
+        },
+        "confidence": 0.98,
+        "_confidence_why": "all properties clearly defined"
+      }
+    ],
+    "layout": {
+      "grid_based": false,
+      "responsive": false,
+      "groups": [
+        {
+          "name": "status_area",
+          "control_ids": [
+            "staInfo"
+          ]
+        },
+        {
+          "name": "info_tabs",
+          "control_ids": [
+            "tabInfo",
+            "txtKB"
+          ]
+        },
+        {
+          "name": "performance_stats",
+          "control_ids": [
+            "fraScore",
+            "txtProgramWins",
+            "txtProgramLosses",
+            "txtProgramTies",
+            "Label5",
+            "Label6",
+            "Label9"
+          ]
+        },
+        {
+          "name": "action_buttons",
+          "control_ids": [
+            "cmdEnd",
+            "cmdExit"
+          ]
+        },
+        {
+          "name": "dialogs",
+          "control_ids": [
+            "dlgFile"
+          ]
+        }
+      ]
+    }
+  },
+  "logic": {
+    "_source_lines": "Lines 1-1200",
+    "_what": "Business logic, event handlers, validations for AI game program",
+    "_why": "defines component behavior, game flow, and validation rules for tic-tac-toe ai",
+    "confidence": 0.92,
+    "_confidence_why": "clear event handlers and game logic, but some complex ai functions are external",
+    "event_handlers": [
+      {
+        "_handler_index": 1,
+        "_source_lines": "Lines 15-60",
+        "_what": "Form initialization - loads default values and sets up UI",
+        "control_id": "frmMain",
+        "event_type": "Load",
+        "handler_name": "Form_Load",
+        "_handler_signature": "Private Sub Form_Load()",
+        "logic_steps": [
+          {
+            "step_type": "initialization",
+            "description": "Set form caption with version",
+            "code_snippet": "frmMain.Caption = \"Artificial Intelligence Program (AIP) \" & gsVersion",
+            "_line": 19,
+            "_angular_equivalent": "this.title = `Artificial Intelligence Program (AIP) ${this.version}`"
+          },
+          {
+            "step_type": "data_binding",
+            "description": "Load global variables into form controls",
+            "code_snippet": "txtProgramSymbol.Text = gsProgramSymbol",
+            "_line": 20,
+            "_angular_equivalent": "this.programSymbol = this.gameService.programSymbol"
+          },
+          {
+            "step_type": "method_call",
+            "description": "Initialize grid display",
+            "code_snippet": "DrawNewGrid",
+            "_line": 55,
+            "_angular_equivalent": "this.drawNewGrid()"
+          }
+        ],
+        "confidence": 0.9,
+        "_confidence_why": "standard form initialization logic is clear"
+      },
+      {
+        "_handler_index": 2,
+        "_source_lines": "Lines 67-150",
+        "_what": "Send feedback handler - processes game results and updates knowledge base",
+        "control_id": "cmdSend",
+        "event_type": "Click",
+        "handler_name": "cmdSend_Click",
+        "_handler_signature": "Public Sub cmdSend_Click()",
+        "logic_steps": [
+          {
+            "step_type": "validation",
+            "description": "Check if win pattern is selected",
+            "code_snippet": "If gbWin = True And lWin < 1 Then MsgBox \"A win was indicated but no pattern selected!\"",
+            "_line": 125,
+            "_angular_equivalent": "if (this.gameWin && this.winPattern < 1) { this.showMessage('Win indicated but no pattern selected!'); }"
+          },
+          {
+            "step_type": "calculation",
+            "description": "Convert selected pattern to binary representation",
+            "code_snippet": "lWin = lWin + (2 ^ (GetCellIndex(nRow, nCol) - 1))",
+            "_line": 90,
+            "_angular_equivalent": "winPattern += Math.pow(2, this.getCellIndex(row, col) - 1)"
+          },
+          {
+            "step_type": "data_operation",
+            "description": "Update win/loss statistics",
+            "code_snippet": "gnProgramWins = gnProgramWins + 1",
+            "_line": 110,
+            "_angular_equivalent": "this.gameStats.programWins++"
+          }
+        ],
+        "confidence": 0.85,
+        "_confidence_why": "complex game logic but pattern is clear"
+      },
+      {
+        "_handler_index": 3,
+        "_source_lines": "Lines 300-350",
+        "_what": "Start game handler - validates settings and begins new game",
+        "control_id": "cmdStart",
+        "event_type": "Click",
+        "handler_name": "cmdStart_Click",
+        "_handler_signature": "Private Sub cmdStart_Click()",
+        "logic_steps": [
+          {
+            "step_type": "validation",
+            "description": "Check for duplicate symbols",
+            "code_snippet": "If gsProgramSymbol = gsTeacherSymbol Then MsgBox \"Duplicate Symbols!\"",
+            "_line": 305,
+            "_angular_equivalent": "if (this.programSymbol === this.teacherSymbol) { this.showError('Duplicate Symbols!'); return; }"
+          },
+          {
+            "step_type": "initialization",
+            "description": "Initialize game variables",
+            "code_snippet": "glProgram = 0: glTeacher = 0: gbWin = False",
+            "_line": 325,
+            "_angular_equivalent": "this.resetGameState()"
+          },
+          {
+            "step_type": "method_call",
+            "description": "Start game coordinator",
+            "code_snippet": "PlayCoordinator",
+            "_line": 340,
+            "_angular_equivalent": "this.playCoordinator()"
+          }
+        ],
+        "confidence": 0.88,
+        "_confidence_why": "clear game start logic with validation"
+      },
+      {
+        "_handler_index": 4,
+        "_source_lines": "Lines 800-900",
+        "_what": "Grid mouse click handler - handles player moves and win highlighting",
+        "control_id": "msgGrid",
+        "event_type": "MouseDown",
+        "handler_name": "msgGrid_MouseDown",
+        "_handler_signature": "Private Sub msgGrid_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)",
+        "logic_steps": [
+          {
+            "step_type": "validation",
+            "description": "Check if cell is empty and valid for move",
+            "code_snippet": "If sSymbol = \"\" And gbGameOver = False And gbProgramTurn = False",
+            "_line": 820,
+            "_angular_equivalent": "if (this.isEmpty(cell) && !this.gameOver && !this.programTurn)"
+          },
+          {
+            "step_type": "data_operation",
+            "description": "Place teacher symbol in cell",
+            "code_snippet": "msgGrid.TextMatrix(nRow, nCol) = gsTeacherSymbol",
+            "_line": 825,
+            "_angular_equivalent": "this.grid[row][col] = this.teacherSymbol"
+          },
+          {
+            "step_type": "other",
+            "description": "Highlight winning pattern cells",
+            "code_snippet": "msgGrid.CellBackColor = glCellSelectedColor",
+            "_line": 850,
+            "_angular_equivalent": "this.highlightCell(row, col, 'selected')"
+          }
+        ],
+        "confidence": 0.82,
+        "_confidence_why": "complex mouse handling with multiple game states"
+      }
+    ],
+    "validations": [
+      {
+        "_validation_index": 1,
+        "_source_lines": "Lines 305-310",
+        "_what": "Validate symbols are not duplicated",
+        "_implicit": false,
+        "field": "gsProgramSymbol, gsTeacherSymbol",
+        "_field_why": "compares program and teacher symbols",
+        "rule_type": "custom",
+        "_rule_subtype": "uniqueness_check",
+        "rule_value": "Symbols must be different",
+        "error_message": "Duplicate Symbols!",
+        "_error_message_source": "Line 306: MsgBox \"Duplicate Symbols!\"",
+        "original_code": "If gsProgramSymbol = gsTeacherSymbol Then\n  MsgBox \"Duplicate Symbols!\"",
+        "confidence": 0.95,
+        "_confidence_why": "explicit validation with clear error message"
+      },
+      {
+        "_validation_index": 2,
+        "_source_lines": "Lines 308-312",
+        "_what": "Validate symbol values are not duplicated",
+        "_implicit": false,
+        "field": "gnProgramValue, gnTeacherValue",
+        "_field_why": "compares program and teacher numeric values",
+        "rule_type": "custom",
+        "_rule_subtype": "uniqueness_check",
+        "rule_value": "Values must be different",
+        "error_message": "Duplicate symbol values!",
+        "_error_message_source": "Line 310: MsgBox \"Duplicate symbol values!\"",
+        "original_code": "If gnProgramValue = gnTeacherValue Then\n  MsgBox \"Duplicate symbol values!\"",
+        "confidence": 0.95,
+        "_confidence_why": "explicit validation with clear error message"
+      },
+      {
+        "_validation_index": 3,
+        "_source_lines": "Lines 125-128",
+        "_what": "Validate win pattern is selected when win is indicated",
+        "_implicit": false,
+        "field": "lWin",
+        "_field_why": "checks if winning pattern value is set",
+        "rule_type": "custom",
+        "_rule_subtype": "business_rule",
+        "rule_value": "Win pattern must be selected if win indicated",
+        "error_message": "A win was indicated but no pattern selected! Select pattern before clicking on Send Feedback!",
+        "_error_message_source": "Line 126: MsgBox \"A win was indicated but no pattern selected!\"",
+        "original_code": "If gbWin = True And lWin < 1 Then\n  MsgBox \"A win was indicated but no pattern selected!\"",
+        "confidence": 0.9,
+        "_confidence_why": "clear business rule validation"
+      },
+      {
+        "_validation_index": 4,
+        "_source_lines": "Lines 1100-1110",
+        "_what": "Implicit numeric validation for program value",
+        "_implicit": true,
+        "field": "txtProgramValue",
+        "_field_why": "cint() function requires numeric input",
+        "rule_type": "numeric",
+        "_rule_reasoning": "cint() function will throw error if non-numeric",
+        "rule_value": "Must be convertible to integer",
+        "error_message": "Type mismatch",
+        "_error_message_note": "vb6 runtime error if cint() fails",
+        "original_code": "nValue = CInt(txtProgramValue.Text)",
+        "confidence": 0.75,
+        "_confidence_why": "implicit validation, no explicit error handling shown"
+      }
+    ],
+    "calculations": [
+      {
+        "_calculation_index": 1,
+        "_source_lines": "Line 90",
+        "_what": "Convert cell position to binary pattern for AI knowledge base",
+        "calculation_type": "bitwise",
+        "formula": "lWin = lWin + (2 ^ (GetCellIndex(nRow, nCol) - 1))",
+        "purpose": "Create binary representation of winning pattern",
+        "_angular_equivalent": "winPattern += Math.pow(2, this.getCellIndex(row, col) - 1)",
+        "confidence": 0.85,
+        "_confidence_why": "clear mathematical operation for game ai"
+      }
+    ],
+    "workflows": [
+      {
+        "_workflow_index": 1,
+        "_what": "New game startup workflow",
+        "name": "start_new_game",
+        "condition": "User clicks Start Game button",
+        "actions": [
+          {
+            "action_type": "validation",
+            "description": "Validate game settings (symbols, values)",
+            "parameters": {
+              "checks": [
+                "duplicate_symbols",
+                "duplicate_values"
+              ]
+            }
+          },
+          {
+            "action_type": "data_operation",
+            "description": "Initialize game state variables",
+            "parameters": {
+              "variables": [
+                "glProgram",
+                "glTeacher",
+                "gbWin",
+                "gbGameOver"
+              ]
+            }
+          },
+          {
+            "action_type": "other",
+            "description": "Start game coordinator",
+            "parameters": {
+              "method": "PlayCoordinator"
+            }
+          }
+        ],
+        "confidence": 0.88
+      },
+      {
+        "_workflow_index": 2,
+        "_what": "Feedback processing workflow",
+        "name": "process_game_feedback",
+        "condition": "User clicks Send Feedback button",
+        "actions": [
+          {
+            "action_type": "validation",
+            "description": "Validate win pattern selection",
+            "parameters": {
+              "rule": "win_pattern_required_if_win"
+            }
+          },
+          {
+            "action_type": "data_operation",
+            "description": "Update game statistics",
+            "parameters": {
+              "stats": [
+                "wins",
+                "losses",
+                "ties"
+              ]
+            }
+          },
+          {
+            "action_type": "other",
+            "description": "Update AI knowledge base",
+            "parameters": {
+              "method": "DeriveABS"
+            }
+          }
+        ],
+        "confidence": 0.85
+      }
+    ],
+    "error_handling": [
+      {
+        "_source_lines": "Line 16",
+        "_what": "Error handling for form load",
+        "type": "on_error_goto",
+        "scope": "Form_Load",
+        "handler": "MyError label with ErrorHandler call",
+        "_pattern": "Standard VB6 error handling pattern",
+        "_angular_equivalent": "try-catch block with proper error service",
+        "_recommendation": "Replace with structured exception handling"
+      },
+      {
+        "_source_lines": "Line 70",
+        "_what": "Error handling for feedback processing",
+        "type": "on_error_goto",
+        "scope": "cmdSend_Click",
+        "handler": "MyError label with ErrorHandler call",
+        "_pattern": "Standard VB6 error handling pattern",
+        "_angular_equivalent": "try-catch with user notification service",
+        "_recommendation": "Add specific error handling for different failure scenarios"
+      },
+      {
+        "_source_lines": "Line 650",
+        "_what": "Error suppression for file dialog cancel",
+        "type": "on_error_resume_next",
+        "scope": "mnuFileOpen_Click",
+        "handler": "Resume next statement for cdlCancel error",
+        "_specific_error": "Handles user canceling file dialog",
+        "_angular_equivalent": "Check dialog result before proceeding",
+        "_recommendation": "Acceptable pattern for user cancellation"
+      }
+    ]
+  },
+  "data": {
+    "_source_lines": "Lines 1-1500",
+    "_what": "Game AI application with file I/O operations and knowledge base management",
+    "confidence": 0.85,
+    "_confidence_why": "clear file operations and data structures present, but some operations are delegated to external functions",
+    "data_source": {
+      "type": "file",
+      "_type_note": "file-based data storage using .aip files",
+      "connection_string": null,
+      "_connection_note": "uses file i/o operations, not database connections",
+      "connection_variable": "gsFilename",
+      "is_external": true,
+      "_external_note": "file operations delegated to readfile() and writefile() functions"
+    },
+    "entities": [
+      {
+        "_entity_index": 2,
+        "_what": "AI knowledge base entries",
+        "name": "ABS",
+        "type": "object",
+        "_type_note": "array of user-defined type for ai knowledge storage",
+        "fields": [
+          "word",
+          "wins"
+        ],
+        "_fields_note": "fields referenced in showknowledge procedure around lines 300-350",
+        "source": "inferred",
+        "_source_reasoning": "uabs array referenced but type definition not in this file"
+      },
+      {
+        "_entity_index": 1,
+        "_what": "Game configuration and state data",
+        "name": "Game",
+        "type": "inferred",
+        "_type_note": "game data structure inferred from file operations and global variables",
+        "fields": [
+          "gsGameName",
+          "gsFilename",
+          "gnRows",
+          "gnCols",
+          "gnProgramWins",
+          "gnProgramLosses",
+          "gnProgramTies",
+          "gsProgramSymbol",
+          "gsTeacherSymbol",
+          "gnProgramValue",
+          "gnTeacherValue",
+          "gnGoFirst",
+          "uABS"
+        ],
+        "_fields_note": "fields inferred from global variables used in file save/load operations",
+        "source": "inferred",
+        "_source_reasoning": "referenced in file operations but structure defined elsewhere"
+      }
+    ],
+    "operations": [
+      {
+        "_operation_index": 1,
+        "_source_lines": "Lines 650-680",
+        "_what": "Load game data from .aip file",
+        "type": "SELECT",
+        "_type_reasoning": "readfile() function loads existing game data",
+        "entity": "Game",
+        "fields": [
+          "*"
+        ],
+        "_fields_note": "all game configuration fields loaded from file",
+        "where_clause": "filename = <selected_file>",
+        "_where_reasoning": "file selected via commondialog and passed to readfile()",
+        "query": null,
+        "_query_note": "file reading logic in external readfile() function",
+        "method": "mnuFileOpen_Click",
+        "_method_line": 650,
+        "security_flags": [],
+        "_security_note": "file operations appear safe, using system file dialogs",
+        "confidence": 0.8,
+        "_confidence_why": "clear file loading operation, implementation in external function"
+      },
+      {
+        "_operation_index": 2,
+        "_source_lines": "Lines 750-800",
+        "_what": "Save game data to .aip file",
+        "type": "INSERT",
+        "_type_reasoning": "writefile() function saves current game state",
+        "entity": "Game",
+        "fields": [
+          "*"
+        ],
+        "_fields_note": "all current game state variables saved to file",
+        "where_clause": "filename = <user_selected>",
+        "_where_reasoning": "user selects filename via savedialog",
+        "query": null,
+        "_query_note": "file writing logic in external writefile() function",
+        "method": "mnuFileSave_Click",
+        "_method_line": 750,
+        "security_flags": [
+          "file_overwrite_check"
+        ],
+        "_security_note": "includes file existence check and user confirmation for overwrite",
+        "confidence": 0.8,
+        "_confidence_why": "clear file saving operation with user confirmation"
+      },
+      {
+        "_operation_index": 3,
+        "_source_lines": "Lines 850-900",
+        "_what": "Save game data with new filename",
+        "type": "INSERT",
+        "_type_reasoning": "writefile() function saves to user-specified filename",
+        "entity": "Game",
+        "fields": [
+          "*"
+        ],
+        "_fields_note": "complete game state saved to new file location",
+        "where_clause": "filename = <new_filename>",
+        "_where_reasoning": "user selects new filename via saveasdialog",
+        "query": null,
+        "_query_note": "file writing logic in external writefile() function",
+        "method": "mnuFileSaveAs_Click",
+        "_method_line": 850,
+        "security_flags": [
+          "file_overwrite_check"
+        ],
+        "_security_note": "includes file existence validation and overwrite confirmation",
+        "confidence": 0.8,
+        "_confidence_why": "clear save-as operation with safety checks"
+      }
+    ],
+    "cobol_files": [],
+    "_cobol_note": "not applicable for vb6",
+    "data_transformations": [
+      {
+        "_transformation_index": 1,
+        "_source_lines": "Lines 1400-1450",
+        "_what": "Convert text input to integer for program value",
+        "from_field": "txtProgramValue.Text",
+        "to_field": "gnProgramValue",
+        "transformation": "String to Integer conversion with validation",
+        "original_code": "nValue = CInt(txtProgramValue.Text)",
+        "_angular_equivalent": "Number(txtProgramValue.value) or parseInt(txtProgramValue.value)"
+      },
+      {
+        "_transformation_index": 2,
+        "_source_lines": "Lines 1480-1520",
+        "_what": "Convert text input to integer for teacher value",
+        "from_field": "txtTeacherValue.Text",
+        "to_field": "gnTeacherValue",
+        "transformation": "String to Integer conversion with validation",
+        "original_code": "nValue = CInt(txtTeacherValue.Text)",
+        "_angular_equivalent": "Number(txtTeacherValue.value) or parseInt(txtTeacherValue.value)"
+      },
+      {
+        "_transformation_index": 3,
+        "_source_lines": "Lines 300-350",
+        "_what": "Convert numeric values to formatted strings for display",
+        "from_field": "uABS(x).word",
+        "to_field": "sValue",
+        "transformation": "Long to String with padding for alignment",
+        "original_code": "sValue = CStr(uABS(x).word) & String(16 - Len(CStr(uABS(x).word)), \" \")",
+        "_angular_equivalent": "uABS[x].word.toString().padEnd(16, ' ')"
+      }
+    ]
+  },
+  "patterns": [],
+  "external_references": {
+    "classes": [],
+    "modules": [],
+    "copybooks": [],
+    "controls": []
+  },
+  "security_issues": [
+    {
+      "_source_lines": "Line 16",
+      "_what": "Error handling for form load",
+      "issue_type": "INSECURE_ERROR_HANDLING",
+      "severity": "medium",
+      "location": "Form_Load",
+      "description": "",
+      "recommendation": "Replace with structured exception handling",
+      "_angular_code": "try-catch block with proper error service"
+    },
+    {
+      "_source_lines": "Line 70",
+      "_what": "Error handling for feedback processing",
+      "issue_type": "INSECURE_ERROR_HANDLING",
+      "severity": "medium",
+      "location": "cmdSend_Click",
+      "description": "",
+      "recommendation": "Add specific error handling for different failure scenarios",
+      "_angular_code": "try-catch with user notification service"
+    },
+    {
+      "_source_lines": "Line 650",
+      "_what": "Error suppression for file dialog cancel",
+      "issue_type": "INSECURE_ERROR_HANDLING",
+      "severity": "medium",
+      "location": "mnuFileOpen_Click",
+      "description": "",
+      "recommendation": "Acceptable pattern for user cancellation",
+      "_angular_code": "Check dialog result before proceeding"
+    }
+  ],
+  "generation_metadata": {
+    "estimated_automation_rate": 0.85,
+    "estimated_manual_effort_hours": 1.2,
+    "complexity_score": 3,
+    "recommended_template": "angular-basic-component",
+    "generation_notes": [
+      "Fix 3 security issue(s)",
+      "Use Angular Material Dialog for modal behavior",
+      "Use Reactive Forms with validation"
+    ]
+  }
+}

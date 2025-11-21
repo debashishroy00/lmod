@@ -1,0 +1,197 @@
+{
+  "total_tests": 5,
+  "passed": 2,
+  "failed": 3,
+  "tests": [
+    {
+      "name": "StartForm (Simple)",
+      "source": "internal",
+      "complexity": "simple",
+      "phase1_success": true,
+      "phase2_success": true,
+      "phase1_time": 28.3,
+      "phase2_time": 47.6,
+      "ir_quality": {
+        "valid": false,
+        "score": 20,
+        "issues": [
+          "Missing 'form' field",
+          "Missing 'controls' field",
+          "Missing 'event_handlers' field"
+        ]
+      },
+      "errors": [],
+      "output_dir": "output/angular/robustness-test-1",
+      "metadata": {
+        "generated_at": "2025-11-21T16:52:39.671220Z",
+        "source_ir": "StartForm.frm",
+        "form_name": "StartForm",
+        "generated_files": [
+          "start.component.ts",
+          "start.component.html",
+          "start.component.scss",
+          "start.component.spec.ts"
+        ],
+        "file_sizes": {
+          "start.component.ts": 4012,
+          "start.component.html": 1298,
+          "start.component.scss": 1587,
+          "start.component.spec.ts": 6573
+        },
+        "ir_metadata": {
+          "source_language": "VB6",
+          "source_file": "StartForm.frm",
+          "source_lines_of_code": 99,
+          "target_framework": "Angular",
+          "analysis_timestamp": "2025-11-21T11:51:52.020342",
+          "analyzer_version": "2.1.0-langgraph",
+          "parser_type": "langgraph-subagent",
+          "confidence": 0.872,
+          "complexity": "simple",
+          "subagents_used": [
+            "vb6-ui-agent",
+            "vb6-logic-agent",
+            "vb6-data-agent"
+          ]
+        },
+        "generation_metadata": {
+          "estimated_automation_rate": 0.85,
+          "estimated_manual_effort_hours": 0.8,
+          "complexity_score": 2,
+          "recommended_template": "angular-dialog-form",
+          "generation_notes": [
+            "Create interfaces/services for: ClientEdit, Client",
+            "Fix 1 security issue(s)",
+            "Use Angular Material Dialog for modal behavior",
+            "Use Reactive Forms with validation"
+          ]
+        },
+        "statistics": {
+          "controls_count": 5,
+          "event_handlers_count": 3,
+          "validations_count": 2,
+          "data_operations_count": 1
+        }
+      }
+    },
+    {
+      "name": "SupplierForm (Medium)",
+      "source": "internal",
+      "complexity": "medium",
+      "phase1_success": true,
+      "phase2_success": false,
+      "phase1_time": 79.87,
+      "phase2_time": 2.37,
+      "ir_quality": {
+        "valid": false,
+        "score": 20,
+        "issues": [
+          "Missing 'form' field",
+          "Missing 'controls' field",
+          "Missing 'event_handlers' field"
+        ]
+      },
+      "errors": [
+        "Phase 2 failed: No Angular files created. Error: Traceback (most recent call last):\n  File \"/Users/DR/projects/lmod/src/codegen/main.py\", line 96, in main\n    files = generator.generate(ir, output_dir, validate=True)\n  File \"/Users/DR/projects/lmod/src/codegen/angular_generator.py\", line 81, in generate\n    generated_code = self._call_claude_api(prompt)\n  File \"/Users/DR/projects/lmod/src/codegen/angular_generator.py\", line 130, in _call_claude_api\n    response = self.client.messages.create(\n  File \"/Users/DR/Library/Python/3.9/lib/python/site-packages/anthropic/_utils/_utils.py\", line 282, in wrapper\n    return func(*args, **kwargs)\n  File \"/Users/DR/Library/Python/3.9/lib/python/site-packages/anthropic/resources/messages/messages.py\", line 930, in create\n    return self._post(\n  File \"/Users/DR/Library/Python/3.9/lib/python/site-packages/anthropic/_base_client.py\", line 1326, in post\n    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))\n  File \"/Users/DR/Library/Python/3.9/lib/python/site-packages/anthropic/_base_client.py\", line 1114, in request\n    raise self._make_status_error_from_response(err.response) from None\nanthropic.RateLimitError: Error code: 429 - {'type': 'error', 'error': {'type': 'rate_limit_error', 'message': 'This request would exceed the rate limit for your organization (afc598f6-34f5-499a-a01d-cf4a2f0f422f) of 8,000 output tokens per minute. For details, refer to: https://docs.claude.com/en/api/rate-limits. You can see the response headers for current usage. Please reduce the prompt length or the maximum tokens requested, or try again later. You may also contact sales at https://www.anthropic.com/contact-sales to discuss your options for a rate limit increase.'}, 'request_id': 'req_011CVMPDWvU8v2F5couWUr9i'}\n"
+      ],
+      "output_dir": null,
+      "metadata": {}
+    },
+    {
+      "name": "Scanner Form (Complex)",
+      "source": "github:tannerhelland/vb6-code",
+      "complexity": "complex",
+      "phase1_success": false,
+      "phase2_success": false,
+      "phase1_time": 120.01,
+      "phase2_time": 0,
+      "ir_quality": {},
+      "errors": [
+        "Phase 1 failed: Phase 1 timed out (>120s)"
+      ]
+    },
+    {
+      "name": "Main Form (Very Complex)",
+      "source": "github:ChuckBolin/VB6",
+      "complexity": "very_complex",
+      "phase1_success": true,
+      "phase2_success": true,
+      "phase1_time": 64.3,
+      "phase2_time": 85.79,
+      "ir_quality": {
+        "valid": false,
+        "score": 20,
+        "issues": [
+          "Missing 'form' field",
+          "Missing 'controls' field",
+          "Missing 'event_handlers' field"
+        ]
+      },
+      "errors": [],
+      "output_dir": "output/angular/robustness-test-4",
+      "metadata": {
+        "generated_at": "2025-11-21T16:58:32.011833Z",
+        "source_ir": "frmMain.frm",
+        "form_name": "frmMain",
+        "generated_files": [
+          "frmmain.component.ts",
+          "frmmain.component.html",
+          "frmmain.component.scss",
+          "frmmain.component.spec.ts"
+        ],
+        "file_sizes": {
+          "frmmain.component.ts": 8858,
+          "frmmain.component.html": 4951,
+          "frmmain.component.scss": 3317,
+          "frmmain.component.spec.ts": 6981
+        },
+        "ir_metadata": {
+          "source_language": "VB6",
+          "source_file": "frmMain.frm",
+          "source_lines_of_code": 1539,
+          "target_framework": "Angular",
+          "analysis_timestamp": "2025-11-21T11:57:06.190107",
+          "analyzer_version": "2.1.0-langgraph",
+          "parser_type": "langgraph-subagent",
+          "confidence": 0.918,
+          "complexity": "medium",
+          "subagents_used": [
+            "vb6-ui-agent",
+            "vb6-logic-agent",
+            "vb6-data-agent"
+          ]
+        },
+        "generation_metadata": {
+          "estimated_automation_rate": 0.85,
+          "estimated_manual_effort_hours": 1.2,
+          "complexity_score": 3,
+          "recommended_template": "angular-basic-component",
+          "generation_notes": [
+            "Fix 3 security issue(s)",
+            "Use Angular Material Dialog for modal behavior",
+            "Use Reactive Forms with validation"
+          ]
+        },
+        "statistics": {
+          "controls_count": 12,
+          "event_handlers_count": 4,
+          "validations_count": 4,
+          "data_operations_count": 3
+        }
+      }
+    },
+    {
+      "name": "Boleto Form (Medium)",
+      "source": "github:impactro/Boleto-VB6",
+      "complexity": "medium",
+      "phase1_success": false,
+      "phase2_success": false,
+      "phase1_time": 0.27,
+      "phase2_time": 0,
+      "ir_quality": {},
+      "errors": [
+        "Phase 1 failed: IR file not created. Error: /Users/DR/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020\n  warnings.warn(\n"
+      ]
+    }
+  ]
+}
