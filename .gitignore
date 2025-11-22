@@ -45,10 +45,19 @@ output/
 *.pyc
 *.pyo
 
+# Test Angular project
+test-migration/
+
 # Test artifacts
 .pytest_cache/
 .coverage
 htmlcov/
+robustness_test_results.json
 
 # Logs
 *.log
+
+# Node.js (if any Angular testing)
+node_modules/
+package-lock.json
+npm-debug.log*
