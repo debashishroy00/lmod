@@ -2,17 +2,19 @@
 """
 Spring Boot Generator CLI - Main Entry Point
 
-WHAT: Command-line interface for COBOL IR → Spring Boot generation
-WHY: Provide simple CLI for generating Spring Boot code from COBOL IR
-HOW: Parse args, load IR, invoke generator, write Spring Boot project
+WHAT: Command-line interface for Universal IR → Spring Boot generation
+WHY: Provide simple CLI for generating Spring Boot code from Universal IR
+HOW: Parse args, load Universal IR, invoke generator, write Spring Boot project
+
+UPDATED FOR PHASE 3: Now accepts Universal IR (language-agnostic schema)
 
 Usage:
-    python3 src/codegen/springboot_main.py samples/cobol/simple/seq_ir.json
+    python3 src/codegen/springboot_main.py output/cobol/seq_universal_ir.json
     python3 src/codegen/springboot_main.py samples/cobol/medium/CBL0001_ir.json --output output/springboot/CBL0001
 
 Design:
-- Mirrors COBOL main.py and Angular generator CLI patterns
-- Uses SpringBootGenerator class (not LLM-based)
+- Mirrors Angular generator CLI pattern (src/codegen/main.py)
+- Uses SpringBootGenerator class (template-based, not LLM)
 - Writes complete Spring Boot project to disk
 - Shows summary to stdout
 """

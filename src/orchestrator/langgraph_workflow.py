@@ -19,7 +19,8 @@ from orchestrator.langgraph_nodes import (
     logic_agent_node,
     data_agent_node,
     merge_node,
-    validate_node
+    validate_node,
+    convert_to_universal_ir_node  # Phase 2: Universal IR conversion
 )
 
 
@@ -30,7 +31,7 @@ def build_vb6_workflow(api_key: str = None, model: str = None):
     HOW: Define nodes, edges for parallel execution, compile
 
     Architecture:
-        START → [UI Agent, Logic Agent, Data Agent] → Merge → Validate → END
+        START → [UI, Logic, Data Agents] → Merge → Validate → Universal IR → END
                  ↑ These 3 run in parallel ↑
 
     Args:
@@ -61,6 +62,7 @@ def build_vb6_workflow(api_key: str = None, model: str = None):
     # Processing nodes (run sequentially)
     workflow.add_node("merge", merge_node)
     workflow.add_node("validate", validate_node)
+    workflow.add_node("convert_to_universal_ir", convert_to_universal_ir_node)  # Phase 2
 
     # ========================================
     # Define edges (execution flow)
@@ -77,9 +79,10 @@ def build_vb6_workflow(api_key: str = None, model: str = None):
     workflow.add_edge("logic_agent", "merge")
     workflow.add_edge("data_agent", "merge")
 
-    # SEQUENTIAL: merge → validate → end
+    # SEQUENTIAL: merge → validate → convert_to_universal_ir → end
     workflow.add_edge("merge", "validate")
-    workflow.add_edge("validate", END)
+    workflow.add_edge("validate", "convert_to_universal_ir")
+    workflow.add_edge("convert_to_universal_ir", END)
 
     # ========================================
     # Compile workflow into executable app
@@ -95,7 +98,7 @@ def build_vb6_workflow(api_key: str = None, model: str = None):
 
     print("✅ LangGraph workflow compiled successfully")
     print("   - 3 parallel agent nodes")
-    print("   - 2 sequential processing nodes")
+    print("   - 3 sequential processing nodes (Merge, Validate, Universal IR)")
     print("   - Auto state management")
     print()
 
@@ -139,14 +142,27 @@ class LangGraphVB6Orchestrator:
         """
         WHAT: Parse VB6 form using LangGraph workflow
         WHY: Production-grade orchestration with automatic parallelization
-        HOW: Invoke workflow with input state, return complete IR
+        HOW: Invoke workflow with input state, return Universal IR
 
         Args:
             frm_content: VB6 form source code
             source_file: Filename (e.g., "StartForm.frm")
 
         Returns:
-            Complete IR dictionary with all 8 sections
+            Universal IR dictionary with 12 sections:
+            - metadata (source_language="VB6")
+            - data_structures (entities, data source)
+            - ui (forms, controls)
+            - business_logic (procedures, event handlers)
+            - io_operations (empty for VB6)
+            - data_operations (recordsets, ADO)
+            - events (event handlers)
+            - patterns (detected patterns)
+            - external_references (classes, modules, DLLs)
+            - security_issues
+            - repository_mapping (empty for VB6)
+            - frontend_mapping (VB6 controls → Angular components)
+            - generation_metadata
         """
         print(f"📄 Parsing: {source_file}")
         print(f"📊 Size: {len(frm_content)} chars, {len(frm_content.split(chr(10)))} lines")
@@ -169,6 +185,8 @@ class LangGraphVB6Orchestrator:
             "logic_ir": None,
             "data_ir": None,
             "complete_ir": None,
+            "universal_ir": None,           # Phase 2: Universal IR output
+            "validation_metrics": None,     # Phase 2: Validation metrics
             "confidence": None,
             "complexity": None,
             "errors": [],    # Initialize empty (Annotated[list, operator.add])
@@ -195,14 +213,28 @@ class LangGraphVB6Orchestrator:
             print(f"  - Total: {total_time:.1f}s")
             print()
 
-        # Validate we got complete IR
-        complete_ir = result.get('complete_ir')
-        if not complete_ir:
-            raise ValueError("Workflow did not produce complete IR")
+        # Validate we got Universal IR (Phase 2)
+        universal_ir = result.get('universal_ir')
+        if not universal_ir:
+            raise ValueError("Workflow did not produce Universal IR")
 
+        # Display validation metrics
+        validation_metrics = result.get('validation_metrics', {})
+        if validation_metrics:
+            print()
+            print("📊 Validation Metrics:")
+            print(f"  - Valid: {validation_metrics.get('is_valid', False)}")
+            print(f"  - UI Controls: {validation_metrics.get('ui_controls_count', 0)}")
+            print(f"  - Entities: {validation_metrics.get('entities_count', 0)}")
+            print(f"  - Procedures: {validation_metrics.get('procedures_count', 0)}")
+            print(f"  - Event Handlers: {validation_metrics.get('event_handlers_count', 0)}")
+            if validation_metrics.get('validation_errors'):
+                print(f"  - Validation Errors: {len(validation_metrics['validation_errors'])}")
+
+        print()
         print("🎉 Parsing complete!")
         print(f"   Confidence: {result.get('confidence', 0.0):.1%}")
         print(f"   Complexity: {result.get('complexity', 'unknown')}")
         print()
 
-        return complete_ir
+        return universal_ir

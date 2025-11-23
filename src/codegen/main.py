@@ -23,15 +23,17 @@ def main():
 
     # Parse command line
     if len(sys.argv) < 2:
-        print("Usage: python3 src/codegen/main.py <path-to-ir.json> [output-dir]")
+        print("Usage: python3 src/codegen/main.py <path-to-universal-ir.json> [output-dir]")
         print("\nExample:")
         print("  python3 src/codegen/main.py samples/vb6/simple/StartForm_ir.json output/angular/start-form")
-        print("\nEnd-to-End Example (VB6 → IR → Angular):")
-        print("  # Step 1: Generate IR from VB6")
+        print("\nEnd-to-End Example (VB6 → Universal IR → Angular):")
+        print("  # Step 1: Generate Universal IR from VB6")
         print("  python3 src/orchestrator/main.py samples/vb6/simple/StartForm.frm")
+        print("  # Output: samples/vb6/simple/StartForm_ir.json (Universal IR)")
         print("")
-        print("  # Step 2: Generate Angular from IR")
+        print("  # Step 2: Generate Angular from Universal IR")
         print("  python3 src/codegen/main.py samples/vb6/simple/StartForm_ir.json output/angular/start-form")
+        print("\nNote: This generator requires Universal IR (Phase 3)")
         sys.exit(1)
 
     ir_file = sys.argv[1]
@@ -56,10 +58,14 @@ def main():
         print(f"❌ Error loading IR: {e}")
         sys.exit(1)
 
-    # Validate IR structure
-    if 'ui' not in ir or 'logic' not in ir or 'data' not in ir:
-        print(f"❌ Error: IR file is missing required sections (ui, logic, data)")
-        print(f"   This may not be a valid IR file.")
+    # Validate Universal IR structure
+    required_sections = ['metadata', 'ui', 'business_logic', 'data_structures']
+    missing_sections = [section for section in required_sections if section not in ir]
+
+    if missing_sections:
+        print(f"❌ Error: IR file is missing required Universal IR sections: {', '.join(missing_sections)}")
+        print(f"   This appears to be an old VB6-specific IR file.")
+        print(f"   Please regenerate the IR using Phase 2+ pipeline to get Universal IR.")
         sys.exit(1)
 
     # Create generator
@@ -74,21 +80,27 @@ def main():
         print("   ANTHROPIC_API_KEY=your-api-key-here")
         sys.exit(1)
 
-    # Print IR summary
+    # Print Universal IR summary
     print("\n" + "=" * 60)
-    print("📊 INPUT IR SUMMARY")
+    print("📊 INPUT UNIVERSAL IR SUMMARY")
     print("=" * 60)
-    form_name = ir['ui']['form']['name']
-    controls_count = len(ir['ui']['controls'])
-    handlers_count = len(ir['logic']['event_handlers'])
-    validations_count = len(ir['logic'].get('validations', []))
+
+    forms = ir['ui'].get('forms', [])
+    form_name = forms[0]['name'] if forms else 'Unknown'
+    controls_count = len(forms[0].get('controls', [])) if forms else 0
+    procedures_count = len(ir['business_logic'].get('procedures', []))
+    event_handlers_count = len(ir['events'].get('handlers', []))
+    entities_count = len(ir['data_structures'].get('entities', []))
 
     print(f"\n📄 Form: {form_name}")
     print(f"📊 Controls: {controls_count}")
-    print(f"⚙️  Event Handlers: {handlers_count}")
-    print(f"✓ Validations: {validations_count}")
+    print(f"⚙️  Procedures: {procedures_count}")
+    print(f"📅 Event Handlers: {event_handlers_count}")
+    print(f"💾 Data Entities: {entities_count}")
     print(f"📈 Confidence: {ir['metadata'].get('confidence', 0.0):.1%}")
     print(f"🎯 Complexity: {ir['metadata'].get('complexity', 'unknown')}")
+    print(f"🌐 Source Language: {ir['metadata'].get('source_language', 'Unknown')}")
+    print(f"🎯 Target Framework: {ir['metadata'].get('target_framework', 'Unknown')}")
 
     # Generate Angular code
     print("\n" + "=" * 60)

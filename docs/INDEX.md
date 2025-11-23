@@ -12,9 +12,10 @@
 3. **[Quick Start Guide](#quick-start-commands)** - Copy-paste commands to get running
 
 ### Architecture Overview
-- **[IR Schema](../ir-schema-draft.json)** - Complete Intermediate Representation structure
+- **[Universal IR Schema](universal_ir_schema.json)** - Language-agnostic Intermediate Representation (Phase 2)
+- **[Universal IR Design](phase2/UNIVERSAL_IR_DESIGN.md)** - Complete Universal IR documentation
 - **[Phase 1 Architecture](phase1/PHASE2_SUBAGENT_ARCHITECTURE.md)** - Multi-agent workflow design
-- **[Phase 2 Architecture](phase2/PHASE2_IMPLEMENTATION_PLAN.md)** - Code generation pipeline
+- **[Phase 2 Overview](phase2/PHASE2_OVERVIEW.md)** - Universal IR + Adapter Pattern architecture
 
 ---
 
@@ -43,15 +44,25 @@
 
 ---
 
-## 📚 Phase 2: IR → Angular Code Generation
+## 📚 Phase 2: Universal IR + Adapter Pattern ✅ **NEW**
 
 ### Core Documentation
 | Document | Description | When to Read |
 |----------|-------------|--------------|
-| [Implementation Plan](phase2/PHASE2_IMPLEMENTATION_PLAN.md) | Complete design and architecture | Understanding how Phase 2 works |
-| [Implementation Summary](phase2/PHASE2_IMPLEMENTATION_SUMMARY.md) | What was built and delivered | Quick overview of Phase 2 |
+| [Phase 2 Overview](phase2/PHASE2_OVERVIEW.md) | Purpose, architecture, and motivation | Understanding Universal IR system |
+| [Universal IR Design](phase2/UNIVERSAL_IR_DESIGN.md) | Complete schema documentation (12 sections) | Understanding IR structure |
+| [VB6 Adapter](phase2/VB6_ADAPTER.md) | VB6 IR → Universal IR mapping rules | Working with VB6 pipeline |
+| [COBOL Adapter](phase2/COBOL_ADAPTER.md) | COBOL IR → Universal IR mapping rules | Working with COBOL pipeline |
+| [Workflow Updates](phase2/WORKFLOW_UPDATES.md) | LangGraph integration details | Understanding workflow changes |
+| [Completion Summary](phase2/PHASE2_COMPLETION_SUMMARY.md) | Implementation results and metrics | Phase 2 status overview |
+
+### Legacy Code Generation Docs
+| Document | Description | When to Read |
+|----------|-------------|--------------|
+| [Implementation Plan](phase2/PHASE2_IMPLEMENTATION_PLAN.md) | Code generation design (pre-Universal IR) | Historical reference |
+| [Implementation Summary](phase2/PHASE2_IMPLEMENTATION_SUMMARY.md) | Code generation delivery (pre-Universal IR) | Historical reference |
 | [Angular Specification](phase2/angular.md) | Original specification | Understanding requirements |
-| [Test Results](phase2/TEST_RESULTS.md) | Comprehensive test report | Verifying Phase 2 quality |
+| [Test Results](phase2/TEST_RESULTS.md) | Comprehensive test report | Verifying code generation quality |
 
 ### Test Results & Examples
 | Path | Description |
@@ -65,6 +76,26 @@
 - **Quality Validation**: Syntax checks + automatic retry on errors
 - **Full Traceability**: VB6 source → IR → Angular code mapping
 - **Entry Point**: `src/codegen/main.py`
+
+---
+
+## 📚 Phase 3: Universal IR Code Generation ✅ **NEW**
+
+### Core Documentation
+| Document | Description | When to Read |
+|----------|-------------|--------------|
+| [Phase 3 Overview](phase3/PHASE3_OVERVIEW.md) | Universal IR code generation architecture | Understanding Phase 3 system |
+| [Angular Universal Generator](phase3/ANGULAR_UNIVERSAL_GENERATOR.md) | Complete Angular generator documentation | Working with Angular generator |
+| [Spring Boot Universal Generator](phase3/SPRINGBOOT_UNIVERSAL_GENERATOR.md) | Complete Spring Boot generator documentation | Working with Spring Boot generator |
+| [Phase 3 Completion Summary](phase3/PHASE3_COMPLETION_SUMMARY.md) | Implementation results and test status | Phase 3 status overview |
+
+### Key Concepts
+- **Language-Agnostic Generators**: Both generators now read Universal IR (work with any source language)
+- **Multi-Language → Multi-Framework**: VB6/COBOL/PowerBuilder → Angular/Spring Boot/React
+- **Angular Generator**: LLM-based (Claude Haiku), generates Angular 17+ components
+- **Spring Boot Generator**: Template-based (Jinja2), generates Spring Boot 3.x + JPA
+- **End-to-End Tests**: Regression tests for both pipelines
+- **Entry Points**: `src/codegen/main.py` (Angular), `src/codegen/springboot_main.py` (Spring Boot)
 
 ---
 
@@ -270,7 +301,9 @@ src/
 #### ...understand how the system works
 1. Read [README.md](../README.md) for overview
 2. Read [Phase 1 LangGraph Implementation](phase1/LANGGRAPH_IMPLEMENTATION.md)
-3. Read [Phase 2 Implementation Plan](phase2/PHASE2_IMPLEMENTATION_PLAN.md)
+3. Read [Phase 2 Overview](phase2/PHASE2_OVERVIEW.md) - Universal IR + Adapter Pattern
+4. Read [Phase 3 Overview](phase3/PHASE3_OVERVIEW.md) - Universal IR Code Generation
+5. Read [Universal IR Design](phase2/UNIVERSAL_IR_DESIGN.md) - Complete schema documentation
 
 #### ...run the complete pipeline
 1. Follow [Quick Start Commands](#quick-start-commands)
@@ -409,8 +442,8 @@ MIT License - See [README - License](../README.md#-license) for details.
 
 ---
 
-**Last Updated**: 2025-11-21
-**Version**: 2.1 (Cost Optimized with Haiku)
+**Last Updated**: 2025-11-22
+**Version**: 3.0 (Universal IR Code Generation)
 **Status**: Production Ready ✅
 
 ---
@@ -419,6 +452,7 @@ MIT License - See [README - License](../README.md#-license) for details.
 - [Back to README](../README.md)
 - [Phase 1 Docs](phase1/)
 - [Phase 2 Docs](phase2/)
+- [Phase 3 Docs](phase3/) ✨ **NEW**
 - [Tutorials](tutorials/)
 - [Guides](guides/)
 - [Test Results](results/)

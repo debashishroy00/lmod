@@ -8,13 +8,13 @@ HOW: StateGraph with parallel agent execution + sequential merge/validate
 
 Design Pattern:
 - Mirrors VB6 workflow structure (src/orchestrator/langgraph_workflow.py)
-- Three agents run in PARALLEL → synchronized → merged → validated
+- Three agents run in PARALLEL → synchronized → merged → validated → Universal IR
 - No LLM calls (COBOL agents are pure Python parsers)
 - Robust error handling
 - Timing metrics
 
 Architecture:
-    START → [Data Agent, Logic Agent, I/O Agent] → Merge → Validate → END
+    START → [Data, Logic, I/O Agents] → Merge → Validate → Universal IR → END
              ↑ These 3 run in parallel ↑
 """
 
@@ -29,7 +29,8 @@ from orchestrator.cobol_langgraph_nodes import (
     logic_agent_node,
     io_agent_node,
     merge_node,
-    validate_node
+    validate_node,
+    convert_to_universal_ir_node  # Phase 2: Universal IR conversion
 )
 
 
@@ -40,7 +41,7 @@ def build_cobol_workflow():
     HOW: Define nodes, edges for parallel execution, compile
 
     Architecture:
-        START → [Data Agent, Logic Agent, I/O Agent] → Merge → Validate → END
+        START → [Data, Logic, I/O Agents] → Merge → Validate → Universal IR → END
                  ↑ These 3 run in parallel ↑
 
     Key Differences from VB6:
@@ -72,6 +73,7 @@ def build_cobol_workflow():
     # Processing nodes (run sequentially)
     workflow.add_node("merge", merge_node)
     workflow.add_node("validate", validate_node)
+    workflow.add_node("convert_to_universal_ir", convert_to_universal_ir_node)  # Phase 2
 
     # ========================================
     # Define edges (execution flow)
@@ -89,9 +91,10 @@ def build_cobol_workflow():
     workflow.add_edge("logic_agent", "merge")
     workflow.add_edge("io_agent", "merge")
 
-    # SEQUENTIAL: merge → validate → end
+    # SEQUENTIAL: merge → validate → convert_to_universal_ir → end
     workflow.add_edge("merge", "validate")
-    workflow.add_edge("validate", END)
+    workflow.add_edge("validate", "convert_to_universal_ir")
+    workflow.add_edge("convert_to_universal_ir", END)
 
     # ========================================
     # Compile workflow into executable app
@@ -107,7 +110,7 @@ def build_cobol_workflow():
 
     print("✅ COBOL LangGraph workflow compiled successfully")
     print("   - 3 parallel agent nodes (Data, Logic, I/O)")
-    print("   - 2 sequential processing nodes (Merge, Validate)")
+    print("   - 3 sequential processing nodes (Merge, Validate, Universal IR)")
     print("   - Auto state management")
     print("   - Pure Python (no LLM calls)")
     print()
@@ -155,27 +158,32 @@ class LangGraphCOBOLOrchestrator:
         """
         WHAT: Parse COBOL program using LangGraph workflow
         WHY: Production-grade orchestration with automatic parallelization
-        HOW: Invoke workflow with input state, return complete IR
+        HOW: Invoke workflow with input state, return Universal IR
 
         Key Benefits:
         - 3 agents run in parallel (faster than sequential)
         - Robust error handling (partial results if one agent fails)
         - Complete timing breakdown
-        - Unified IR with 8 sections
+        - Universal IR output (language-agnostic schema)
 
         Args:
             cobol_content: COBOL source code
             source_file: Filename (e.g., "seq.cbl", "CBL0001.cbl")
 
         Returns:
-            Complete unified IR dictionary with 8 sections:
-            - metadata
-            - data_structures
-            - business_logic
-            - io_operations
-            - patterns
-            - external_references
+            Universal IR dictionary with 12 sections:
+            - metadata (source_language="COBOL")
+            - data_structures (entities, files, copybooks)
+            - ui (empty for COBOL)
+            - business_logic (procedures, workflows, calculations)
+            - io_operations (file operations, patterns)
+            - data_operations (empty for COBOL)
+            - events (empty for COBOL)
+            - patterns (detected patterns)
+            - external_references (copybooks, calls)
             - security_issues
+            - repository_mapping (Spring Boot repositories)
+            - frontend_mapping (empty for COBOL)
             - generation_metadata
         """
         print(f"📄 Parsing: {source_file}")
@@ -200,6 +208,8 @@ class LangGraphCOBOLOrchestrator:
             "logic_ir": None,
             "io_ir": None,
             "complete_ir": None,
+            "universal_ir": None,           # Phase 2: Universal IR output
+            "validation_metrics": None,     # Phase 2: Validation metrics
             "confidence": None,
             "complexity": None,
             "errors": [],    # Initialize empty (Annotated[list, operator.add])
@@ -226,14 +236,27 @@ class LangGraphCOBOLOrchestrator:
             print(f"  - Total: {total_time:.2f}s")
             print()
 
-        # Validate we got complete IR
-        complete_ir = result.get('complete_ir')
-        if not complete_ir:
-            raise ValueError("Workflow did not produce complete IR")
+        # Validate we got Universal IR (Phase 2)
+        universal_ir = result.get('universal_ir')
+        if not universal_ir:
+            raise ValueError("Workflow did not produce Universal IR")
 
+        # Display validation metrics
+        validation_metrics = result.get('validation_metrics', {})
+        if validation_metrics:
+            print()
+            print("📊 Validation Metrics:")
+            print(f"  - Valid: {validation_metrics.get('is_valid', False)}")
+            print(f"  - Entities: {validation_metrics.get('entities_count', 0)}")
+            print(f"  - Procedures: {validation_metrics.get('procedures_count', 0)}")
+            print(f"  - I/O Operations: {validation_metrics.get('io_operations_count', 0)}")
+            if validation_metrics.get('validation_errors'):
+                print(f"  - Validation Errors: {len(validation_metrics['validation_errors'])}")
+
+        print()
         print("🎉 Parsing complete!")
         print(f"   Confidence: {result.get('confidence', 0.0):.1%}")
         print(f"   Complexity: {result.get('complexity', 'unknown')}")
         print()
 
-        return complete_ir
+        return universal_ir

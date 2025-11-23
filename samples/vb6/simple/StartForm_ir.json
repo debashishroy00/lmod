@@ -3,611 +3,272 @@
     "source_language": "VB6",
     "source_file": "StartForm.frm",
     "source_lines_of_code": 99,
+    "source_path": null,
     "target_framework": "Angular",
-    "analysis_timestamp": "2025-11-21T12:09:50.475129",
+    "analysis_timestamp": "2025-11-22T21:07:16.241835",
     "analyzer_version": "2.1.0-langgraph",
     "parser_type": "langgraph-subagent",
     "confidence": 0.872,
+    "ui_agent_confidence": null,
+    "data_agent_confidence": null,
+    "logic_agent_confidence": null,
+    "io_agent_confidence": null,
     "complexity": "simple",
+    "complexity_score": null,
     "subagents_used": [
       "vb6-ui-agent",
       "vb6-logic-agent",
       "vb6-data-agent"
-    ]
-  },
-  "ui": {
-    "_source_lines": "Lines 2-64",
-    "_what": "User interface structure - form and controls",
-    "_why": "defines what angular component ui should look like",
-    "type": "dialog",
-    "_type_reasoning": "borderstyle=3 (fixed dialog), no maximize/minimize buttons",
-    "confidence": 0.95,
-    "_confidence_why": "all ui elements clearly defined, standard vb6 format",
-    "form": {
-      "name": "StartForm",
-      "_name_source": "Line 2: Begin VB.Form StartForm",
-      "caption": "Start",
-      "_caption_source": "Line 3: Caption = \"Start\"",
-      "width": 4050,
-      "_width_source": "Line 10: ClientWidth = 4050",
-      "height": 1500,
-      "_height_source": "Line 4: ClientHeight = 1500",
-      "border_style": "FixedDialog",
-      "_border_style_source": "Line 3: BorderStyle = 3",
-      "start_position": "CenterOwner",
-      "_start_position_source": "Line 13: StartUpPosition = 1",
-      "properties": {
-        "max_button": false,
-        "_max_button_source": "Line 8: MaxButton = 0 'False",
-        "min_button": false,
-        "_min_button_source": "Line 9: MinButton = 0 'False",
-        "show_in_taskbar": false,
-        "_show_in_taskbar_source": "Line 12: ShowInTaskbar = 0 'False",
-        "link_topic": "Form1",
-        "_link_topic_source": "Line 7: LinkTopic = \"Form1\""
-      }
-    },
-    "controls": [
-      {
-        "_control_index": 4,
-        "_source_lines": "Lines 14-20",
-        "_what": "Button to close the form",
-        "id": "cmdClose",
-        "_id_source": "Line 14: Begin VB.CommandButton cmdClose",
-        "_naming_convention": "cmd = CommandButton prefix",
-        "type": "CommandButton",
-        "_type_source": "Line 14: VB.CommandButton",
-        "_type_angular_mapping": "mat-button or button with (click) event",
-        "caption": "Close",
-        "_caption_source": "Line 15: Caption = \"Close\"",
-        "_caption_angular": "Button text/label",
-        "position": {
-          "left": 2640,
-          "top": 960,
-          "width": 1215,
-          "height": 375,
-          "_source": "Lines 16-20",
-          "_layout_note": "third button in row of 3 buttons at y=960"
-        },
-        "tab_index": 3,
-        "_tab_index_source": "Line 18: TabIndex = 3",
-        "_tab_order": "Fourth in tab order (after cmdOpen)",
-        "enabled": true,
-        "_enabled_default": "Not specified = True by default",
-        "visible": true,
-        "_visible_default": "Not specified = True by default",
-        "properties": {
-          "default": false,
-          "_default_note": "not the default button (not triggered by enter key)",
-          "event_handler": "cmdClose_Click",
-          "_event_handler_source": "Lines 88-90: Private Sub cmdClose_Click()"
-        },
-        "confidence": 0.99,
-        "_confidence_why": "complete definition with event handler"
-      },
-      {
-        "_control_index": 2,
-        "_source_lines": "Lines 28-34",
-        "_what": "Button to create new client",
-        "id": "cmdNew",
-        "_id_source": "Line 28: Begin VB.CommandButton cmdNew",
-        "_naming_convention": "cmd = CommandButton prefix",
-        "type": "CommandButton",
-        "_type_source": "Line 28: VB.CommandButton",
-        "_type_angular_mapping": "mat-button or button with (click) event",
-        "caption": "New",
-        "_caption_source": "Line 29: Caption = \"New\"",
-        "_caption_angular": "Button text/label",
-        "position": {
-          "left": 120,
-          "top": 960,
-          "width": 1095,
-          "height": 375,
-          "_source": "Lines 30-34",
-          "_layout_note": "first button in row of 3 buttons at y=960"
-        },
-        "tab_index": 1,
-        "_tab_index_source": "Line 32: TabIndex = 1",
-        "_tab_order": "Second in tab order (after txtID)",
-        "enabled": true,
-        "_enabled_default": "Not specified = True by default",
-        "visible": true,
-        "_visible_default": "Not specified = True by default",
-        "properties": {
-          "default": false,
-          "_default_note": "not the default button (not triggered by enter key)",
-          "event_handler": "cmdNew_Click",
-          "_event_handler_source": "Lines 66-72: Private Sub cmdNew_Click()"
-        },
-        "confidence": 0.99,
-        "_confidence_why": "complete definition with event handler"
-      },
-      {
-        "_control_index": 3,
-        "_source_lines": "Lines 21-27",
-        "_what": "Button to open existing client",
-        "id": "cmdOpen",
-        "_id_source": "Line 21: Begin VB.CommandButton cmdOpen",
-        "_naming_convention": "cmd = CommandButton prefix",
-        "type": "CommandButton",
-        "_type_source": "Line 21: VB.CommandButton",
-        "_type_angular_mapping": "mat-button or button with (click) event",
-        "caption": "Open",
-        "_caption_source": "Line 22: Caption = \"Open\"",
-        "_caption_angular": "Button text/label",
-        "position": {
-          "left": 1320,
-          "top": 960,
-          "width": 1215,
-          "height": 375,
-          "_source": "Lines 23-27",
-          "_layout_note": "second button in row of 3 buttons at y=960"
-        },
-        "tab_index": 2,
-        "_tab_index_source": "Line 25: TabIndex = 2",
-        "_tab_order": "Third in tab order (after cmdNew)",
-        "enabled": true,
-        "_enabled_default": "Not specified = True by default",
-        "visible": true,
-        "_visible_default": "Not specified = True by default",
-        "properties": {
-          "default": false,
-          "_default_note": "not the default button (not triggered by enter key)",
-          "event_handler": "cmdOpen_Click",
-          "_event_handler_source": "Lines 74-86: Private Sub cmdOpen_Click()"
-        },
-        "confidence": 0.99,
-        "_confidence_why": "complete definition with event handler"
-      },
-      {
-        "_control_index": 5,
-        "_source_lines": "Lines 42-58",
-        "_what": "Label for Client ID textbox",
-        "id": "Label1",
-        "_id_source": "Line 42: Begin VB.Label Label1",
-        "_naming_note": "generic name, not descriptive like 'lblclientid'",
-        "type": "Label",
-        "_type_source": "Line 42: VB.Label",
-        "_type_angular_mapping": "mat-label or simple <label> element",
-        "caption": "Client ID",
-        "_caption_source": "Line 43: Caption = \"Client ID\"",
-        "position": {
-          "left": 120,
-          "top": 360,
-          "width": 1095,
-          "height": 255,
-          "_source": "Lines 53-57",
-          "_units": "twips",
-          "_layout_note": "positioned to left of txtid (same top=360)"
-        },
-        "tab_index": 4,
-        "_tab_index_source": "Line 55: TabIndex = 4",
-        "_tab_index_note": "labels typically last in tab order (non-interactive)",
-        "enabled": true,
-        "_enabled_default": "Not specified = True by default",
-        "visible": true,
-        "_visible_default": "Not specified = True by default",
-        "font": {
-          "_source_lines": "Lines 44-52",
-          "_what": "Font styling for label",
-          "name": "MS Sans Serif",
-          "_name_source": "Line 45: Name = \"MS Sans Serif\"",
-          "size": 8.25,
-          "_size_source": "Line 46: Size = 8.25",
-          "weight": 700,
-          "_weight_source": "Line 49: Weight = 700",
-          "_weight_mapping": "700 = Bold",
-          "bold": true,
-          "_bold_derived": "Weight 700 = Bold",
-          "italic": false,
-          "_italic_source": "Line 51: Italic = 0 'False",
-          "underline": false,
-          "_underline_source": "Line 50: Underline = 0 'False",
-          "strikethrough": false,
-          "_strikethrough_source": "Line 52: Strikethrough = 0 'False",
-          "weight_mapping": "bold",
-          "bold_derived": true
-        },
-        "properties": {
-          "for_control": "txtID",
-          "_for_control_reasoning": "positioned directly left of txtid, describes its purpose"
-        },
-        "confidence": 1.0,
-        "_confidence_why": "complete definition including font properties"
-      },
-      {
-        "_control_index": 1,
-        "_source_lines": "Lines 35-41",
-        "_what": "Text input for Client ID",
-        "id": "txtID",
-        "_id_source": "Line 35: Begin VB.TextBox txtID",
-        "type": "TextBox",
-        "_type_source": "Line 35: VB.TextBox",
-        "_type_angular_mapping": "mat-form-field with input type='text'",
-        "caption": "",
-        "_caption_note": "textboxes don't have captions, only text property (runtime value)",
-        "position": {
-          "left": 1320,
-          "top": 360,
-          "width": 2535,
-          "height": 285,
-          "_source": "Lines 36-40",
-          "_units": "twips",
-          "_note": "position is relative to form's top-left corner"
-        },
-        "tab_index": 0,
-        "_tab_index_source": "Line 38: TabIndex = 0",
-        "_tab_index_why": "first control in tab order (user enters id first)",
-        "enabled": true,
-        "_enabled_default": "Not specified = True by default",
-        "visible": true,
-        "_visible_default": "Not specified = True by default",
-        "properties": {
-          "max_length": 0,
-          "_max_length_note": "not specified, defaults to 0 (unlimited)",
-          "text": "",
-          "_text_note": "default empty, filled at runtime",
-          "associated_label": "Label1",
-          "_associated_label_why": "label1 ('client id') is positioned at same top (360), to the left"
-        },
-        "confidence": 0.98,
-        "_confidence_why": "all properties clearly defined"
-      }
     ],
-    "layout": {
-      "grid_based": false,
-      "responsive": false,
-      "groups": [
-        {
-          "name": "input_section",
-          "control_ids": [
-            "Label1",
-            "txtID"
-          ]
-        },
-        {
-          "name": "action_buttons",
-          "control_ids": [
-            "cmdNew",
-            "cmdOpen",
-            "cmdClose"
-          ]
-        }
-      ]
+    "language_specific": {
+      "vb6": {
+        "source_language": "VB6",
+        "source_file": "StartForm.frm",
+        "source_lines_of_code": 99,
+        "target_framework": "Angular",
+        "analysis_timestamp": "2025-11-22T21:07:16.241835",
+        "analyzer_version": "2.1.0-langgraph",
+        "parser_type": "langgraph-subagent",
+        "confidence": 0.872,
+        "complexity": "simple",
+        "subagents_used": [
+          "vb6-ui-agent",
+          "vb6-logic-agent",
+          "vb6-data-agent"
+        ]
+      }
     }
   },
-  "logic": {
-    "_source_lines": "Lines 71-98",
-    "_what": "Business logic, event handlers, validations",
-    "_why": "defines component behavior and validation rules",
-    "confidence": 0.88,
-    "_confidence_why": "clear event handlers and validation logic, but depends on external client and clientedit components",
-    "event_handlers": [
-      {
-        "_handler_index": 1,
-        "_source_lines": "Lines 71-78",
-        "_what": "Create new client and open edit dialog",
-        "control_id": "cmdNew",
-        "event_type": "Click",
-        "handler_name": "cmdNew_Click",
-        "_handler_signature": "Private Sub cmdNew_Click()",
-        "logic_steps": [
-          {
-            "step_type": "object_creation",
-            "description": "Create new Client object",
-            "code_snippet": "Dim objClient As New Client",
-            "_line": 72,
-            "_angular_equivalent": "const objClient = new Client(); or this.clientService.createNew()"
-          },
-          {
-            "step_type": "object_creation",
-            "description": "Create new ClientEdit form",
-            "code_snippet": "Dim frm As New ClientEdit",
-            "_line": 73,
-            "_angular_equivalent": "Component instantiated via dialog service"
-          },
-          {
-            "step_type": "method_call",
-            "description": "Pass client to form",
-            "code_snippet": "Set frm.Client = objClient",
-            "_line": 75,
-            "_angular_equivalent": "Pass data via dialog config or @Input"
-          },
-          {
-            "step_type": "navigation",
-            "description": "Show form as modal dialog",
-            "code_snippet": "frm.Show vbModal",
-            "_line": 76,
-            "_angular_equivalent": "this.dialog.open(ClientEditComponent, { data: objClient })",
-            "_modal_note": "vbmodal = blocks parent until closed"
-          }
-        ],
-        "confidence": 0.85,
-        "_confidence_why": "logic clear, but client and clientedit are external dependencies"
-      },
-      {
-        "_handler_index": 2,
-        "_source_lines": "Lines 80-95",
-        "_what": "Open existing client by ID and show edit dialog",
-        "control_id": "cmdOpen",
-        "event_type": "Click",
-        "handler_name": "cmdOpen_Click",
-        "_handler_signature": "Private Sub cmdOpen_Click()",
-        "logic_steps": [
-          {
-            "step_type": "object_creation",
-            "description": "Create ClientEdit form",
-            "code_snippet": "Dim frm As New ClientEdit",
-            "_line": 82,
-            "_angular_equivalent": "Component instantiated via dialog service"
-          },
-          {
-            "step_type": "method_call",
-            "description": "Get client by ID from database",
-            "code_snippet": "Set objClient = GetClient(CLng(txtID.Text))",
-            "_line": 85,
-            "_angular_equivalent": "this.clientService.getById(+this.txtID.value)"
-          },
-          {
-            "step_type": "validation",
-            "description": "Check if client was found",
-            "code_snippet": "If objClient Is Nothing Then",
-            "_line": 87,
-            "_angular_equivalent": "if (!objClient) {"
-          },
-          {
-            "step_type": "message",
-            "description": "Show error message if client not found",
-            "code_snippet": "MsgBox \"Client ID not found\"",
-            "_line": 88,
-            "_angular_equivalent": "this.snackBar.open('Client ID not found', 'Close')"
-          },
-          {
-            "step_type": "navigation",
-            "description": "Show form with existing client",
-            "code_snippet": "frm.Show vbModal",
-            "_line": 91,
-            "_angular_equivalent": "this.dialog.open(ClientEditComponent, { data: objClient })"
-          }
-        ],
-        "confidence": 0.9,
-        "_confidence_why": "complete workflow with error handling and validation"
-      },
-      {
-        "_handler_index": 3,
-        "_source_lines": "Lines 97-98",
-        "_what": "Close the form",
-        "control_id": "cmdClose",
-        "event_type": "Click",
-        "handler_name": "cmdClose_Click",
-        "_handler_signature": "Private Sub cmdClose_Click()",
-        "logic_steps": [
-          {
-            "step_type": "navigation",
-            "description": "Unload current form",
-            "code_snippet": "Unload Me",
-            "_line": 98,
-            "_angular_equivalent": "this.dialogRef.close() or this.router.navigate(['..'])"
-          }
-        ],
-        "confidence": 0.95,
-        "_confidence_why": "simple, clear navigation logic"
-      }
-    ],
-    "validations": [
-      {
-        "_validation_index": 1,
-        "_source_lines": "Lines 87-88",
-        "_what": "Validate client ID exists in database",
-        "_implicit": true,
-        "field": "txtID",
-        "_field_why": "input comes from txtid.text",
-        "rule_type": "custom",
-        "_rule_subtype": "database_lookup",
-        "rule_value": "Client must exist in database",
-        "error_message": "Client ID not found",
-        "_error_message_source": "Line 88: MsgBox \"Client ID not found\"",
-        "original_code": "If objClient Is Nothing Then\n  MsgBox \"Client ID not found\"",
-        "confidence": 0.9,
-        "_confidence_why": "validation logic is clear"
-      },
-      {
-        "_validation_index": 2,
-        "_what": "Implicit type validation - ID must be numeric",
-        "_source_lines": "Line 85",
-        "_implicit": true,
-        "field": "txtID",
-        "rule_type": "numeric",
-        "_rule_reasoning": "clng() function requires numeric string",
-        "rule_value": "Must convert to Long integer",
-        "error_message": "Type mismatch",
-        "_error_message_note": "vb6 runtime error if clng() fails",
-        "original_code": "CLng(txtID.Text)",
-        "confidence": 0.75,
-        "_confidence_why": "implicit validation, error handling may suppress"
-      }
-    ],
-    "calculations": [],
-    "_calculations_note": "no calculations in this form",
-    "workflows": [
-      {
-        "_workflow_index": 1,
-        "_what": "New client creation workflow",
-        "name": "create_new_client",
-        "condition": "User clicks 'New' button",
-        "actions": [
-          {
-            "action_type": "show_form",
-            "description": "Open ClientEdit dialog with new client",
-            "parameters": {
-              "form": "ClientEdit",
-              "mode": "create",
-              "modal": true
-            }
-          }
-        ],
-        "confidence": 0.85
-      },
-      {
-        "_workflow_index": 2,
-        "_what": "Open existing client workflow",
-        "name": "open_existing_client",
-        "condition": "User clicks 'Open' button",
-        "actions": [
-          {
-            "action_type": "validation",
-            "description": "Validate client ID and retrieve from database"
-          },
-          {
-            "action_type": "show_form",
-            "description": "Open ClientEdit dialog with existing client",
-            "parameters": {
-              "form": "ClientEdit",
-              "mode": "edit",
-              "modal": true
-            }
-          }
-        ],
-        "confidence": 0.9
-      }
-    ],
-    "error_handling": [
-      {
-        "_source_lines": "Line 84",
-        "_what": "Error suppression for GetClient operation",
-        "type": "on_error_resume_next",
-        "scope": "cmdOpen_Click",
-        "handler": "Resume next statement (suppress errors)",
-        "_security_issue": "Hides errors instead of handling them properly",
-        "_angular_equivalent": "Should use try-catch with proper error handling",
-        "_recommendation": "Replace with explicit error handling and user feedback"
-      }
-    ]
+  "data_structures": {
+    "entities": [],
+    "files": [],
+    "copybooks": [],
+    "data_source": null
   },
-  "data": {
-    "_source_lines": "Lines 72-81",
-    "_what": "Data access patterns and external dependencies",
-    "confidence": 0.7,
-    "_confidence_why": "data operations are delegated to external client class and getclient function - actual implementation unknown",
-    "data_source": {
-      "type": "other",
-      "_type_note": "data access delegated to external client class and getclient function",
-      "connection_string": null,
-      "_connection_note": "no connection string in this file",
-      "connection_variable": null,
-      "is_external": true,
-      "_external_note": "all data operations via external dependencies"
-    },
-    "entities": [
+  "business_logic": {
+    "procedures": [],
+    "workflows": [],
+    "calculations": [],
+    "error_handling": []
+  },
+  "io_operations": {
+    "operations": [],
+    "io_patterns": [],
+    "repository_recommendations": [],
+    "file_status_handling": []
+  },
+  "ui": {
+    "forms": [
       {
-        "_entity_index": 1,
-        "_what": "Client entity (inferred from usage)",
-        "name": "Client",
-        "type": "object",
-        "_type_note": "vb6 class, not database table directly",
-        "fields": [],
-        "_fields_note": "field structure unknown - client class not in this file",
-        "source": "inferred",
-        "_source_reasoning": "referenced in lines 72, 81, 85 but not defined"
-      }
-    ],
-    "operations": [
-      {
-        "_operation_index": 1,
-        "_source_lines": "Line 85",
-        "_what": "Retrieve client by ID",
-        "type": "SELECT",
-        "_type_reasoning": "getclient() performs database lookup",
-        "entity": "Client",
-        "fields": [
-          "*"
+        "name": "StartForm",
+        "title": "Start",
+        "type": "form",
+        "width": 4050,
+        "height": 1500,
+        "startup_position": null,
+        "controls": [
+          {
+            "name": "cmdClose",
+            "type": "CommandButton",
+            "caption": "Close",
+            "text": null,
+            "enabled": true,
+            "visible": true,
+            "tab_index": 3,
+            "left": 2640,
+            "top": 960,
+            "width": 1215,
+            "height": 375,
+            "data_field": null,
+            "data_source": null,
+            "required": false,
+            "validation_pattern": null,
+            "controls": [],
+            "description": "Button to close the form"
+          },
+          {
+            "name": "cmdNew",
+            "type": "CommandButton",
+            "caption": "New",
+            "text": null,
+            "enabled": true,
+            "visible": true,
+            "tab_index": 1,
+            "left": 120,
+            "top": 960,
+            "width": 1095,
+            "height": 375,
+            "data_field": null,
+            "data_source": null,
+            "required": false,
+            "validation_pattern": null,
+            "controls": [],
+            "description": "Button to create new client"
+          },
+          {
+            "name": "cmdOpen",
+            "type": "CommandButton",
+            "caption": "Open",
+            "text": null,
+            "enabled": true,
+            "visible": true,
+            "tab_index": 2,
+            "left": 1320,
+            "top": 960,
+            "width": 1215,
+            "height": 375,
+            "data_field": null,
+            "data_source": null,
+            "required": false,
+            "validation_pattern": null,
+            "controls": [],
+            "description": "Button to open existing client"
+          },
+          {
+            "name": "Label1",
+            "type": "Label",
+            "caption": "Client ID",
+            "text": null,
+            "enabled": true,
+            "visible": true,
+            "tab_index": 4,
+            "left": 120,
+            "top": 360,
+            "width": 1095,
+            "height": 255,
+            "data_field": null,
+            "data_source": null,
+            "required": false,
+            "validation_pattern": null,
+            "controls": [],
+            "description": "Label for Client ID textbox"
+          },
+          {
+            "name": "txtID",
+            "type": "TextBox",
+            "caption": "",
+            "text": null,
+            "enabled": true,
+            "visible": true,
+            "tab_index": 0,
+            "left": 1320,
+            "top": 360,
+            "width": 2535,
+            "height": 285,
+            "data_field": null,
+            "data_source": null,
+            "required": false,
+            "validation_pattern": null,
+            "controls": [],
+            "description": "Text input for Client ID"
+          }
         ],
-        "_fields_note": "unknown which fields are retrieved",
-        "where_clause": "ID = <value>",
-        "_where_reasoning": "getclient(clng(txtid.text)) passes id as parameter",
-        "query": null,
-        "_query_note": "actual sql unknown - inside getclient() function",
-        "method": "cmdOpen_Click",
-        "_method_line": 85,
-        "security_flags": [],
-        "_security_note": "getclient() likely parameterized (function call), not direct sql concatenation",
-        "confidence": 0.75,
-        "_confidence_why": "operation inferred from function call, actual implementation unknown"
+        "description": "User interface structure - form and controls"
       }
     ],
-    "cobol_files": [],
-    "_cobol_note": "not applicable for vb6",
-    "data_transformations": [
-      {
-        "_transformation_index": 1,
-        "_source_lines": "Line 85",
-        "_what": "Convert text input to Long integer",
-        "from_field": "txtID.Text",
-        "to_field": "CLng() result",
-        "transformation": "String to Long integer conversion",
-        "original_code": "CLng(txtID.Text)",
-        "_angular_equivalent": "Number() or parseInt() or unary + operator"
-      }
-    ]
+    "has_ui": true
+  },
+  "data_operations": {
+    "operations": []
+  },
+  "events": {
+    "handlers": []
   },
   "patterns": [
     {
-      "pattern_type": "MODAL_DIALOG",
-      "pattern_name": "Modal Dialog",
+      "pattern_type": "",
+      "pattern_name": "",
+      "entities_involved": [],
+      "description": null,
+      "target_equivalent": null,
       "confidence": 0.95
     }
   ],
   "external_references": {
-    "classes": [
+    "classes": [],
+    "modules": [],
+    "copybooks": [],
+    "controls": [],
+    "dlls": [],
+    "apis": []
+  },
+  "security_issues": [],
+  "repository_mapping": {
+    "mappings": []
+  },
+  "frontend_mapping": {
+    "mappings": [
       {
-        "name": "ClientEdit",
-        "source": "external",
-        "_source_note": "Referenced but not defined in this file",
-        "methods_called": []
+        "source_control": "cmdClose",
+        "source_type": "CommandButton",
+        "target_component": "mat-button",
+        "target_framework": "Angular",
+        "props": {
+          "label": "Close",
+          "value": null,
+          "disabled": false
+        },
+        "events": {}
       },
       {
-        "name": "Client",
-        "source": "external",
-        "_source_note": "Referenced but not defined in this file",
-        "methods_called": []
-      }
-    ],
-    "modules": [
+        "source_control": "cmdNew",
+        "source_type": "CommandButton",
+        "target_component": "mat-button",
+        "target_framework": "Angular",
+        "props": {
+          "label": "New",
+          "value": null,
+          "disabled": false
+        },
+        "events": {}
+      },
       {
-        "name": "unknown_module",
-        "_what": "Module containing external functions",
-        "type": "standard_module",
-        "_type_note": "Likely .bas file",
-        "functions_called": [
-          "GetClient"
-        ]
+        "source_control": "cmdOpen",
+        "source_type": "CommandButton",
+        "target_component": "mat-button",
+        "target_framework": "Angular",
+        "props": {
+          "label": "Open",
+          "value": null,
+          "disabled": false
+        },
+        "events": {}
+      },
+      {
+        "source_control": "Label1",
+        "source_type": "Label",
+        "target_component": "mat-label",
+        "target_framework": "Angular",
+        "props": {
+          "label": "Client ID",
+          "value": null,
+          "disabled": false
+        },
+        "events": {}
+      },
+      {
+        "source_control": "txtID",
+        "source_type": "TextBox",
+        "target_component": "mat-input",
+        "target_framework": "Angular",
+        "props": {
+          "label": "",
+          "value": null,
+          "disabled": false
+        },
+        "events": {}
       }
-    ],
-    "copybooks": [],
-    "controls": []
-  },
-  "security_issues": [
-    {
-      "_source_lines": "Line 84",
-      "_what": "Error suppression for GetClient operation",
-      "issue_type": "INSECURE_ERROR_HANDLING",
-      "severity": "medium",
-      "location": "cmdOpen_Click",
-      "description": "Hides errors instead of handling them properly",
-      "recommendation": "Replace with explicit error handling and user feedback",
-      "_angular_code": "Should use try-catch with proper error handling"
-    }
-  ],
-  "generation_metadata": {
-    "estimated_automation_rate": 0.85,
-    "estimated_manual_effort_hours": 0.8,
-    "complexity_score": 2,
-    "recommended_template": "angular-dialog-form",
-    "generation_notes": [
-      "Create interfaces/services for: ClientEdit, Client",
-      "Fix 1 security issue(s)",
-      "Use Angular Material Dialog for modal behavior",
-      "Use Reactive Forms with validation"
     ]
-  }
+  },
+  "generation_metadata": {
+    "estimated_automation_rate": 0.9,
+    "estimated_manual_effort_hours": 0.0,
+    "complexity_score": 5,
+    "recommended_template": "angular-component",
+    "generation_notes": [],
+    "target_specific_hints": {
+      "angular": {}
+    }
+  },
+  "schema_version": "universal-ir-v1"
 }

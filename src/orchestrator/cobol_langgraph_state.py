@@ -66,6 +66,15 @@ class COBOLState(TypedDict):
                                             #           security_issues, generation_metadata
 
     # ============================================================
+    # UNIVERSAL IR (Phase 2 - set by convert_to_universal_ir node)
+    # ============================================================
+
+    universal_ir: Optional[Dict[str, Any]]  # Universal IR (language-agnostic schema)
+                                             # Replaces language-specific IR for code generation
+
+    validation_metrics: Optional[Dict[str, Any]]  # Validation metrics from Universal IR validator
+
+    # ============================================================
     # METADATA (calculated/accumulated)
     # ============================================================
 

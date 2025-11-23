@@ -43,6 +43,14 @@ class VB6State(TypedDict):
     complete_ir: Optional[Dict[str, Any]]  # Complete IR with all 8 sections
 
     # ============================================================
+    # UNIVERSAL IR (Phase 2 - set by convert_to_universal_ir node)
+    # ============================================================
+    universal_ir: Optional[Dict[str, Any]]  # Universal IR (language-agnostic schema)
+                                             # Replaces language-specific IR for code generation
+
+    validation_metrics: Optional[Dict[str, Any]]  # Validation metrics from Universal IR validator
+
+    # ============================================================
     # METADATA (accumulated/calculated)
     # ============================================================
     confidence: Optional[float]     # Overall confidence (0.0-1.0)

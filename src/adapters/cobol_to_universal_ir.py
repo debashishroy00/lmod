@@ -19,7 +19,7 @@ import json
 from typing import Dict, Any, List, Optional
 from pathlib import Path
 
-from src.core.universal_ir_schema import (
+from core.universal_ir_schema import (
     UniversalIR,
     SourceMetadata,
     DataStructuresSection, DataStructure, FieldDefinition, FileDefinition, DataSource,

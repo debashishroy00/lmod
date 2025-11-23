@@ -1,17 +1,19 @@
 #!/usr/bin/env python3
 """
-Spring Boot Code Generator - COBOL IR → Spring Boot
+Spring Boot Code Generator - Universal IR → Spring Boot
 
-WHAT: Generates Spring Boot application from COBOL IR
-WHY: Automate COBOL → Spring Boot migration
-HOW: Read COBOL IR JSON → Generate @Entity, @Repository, @Service, config files
+WHAT: Generates Spring Boot application from Universal IR
+WHY: Automate legacy code → Spring Boot migration (COBOL, AS/400, etc.)
+HOW: Read Universal IR JSON → Generate @Entity, @Repository, @Service, config files
+
+UPDATED FOR PHASE 3: Now reads from Universal IR (language-agnostic schema)
 
 Architecture:
 - Mirrors Angular generator structure (src/codegen/angular_generator.py)
 - Template-based generation (not LLM-based for determinism)
 - Generates complete Spring Boot project structure
 
-Input: COBOL IR (8 sections)
+Input: Universal IR (12 sections, uses: data_structures, business_logic, io_operations, repository_mapping)
 Output: Spring Boot project with:
   - src/main/java/com/legacy/cobol/entity/*.java (@Entity classes)
   - src/main/java/com/legacy/cobol/repository/*.java (@Repository interfaces)

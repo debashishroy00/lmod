@@ -16,7 +16,7 @@ Version: 1.0.0
 """
 
 from typing import List, Dict, Tuple
-from src.core.universal_ir_schema import UniversalIR
+from core.universal_ir_schema import UniversalIR
 
 
 class ValidationResult:
@@ -87,7 +87,7 @@ class UniversalIRValidator:
         """Initialize validator."""
         pass
 
-    def validate(self, universal_ir: UniversalIR) -> ValidationResult:
+    def validate(self, universal_ir: UniversalIR, verbose: bool = True) -> ValidationResult:
         """
         WHAT: Validate Universal IR
         WHY: Main entry point for validation
@@ -95,29 +95,75 @@ class UniversalIRValidator:
 
         Args:
             universal_ir: UniversalIR Pydantic model
+            verbose: Enable detailed logging (default: True)
 
         Returns:
             ValidationResult with errors, warnings, metrics
         """
+        if verbose:
+            print("🔍 Validating Universal IR...")
+            print(f"   Language: {universal_ir.metadata.source_language}")
+            print(f"   Target: {universal_ir.metadata.target_framework}")
+            print()
+
         result = ValidationResult()
 
         # Schema validation is automatic with Pydantic
         # If we got here, schema is valid
+        if verbose:
+            print("  ✓ Pydantic schema validation passed")
 
         # Run business rule validations
+        if verbose:
+            print("  📋 Validating metadata section...")
         self._validate_metadata(universal_ir.metadata, result)
+
+        if verbose:
+            print("  📦 Validating data structures section...")
         self._validate_data_structures(universal_ir.data_structures, result)
+
+        if verbose:
+            print("  ⚙️  Validating business logic section...")
         self._validate_business_logic(universal_ir.business_logic, result)
+
+        if verbose:
+            print("  📁 Validating I/O operations section...")
         self._validate_io_operations(universal_ir.io_operations, result)
 
         # Language-specific validations
         if universal_ir.metadata.source_language == "VB6":
+            if verbose:
+                print("  🎨 Running VB6-specific validations...")
             self._validate_vb6_specific(universal_ir, result)
         elif universal_ir.metadata.source_language == "COBOL":
+            if verbose:
+                print("  📊 Running COBOL-specific validations...")
             self._validate_cobol_specific(universal_ir, result)
 
         # Calculate metrics
+        if verbose:
+            print("  📐 Calculating validation metrics...")
         self._calculate_metrics(universal_ir, result)
+
+        # Display summary
+        if verbose:
+            print()
+            if result.is_valid:
+                print("  ✅ Validation PASSED")
+            else:
+                print(f"  ❌ Validation FAILED ({len(result.errors)} errors)")
+
+            if result.errors:
+                print(f"     Errors: {len(result.errors)}")
+                for error in result.errors[:3]:  # Show first 3 errors
+                    print(f"       - {error}")
+                if len(result.errors) > 3:
+                    print(f"       ... and {len(result.errors) - 3} more")
+
+            if result.warnings:
+                print(f"     Warnings: {len(result.warnings)}")
+
+            print()
 
         return result
 

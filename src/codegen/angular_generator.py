@@ -56,10 +56,10 @@ class AngularGenerator:
 
     def generate(self, ir: Dict[str, Any], output_dir: str, validate: bool = True) -> Dict[str, str]:
         """
-        Generate Angular component from IR
+        Generate Angular component from Universal IR
 
         Args:
-            ir: Complete IR JSON from Phase 1
+            ir: Universal IR JSON (Phase 3 - language-agnostic schema)
             output_dir: Directory to write generated files
             validate: Whether to validate generated code (default: True)
 
@@ -67,7 +67,12 @@ class AngularGenerator:
             Dictionary of {filename: content}
         """
         print("\n🚀 Starting Angular code generation...")
-        form_name = ir['ui']['form']['name']
+
+        # Extract form name from Universal IR structure
+        forms = ir.get('ui', {}).get('forms', [])
+        if not forms:
+            raise ValueError("No forms found in Universal IR")
+        form_name = forms[0]['name']
         print(f"📝 Form: {form_name}")
 
         # Step 1: Build prompt

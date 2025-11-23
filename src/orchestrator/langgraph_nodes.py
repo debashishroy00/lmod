@@ -23,6 +23,10 @@ from agents.vb6_ui_agent import VB6UIAgent
 from agents.vb6_logic_agent import VB6LogicAgent
 from agents.vb6_data_agent import VB6DataAgent
 
+# Import Universal IR adapter and validator (Phase 2)
+from adapters.vb6_to_universal_ir import VB6ToUniversalIRAdapter
+from core.universal_ir_validator import UniversalIRValidator
+
 # Load .env file from src directory
 load_dotenv(os.path.join(os.path.dirname(__file__), '..', '.env'))
 
@@ -620,3 +624,105 @@ def _generate_notes(external_refs: Dict, security_issues: list) -> list:
     notes.append('Use Reactive Forms with validation')
 
     return notes
+
+
+# ============================================================
+# PHASE 2: UNIVERSAL IR CONVERSION NODE
+# ============================================================
+
+async def convert_to_universal_ir_node(state: VB6State) -> Dict[str, Any]:
+    """
+    WHAT: Convert VB6 IR to Universal IR (Phase 2)
+    WHY: Enable unified code generation from language-agnostic schema
+    HOW: Use VB6ToUniversalIRAdapter + UniversalIRValidator
+
+    This node runs AFTER validate_node in the workflow.
+
+    Flow:
+        1. Extract complete_ir from state
+        2. Convert to Universal IR using adapter
+        3. Validate Universal IR
+        4. Return universal_ir + validation_metrics in state
+
+    Args:
+        state: VB6State with complete_ir
+
+    Returns:
+        Dict with:
+        - universal_ir: Universal IR dict
+        - validation_metrics: Validation metrics dict
+        - timing: Updated timing dict
+        - errors: Updated errors list (if validation fails)
+    """
+    start_time = time.time()
+
+    print("🔄 Converting VB6 IR → Universal IR...")
+
+    # Get complete IR from state
+    complete_ir = state.get('complete_ir')
+    if not complete_ir:
+        error_msg = "convert_to_universal_ir_node: No complete_ir in state"
+        print(f"  ❌ {error_msg}")
+        return {
+            "errors": [error_msg],
+            "timing": {"universal_ir_conversion": time.time() - start_time}
+        }
+
+    try:
+        # Convert to Universal IR
+        adapter = VB6ToUniversalIRAdapter()
+        universal_ir_model = adapter.convert(complete_ir)
+
+        # Convert Pydantic model to dict for state management
+        universal_ir_dict = universal_ir_model.model_dump()
+
+        print(f"✓ Universal IR conversion complete in {time.time() - start_time:.2f}s")
+
+        # Validate Universal IR
+        validator = UniversalIRValidator()
+        validation_result = validator.validate(universal_ir_model)
+
+        # Convert validation result to dict
+        validation_metrics = {
+            "is_valid": validation_result.is_valid,
+            "validation_errors": validation_result.errors,
+            "validation_warnings": validation_result.warnings,
+            "entities_count": validation_result.metrics.get("entities_count", 0),
+            "procedures_count": validation_result.metrics.get("procedures_count", 0),
+            "io_operations_count": validation_result.metrics.get("io_operations_count", 0),
+            "ui_controls_count": validation_result.metrics.get("ui_controls_count", 0),
+            "event_handlers_count": validation_result.metrics.get("event_handlers_count", 0),
+            "data_operations_count": validation_result.metrics.get("data_operations_count", 0),
+        }
+
+        status = "PASSED" if validation_result.is_valid else "FAILED"
+        print(f"✓ Universal IR validation: {status}")
+
+        # Display metrics
+        ui_count = validation_result.metrics.get("ui_controls_count", 0)
+        entities_count = validation_result.metrics.get("entities_count", 0)
+        procedures_count = validation_result.metrics.get("procedures_count", 0)
+        events_count = validation_result.metrics.get("event_handlers_count", 0)
+
+        print(f"📊 Universal IR: {ui_count} controls, {entities_count} entities, "
+              f"{procedures_count} procedures, {events_count} events")
+
+        # Check for validation errors
+        errors_to_add = []
+        if not validation_result.is_valid:
+            errors_to_add = [f"Universal IR validation: {err}" for err in validation_result.errors]
+
+        return {
+            "universal_ir": universal_ir_dict,
+            "validation_metrics": validation_metrics,
+            "errors": errors_to_add,
+            "timing": {"universal_ir_conversion": time.time() - start_time}
+        }
+
+    except Exception as e:
+        error_msg = f"Universal IR conversion failed: {str(e)}"
+        print(f"  ❌ {error_msg}")
+        return {
+            "errors": [error_msg],
+            "timing": {"universal_ir_conversion": time.time() - start_time}
+        }

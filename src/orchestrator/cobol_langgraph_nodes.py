@@ -28,6 +28,10 @@ from agents.cobol.cobol_io_agent import COBOLIOAgent
 # Import COBOL IR merger
 from core.cobol_ir import merge_cobol_ir, validate_cobol_ir
 
+# Import Universal IR adapter and validator (Phase 2)
+from adapters.cobol_to_universal_ir import COBOLToUniversalIRAdapter
+from core.universal_ir_validator import UniversalIRValidator
+
 
 # ============================================================
 # AGENT INITIALIZATION (no LLM - pure Python parsers)
@@ -330,3 +334,74 @@ def validate_node(state: COBOLState) -> Dict[str, Any]:
     print("  - Metadata fields complete")
 
     return {}  # No updates needed if valid
+
+
+def convert_to_universal_ir_node(state: COBOLState) -> Dict[str, Any]:
+    """
+    WHAT: Convert COBOL IR to Universal IR (Phase 2)
+    WHY: Enable unified IR schema across all source languages
+    HOW: Use COBOL→Universal IR adapter
+
+    This node is NEW in Phase 2
+    - Takes complete COBOL IR
+    - Converts to Universal IR using adapter
+    - Validates Universal IR
+    - Returns universal_ir in state
+
+    Args:
+        state: Current workflow state with complete_ir
+
+    Returns:
+        Dict with universal_ir and validation metrics
+    """
+    start_time = time.time()
+
+    print("\n🔄 Converting COBOL IR → Universal IR...")
+
+    try:
+        # Get COBOL IR from state
+        cobol_ir = state.get('complete_ir', {})
+
+        # Create adapter
+        adapter = COBOLToUniversalIRAdapter()
+
+        # Convert COBOL IR → Universal IR
+        universal_ir = adapter.convert(cobol_ir)
+
+        # Validate Universal IR
+        validator = UniversalIRValidator()
+        validation_result = validator.validate(universal_ir)
+
+        elapsed = time.time() - start_time
+
+        # Display validation results
+        if validation_result.is_valid:
+            print(f"✓ Universal IR conversion complete in {elapsed:.2f}s")
+            print(f"✓ Universal IR validation: PASSED")
+        else:
+            print(f"⚠ Universal IR conversion complete but has {len(validation_result.errors)} errors")
+
+        # Show metrics
+        if validation_result.metrics:
+            entities = validation_result.metrics.get('entities_count', 0)
+            procedures = validation_result.metrics.get('procedures_count', 0)
+            io_ops = validation_result.metrics.get('io_operations_count', 0)
+            print(f"📊 Universal IR: {entities} entities, {procedures} procedures, {io_ops} I/O ops")
+
+        # Convert Pydantic model to dict for state
+        universal_ir_dict = universal_ir.model_dump()
+
+        return {
+            "universal_ir": universal_ir_dict,
+            "timing": {"universal_ir_conversion": elapsed},
+            "validation_metrics": validation_result.metrics
+        }
+
+    except Exception as e:
+        print(f"✗ Universal IR conversion error: {e}")
+        import traceback
+        traceback.print_exc()
+        return {
+            "errors": [f"Universal IR conversion error: {str(e)}"],
+            "timing": {"universal_ir_conversion": time.time() - start_time}
+        }

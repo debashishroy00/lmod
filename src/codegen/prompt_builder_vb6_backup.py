@@ -1,51 +1,30 @@
 """
-Build LLM prompt for Angular code generation from Universal IR
+Build LLM prompt for Angular code generation from IR
 
 WHAT: Constructs comprehensive prompts for Claude API
 WHY: Prompt engineering is critical for quality code generation
-HOW: Template-based prompt with Universal IR data and mapping rules
-
-UPDATED FOR PHASE 3: Now reads from Universal IR instead of VB6-specific IR
+HOW: Template-based prompt with IR data and mapping rules
 """
 
 import json
 from typing import Dict, Any, List
 
 
-def build_angular_generation_prompt(universal_ir: Dict[str, Any]) -> str:
+def build_angular_generation_prompt(ir: Dict[str, Any]) -> str:
     """
     Build comprehensive prompt for Claude to generate Angular component
 
     Args:
-        universal_ir: Universal IR JSON (Phase 3 - language-agnostic schema)
+        ir: Complete IR JSON from Phase 1
 
     Returns:
         Formatted prompt string for Claude API
     """
 
-    # Extract from Universal IR structure
-    metadata = universal_ir['metadata']
-    ui_section = universal_ir['ui']
-    business_logic = universal_ir['business_logic']
-    data_structures = universal_ir['data_structures']
-    frontend_mapping = universal_ir['frontend_mapping']
-    events = universal_ir['events']
-
-    # Get form information
-    forms = ui_section.get('forms', [])
-    if not forms:
-        raise ValueError("No forms found in Universal IR")
-
-    form = forms[0]  # Use first form
-    form_name = form['name']
-    controls = form.get('controls', [])
-
-    # Get procedures (including event handlers)
-    procedures = business_logic.get('procedures', [])
-    event_handlers = events.get('handlers', [])
-
-    # Get entities for type hints
-    entities = data_structures.get('entities', [])
+    form_name = ir['ui']['form']['name']
+    controls = ir['ui']['controls']
+    event_handlers = ir['logic']['event_handlers']
+    validations = ir['logic'].get('validations', [])
 
     # Generate component name (remove "Form" suffix, convert to kebab-case)
     component_name = form_name.replace('Form', '').lower()
@@ -54,7 +33,7 @@ def build_angular_generation_prompt(universal_ir: Dict[str, Any]) -> str:
 
     class_name = form_name
 
-    prompt = f"""You are an Angular 17 expert generating production-ready code from Universal Intermediate Representation (IR).
+    prompt = f"""You are an Angular 17 expert generating production-ready code from Intermediate Representation (IR).
 
 **CRITICAL RULES**:
 1. Output ONLY valid TypeScript/HTML/SCSS - no markdown code fences, no explanations
@@ -64,13 +43,9 @@ def build_angular_generation_prompt(universal_ir: Dict[str, Any]) -> str:
 5. Generate passing unit tests
 6. Use Angular Material components
 
-**INPUT**: Universal IR (language-agnostic schema)
+**INPUT**: VB6 Form IR (JSON)
 
-Source Language: {metadata.get('source_language', 'Unknown')}
-Target Framework: {metadata.get('target_framework', 'Angular')}
-Confidence: {metadata.get('confidence', 0.0):.1%}
-
-{json.dumps(universal_ir, indent=2)}
+{json.dumps(ir, indent=2)}
 
 **YOUR TASK**: Generate Angular component files for the form "{form_name}"
 
@@ -119,8 +94,8 @@ export class {class_name}Component {{
 }}
 ```
 
-**Implement these event handlers/procedures**:
-{_format_procedures(procedures, event_handlers)}
+**Implement these event handlers**:
+{_format_event_handlers(event_handlers)}
 
 **Use signals for state** (Angular 17 feature):
 - Form inputs: `clientId = signal('');`
@@ -128,8 +103,8 @@ export class {class_name}Component {{
 
 ### 2. HTML Template ({component_name}.component.html)
 
-**Map these UI controls to Angular Material**:
-{_format_control_mappings(controls, frontend_mapping)}
+**Map these VB6 controls to Angular Material**:
+{_format_control_mappings(controls)}
 
 **Layout requirements**:
 - Use CSS Grid or Flexbox for layout
@@ -139,8 +114,8 @@ export class {class_name}Component {{
 ### 3. SCSS Styles ({component_name}.component.scss)
 
 **Form dimensions** (from IR):
-- Width: {form.get('width', 'auto')} twips (convert to px: 1 twip ≈ 0.0625px)
-- Height: {form.get('height', 'auto')} twips
+- Width: {ir['ui']['form'].get('width', 'auto')} twips (convert to px: 1 twip ≈ 0.0625px)
+- Height: {ir['ui']['form'].get('height', 'auto')} twips
 
 **Use Material theming**:
 - Colors from theme
@@ -150,7 +125,7 @@ export class {class_name}Component {{
 
 **Required tests**:
 - Component creation test
-- One test per event handler/procedure
+- One test per event handler
 - Validation tests (if applicable)
 - Use Angular TestBed
 
@@ -158,17 +133,17 @@ export class {class_name}Component {{
 
 ## MAPPING RULES
 
-### UI Control → Angular Material
+### VB6 Control → Angular Material
 
 {_format_detailed_control_mapping()}
 
-### Events → Angular Events
+### VB6 Events → Angular Events
 
 {_format_detailed_event_mapping()}
 
-### Data Types
+### VB6 Validations → Angular Validators
 
-{_format_data_types(entities)}
+{_format_validation_rules(validations)}
 
 ---
 
@@ -191,7 +166,7 @@ export class {class_name}Component {{
 
 4. **Comments**:
    - Add brief comments for complex logic
-   - Include traceability comments (source line numbers from IR)
+   - Include traceability comments (VB6 line numbers from IR)
 
 ---
 
@@ -209,75 +184,48 @@ Now generate the complete Angular component files.
     return prompt
 
 
-def _format_procedures(procedures: List[Dict[str, Any]], event_handlers: List[Dict[str, Any]]) -> str:
-    """Format procedures and event handlers section of prompt"""
-    all_handlers = []
+def _format_event_handlers(handlers: List[Dict[str, Any]]) -> str:
+    """Format event handlers section of prompt"""
+    if not handlers:
+        return "No event handlers"
 
-    # Add procedures
-    for proc in procedures:
-        name = proc.get('name', 'unknown')
-        proc_type = proc.get('type', 'unknown')
-        description = proc.get('description', '')
-        start_line = proc.get('start_line', 'unknown')
-        end_line = proc.get('end_line', 'unknown')
+    lines = []
+    for handler in handlers:
+        control_id = handler.get('control_id', 'unknown')
+        event_type = handler.get('event_type', 'Unknown')
+        handler_name = handler.get('handler_name', 'unknown')
+        source_lines = handler.get('_source_lines', 'unknown')
 
-        all_handlers.append(f"- **{name}()** (type: {proc_type}, lines {start_line}-{end_line})")
-        if description:
-            all_handlers.append(f"  - {description}")
+        lines.append(f"- **{handler_name}()** (VB6 lines {source_lines})")
 
         # Show logic steps
-        logic_steps = proc.get('logic_steps', [])
+        logic_steps = handler.get('logic_steps', [])
         if logic_steps:
             for step in logic_steps[:3]:  # Show first 3 steps
                 desc = step.get('description', '')
-                all_handlers.append(f"  - {desc}")
+                lines.append(f"  - {desc}")
             if len(logic_steps) > 3:
-                all_handlers.append(f"  - ... and {len(logic_steps) - 3} more steps")
-        all_handlers.append("")
+                lines.append(f"  - ... and {len(logic_steps) - 3} more steps")
+        lines.append("")
 
-    # Add event handlers
-    for handler in event_handlers:
-        event_name = handler.get('event_name', 'unknown')
-        control_name = handler.get('control_name', '')
-        start_line = handler.get('start_line', 'unknown')
-        end_line = handler.get('end_line', 'unknown')
-
-        all_handlers.append(f"- **{event_name}()** (control: {control_name}, lines {start_line}-{end_line})")
-        all_handlers.append("")
-
-    if not all_handlers:
-        return "No event handlers or procedures"
-
-    return "\n".join(all_handlers)
+    return "\n".join(lines)
 
 
-def _format_control_mappings(controls: List[Dict[str, Any]], frontend_mapping: Dict[str, Any]) -> str:
+def _format_control_mappings(controls: List[Dict[str, Any]]) -> str:
     """Format control mappings section"""
     if not controls:
         return "No controls"
 
-    # Build mapping lookup from frontend_mapping
-    mapping_lookup = {}
-    for mapping in frontend_mapping.get('mappings', []):
-        source_control = mapping.get('source_control', '')
-        mapping_lookup[source_control] = {
-            'target_component': mapping.get('target_component', 'div'),
-            'props': mapping.get('props', {})
-        }
-
     lines = []
     for control in controls:
-        control_name = control.get('name', 'unknown')
-        control_type = control.get('type', 'Unknown')
+        control_id = control.get('id', 'unknown')
+        vb6_type = control.get('type', 'Unknown')
         caption = control.get('caption', '')
+        angular_hint = control.get('_type_angular_mapping', 'Unknown')
 
-        # Get Angular mapping
-        mapping_info = mapping_lookup.get(control_name, {})
-        angular_component = mapping_info.get('target_component', 'div')
-
-        lines.append(f"- **{control_name}** ({control_type})")
+        lines.append(f"- **{control_id}** ({vb6_type})")
         lines.append(f"  - Caption: \"{caption}\"")
-        lines.append(f"  - Angular: {angular_component}")
+        lines.append(f"  - Angular: {angular_hint}")
         lines.append("")
 
     return "\n".join(lines)
@@ -286,8 +234,8 @@ def _format_control_mappings(controls: List[Dict[str, Any]], frontend_mapping: D
 def _format_detailed_control_mapping() -> str:
     """Format detailed control mapping table"""
     return """
-| Source Control Type | Angular Material | Example |
-|---------------------|------------------|---------|
+| VB6 Control | Angular Material | Example |
+|-------------|------------------|---------|
 | CommandButton | `<button mat-raised-button>` | `<button mat-raised-button (click)="onSave()">Save</button>` |
 | TextBox | `<mat-form-field><input matInput>` | `<mat-form-field><input matInput [(ngModel)]="name"></mat-form-field>` |
 | Label | `<mat-label>` | `<mat-label>Client ID</mat-label>` |
@@ -301,8 +249,8 @@ def _format_detailed_control_mapping() -> str:
 def _format_detailed_event_mapping() -> str:
     """Format detailed event mapping table"""
     return """
-| Source Event | Angular Event | Example |
-|--------------|---------------|---------|
+| VB6 Event | Angular Event | Example |
+|-----------|---------------|---------|
 | Click | `(click)` | `<button (click)="onClick()">` |
 | Change | `(change)` | `<input (change)="onChange()">` |
 | DblClick | `(dblclick)` | `<div (dblclick)="onDoubleClick()">` |
@@ -314,23 +262,33 @@ def _format_detailed_event_mapping() -> str:
 """
 
 
-def _format_data_types(entities: List[Dict[str, Any]]) -> str:
-    """Format data types section"""
-    if not entities:
-        return "No data entities defined"
+def _format_validation_rules(validations: List[Dict[str, Any]]) -> str:
+    """Format validation rules section"""
+    if not validations:
+        return "No validations specified in IR"
 
     lines = []
-    for entity in entities:
-        entity_name = entity.get('name', 'unknown')
-        fields = entity.get('fields', [])
+    for validation in validations:
+        field = validation.get('field', 'unknown')
+        rule_type = validation.get('rule_type', 'unknown')
+        error_msg = validation.get('error_message', '')
+        source_lines = validation.get('_source_lines', 'unknown')
 
-        lines.append(f"**Entity**: {entity_name}")
-        for field in fields[:5]:  # Show first 5 fields
-            field_name = field.get('name', 'unknown')
-            data_type = field.get('data_type', 'any')
-            lines.append(f"  - {field_name}: {data_type}")
-        if len(fields) > 5:
-            lines.append(f"  - ... and {len(fields) - 5} more fields")
+        lines.append(f"- **Field**: {field} (VB6 lines {source_lines})")
+        lines.append(f"  - Rule: {rule_type}")
+        lines.append(f"  - Error: \"{error_msg}\"")
+        lines.append(f"  - Angular: {_map_validation_to_angular(rule_type)}")
         lines.append("")
 
     return "\n".join(lines)
+
+
+def _map_validation_to_angular(rule_type: str) -> str:
+    """Map VB6 validation rule to Angular validator"""
+    mapping = {
+        "required": "Validators.required",
+        "numeric": "Validators.pattern(/^\\d+$/)",
+        "custom": "Custom validator function",
+        "database_lookup": "Async validator with service call"
+    }
+    return mapping.get(rule_type, "Custom validator function")
