@@ -1,0 +1,108 @@
+{
+  "_agent": "cobol-data-agent",
+  "_version": "1.0.0",
+  "_timestamp": "2025-11-22T12:50:40.773719",
+  "_what": "Data structures extracted from COBOL",
+  "confidence": 0.875,
+  "cobol_files": [
+    {
+      "select_name": "DIAG-FILE",
+      "_what": "File definition for DIAG-FILE",
+      "assign_to": "DISK",
+      "organization": "SEQUENTIAL",
+      "access_mode": "SEQUENTIAL",
+      "_select_line": 9,
+      "record_layout": "DiagDetails",
+      "file_status": null,
+      "label_record": "STANDARD",
+      "value_of_file_id": "DIAG.DAT",
+      "_fd_line": 14
+    }
+  ],
+  "entities": [
+    {
+      "name": "DiagDetails",
+      "type": "record",
+      "fields": [
+        {
+          "name": "DiagCode",
+          "level": 2,
+          "cobol_picture": "X(5)",
+          "data_type": "String",
+          "length": 5,
+          "decimals": null,
+          "default_value": null,
+          "_line": 20,
+          "_what": "Field DiagCode (String)"
+        },
+        {
+          "name": "DiagName",
+          "level": 2,
+          "cobol_picture": "X(70)",
+          "data_type": "String",
+          "length": 70,
+          "decimals": null,
+          "default_value": null,
+          "_line": 21,
+          "_what": "Field DiagName (String)"
+        }
+      ],
+      "source": "FILE SECTION",
+      "_what": "Record layout for DiagDetails"
+    },
+    {
+      "name": "DiagDetails",
+      "type": "record",
+      "fields": [
+        {
+          "name": "DiagCode",
+          "level": 2,
+          "cobol_picture": "X(5)",
+          "data_type": "String",
+          "length": 5,
+          "decimals": null,
+          "default_value": null,
+          "_line": 20,
+          "_what": "Field DiagCode (String)"
+        },
+        {
+          "name": "DiagName",
+          "level": 2,
+          "cobol_picture": "X(70)",
+          "data_type": "String",
+          "length": 70,
+          "decimals": null,
+          "default_value": null,
+          "_line": 21,
+          "_what": "Field DiagName (String)"
+        }
+      ],
+      "source": "FILE SECTION",
+      "_what": "Record layout for DiagDetails"
+    },
+    {
+      "name": "READ-EOF",
+      "type": "variable",
+      "fields": [
+        {
+          "name": "READ-EOF",
+          "level": 1,
+          "cobol_picture": "9",
+          "data_type": "Integer",
+          "length": 1,
+          "decimals": null,
+          "default_value": "0",
+          "_line": 24,
+          "_what": "Field READ-EOF (Integer)"
+        }
+      ],
+      "source": "WORKING-STORAGE",
+      "_what": "Variable READ-EOF"
+    }
+  ],
+  "copybooks": [],
+  "data_source": {
+    "type": "sequential_file",
+    "_what": "Sequential flat files"
+  }
+}

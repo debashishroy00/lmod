@@ -1,0 +1,2216 @@
+{
+  "$defs": {
+    "BusinessLogicSection": {
+      "description": "All business logic in the source program.",
+      "properties": {
+        "procedures": {
+          "items": {
+            "$ref": "#/$defs/Procedure"
+          },
+          "title": "Procedures",
+          "type": "array"
+        },
+        "workflows": {
+          "items": {
+            "$ref": "#/$defs/Workflow"
+          },
+          "title": "Workflows",
+          "type": "array"
+        },
+        "calculations": {
+          "items": {
+            "$ref": "#/$defs/Calculation"
+          },
+          "title": "Calculations",
+          "type": "array"
+        },
+        "error_handling": {
+          "items": {
+            "$ref": "#/$defs/ErrorHandler"
+          },
+          "title": "Error Handling",
+          "type": "array"
+        }
+      },
+      "title": "BusinessLogicSection",
+      "type": "object"
+    },
+    "Calculation": {
+      "description": "Business calculation or formula.",
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "formula": {
+          "title": "Formula",
+          "type": "string"
+        },
+        "inputs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Inputs",
+          "type": "array"
+        },
+        "output": {
+          "title": "Output",
+          "type": "string"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "line_number": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Line Number"
+        }
+      },
+      "required": [
+        "name",
+        "formula",
+        "output"
+      ],
+      "title": "Calculation",
+      "type": "object"
+    },
+    "ComponentMapping": {
+      "description": "Mapping of UI controls to frontend components.",
+      "properties": {
+        "source_control": {
+          "title": "Source Control",
+          "type": "string"
+        },
+        "source_type": {
+          "title": "Source Type",
+          "type": "string"
+        },
+        "target_component": {
+          "title": "Target Component",
+          "type": "string"
+        },
+        "target_framework": {
+          "title": "Target Framework",
+          "type": "string"
+        },
+        "props": {
+          "additionalProperties": true,
+          "title": "Props",
+          "type": "object"
+        },
+        "events": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Events",
+          "type": "object"
+        }
+      },
+      "required": [
+        "source_control",
+        "source_type",
+        "target_component",
+        "target_framework"
+      ],
+      "title": "ComponentMapping",
+      "type": "object"
+    },
+    "DataOperation": {
+      "description": "Data operation (VB6 recordset, ADO, DAO).",
+      "properties": {
+        "operation_type": {
+          "title": "Operation Type",
+          "type": "string"
+        },
+        "target_table": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Target Table"
+        },
+        "sql_query": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sql Query"
+        },
+        "recordset_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Recordset Name"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "line_number": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Line Number"
+        }
+      },
+      "required": [
+        "operation_type"
+      ],
+      "title": "DataOperation",
+      "type": "object"
+    },
+    "DataOperationsSection": {
+      "description": "VB6-specific data operations (recordsets, ADO, DAO).",
+      "properties": {
+        "operations": {
+          "items": {
+            "$ref": "#/$defs/DataOperation"
+          },
+          "title": "Operations",
+          "type": "array"
+        }
+      },
+      "title": "DataOperationsSection",
+      "type": "object"
+    },
+    "DataSource": {
+      "description": "Data source configuration (database, file, API).",
+      "properties": {
+        "type": {
+          "title": "Type",
+          "type": "string"
+        },
+        "connection_string": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Connection String"
+        },
+        "provider": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Provider"
+        },
+        "config": {
+          "additionalProperties": true,
+          "title": "Config",
+          "type": "object"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "title": "DataSource",
+      "type": "object"
+    },
+    "DataStructure": {
+      "description": "Universal data structure (record, class, type, entity).",
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "type": {
+          "enum": [
+            "record",
+            "class",
+            "type",
+            "entity",
+            "variable",
+            "constant"
+          ],
+          "title": "Type",
+          "type": "string"
+        },
+        "fields": {
+          "items": {
+            "$ref": "#/$defs/FieldDefinition"
+          },
+          "title": "Fields",
+          "type": "array"
+        },
+        "source": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source"
+        },
+        "parent_structure": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Parent Structure"
+        },
+        "table_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Table Name"
+        },
+        "schema_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Schema Name"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "start_line": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Start Line"
+        },
+        "end_line": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "End Line"
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ],
+      "title": "DataStructure",
+      "type": "object"
+    },
+    "DataStructuresSection": {
+      "description": "All data structures in the source program.",
+      "properties": {
+        "entities": {
+          "items": {
+            "$ref": "#/$defs/DataStructure"
+          },
+          "title": "Entities",
+          "type": "array"
+        },
+        "files": {
+          "items": {
+            "$ref": "#/$defs/FileDefinition"
+          },
+          "title": "Files",
+          "type": "array"
+        },
+        "copybooks": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Copybooks",
+          "type": "array"
+        },
+        "data_source": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/DataSource"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "title": "DataStructuresSection",
+      "type": "object"
+    },
+    "DetectedPattern": {
+      "description": "Detected design pattern or coding pattern.",
+      "properties": {
+        "pattern_type": {
+          "title": "Pattern Type",
+          "type": "string"
+        },
+        "pattern_name": {
+          "title": "Pattern Name",
+          "type": "string"
+        },
+        "entities_involved": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Entities Involved",
+          "type": "array"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "target_equivalent": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Target Equivalent"
+        },
+        "confidence": {
+          "default": 0.9,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Confidence",
+          "type": "number"
+        }
+      },
+      "required": [
+        "pattern_type",
+        "pattern_name"
+      ],
+      "title": "DetectedPattern",
+      "type": "object"
+    },
+    "ErrorHandler": {
+      "description": "Error handling logic.",
+      "properties": {
+        "type": {
+          "title": "Type",
+          "type": "string"
+        },
+        "scope": {
+          "title": "Scope",
+          "type": "string"
+        },
+        "handler": {
+          "title": "Handler",
+          "type": "string"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "line_number": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Line Number"
+        },
+        "target_equivalent": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Target Equivalent"
+        }
+      },
+      "required": [
+        "type",
+        "scope",
+        "handler"
+      ],
+      "title": "ErrorHandler",
+      "type": "object"
+    },
+    "EventHandler": {
+      "description": "Event handler (VB6, PowerBuilder, Delphi).",
+      "properties": {
+        "event_name": {
+          "title": "Event Name",
+          "type": "string"
+        },
+        "control_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Control Name"
+        },
+        "handler_code": {
+          "title": "Handler Code",
+          "type": "string"
+        },
+        "parameters": {
+          "items": {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          "title": "Parameters",
+          "type": "array"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "start_line": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Start Line"
+        },
+        "end_line": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "End Line"
+        }
+      },
+      "required": [
+        "event_name",
+        "handler_code"
+      ],
+      "title": "EventHandler",
+      "type": "object"
+    },
+    "EventsSection": {
+      "description": "All event handlers in the source program.",
+      "properties": {
+        "handlers": {
+          "items": {
+            "$ref": "#/$defs/EventHandler"
+          },
+          "title": "Handlers",
+          "type": "array"
+        }
+      },
+      "title": "EventsSection",
+      "type": "object"
+    },
+    "ExternalReferencesSection": {
+      "description": "External dependencies (classes, modules, DLLs, APIs).",
+      "properties": {
+        "classes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Classes",
+          "type": "array"
+        },
+        "modules": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Modules",
+          "type": "array"
+        },
+        "copybooks": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Copybooks",
+          "type": "array"
+        },
+        "controls": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Controls",
+          "type": "array"
+        },
+        "dlls": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Dlls",
+          "type": "array"
+        },
+        "apis": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Apis",
+          "type": "array"
+        }
+      },
+      "title": "ExternalReferencesSection",
+      "type": "object"
+    },
+    "FieldDefinition": {
+      "description": "Universal field definition for records, classes, entities.",
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "data_type": {
+          "title": "Data Type",
+          "type": "string"
+        },
+        "length": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Length"
+        },
+        "decimals": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Decimals"
+        },
+        "nullable": {
+          "default": true,
+          "title": "Nullable",
+          "type": "boolean"
+        },
+        "default_value": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Default Value"
+        },
+        "min_value": {
+          "anyOf": [
+            {},
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Min Value"
+        },
+        "max_value": {
+          "anyOf": [
+            {},
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Value"
+        },
+        "pattern": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Pattern"
+        },
+        "control_type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Control Type"
+        },
+        "label": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Label"
+        },
+        "column_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Column Name"
+        },
+        "primary_key": {
+          "default": false,
+          "title": "Primary Key",
+          "type": "boolean"
+        },
+        "foreign_key": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Foreign Key"
+        },
+        "indexed": {
+          "default": false,
+          "title": "Indexed",
+          "type": "boolean"
+        },
+        "cobol_picture": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Cobol Picture"
+        },
+        "cobol_level": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Cobol Level"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "line_number": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Line Number"
+        }
+      },
+      "required": [
+        "name",
+        "data_type"
+      ],
+      "title": "FieldDefinition",
+      "type": "object"
+    },
+    "FileDefinition": {
+      "description": "File definition (COBOL files, VB6 data files).",
+      "properties": {
+        "select_name": {
+          "title": "Select Name",
+          "type": "string"
+        },
+        "assign_to": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Assign To"
+        },
+        "organization": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Organization"
+        },
+        "access_mode": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Access Mode"
+        },
+        "record_layout": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Record Layout"
+        },
+        "file_status": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "File Status"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "line_number": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Line Number"
+        }
+      },
+      "required": [
+        "select_name"
+      ],
+      "title": "FileDefinition",
+      "type": "object"
+    },
+    "FrontendMappingSection": {
+      "description": "Frontend component mappings for UI frameworks.",
+      "properties": {
+        "mappings": {
+          "items": {
+            "$ref": "#/$defs/ComponentMapping"
+          },
+          "title": "Mappings",
+          "type": "array"
+        }
+      },
+      "title": "FrontendMappingSection",
+      "type": "object"
+    },
+    "GenerationMetadata": {
+      "description": "Code generation hints and metadata.",
+      "properties": {
+        "estimated_automation_rate": {
+          "default": 0.9,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Estimated Automation Rate",
+          "type": "number"
+        },
+        "estimated_manual_effort_hours": {
+          "default": 0.0,
+          "minimum": 0.0,
+          "title": "Estimated Manual Effort Hours",
+          "type": "number"
+        },
+        "complexity_score": {
+          "default": 5,
+          "maximum": 10,
+          "minimum": 0,
+          "title": "Complexity Score",
+          "type": "integer"
+        },
+        "recommended_template": {
+          "default": "default",
+          "title": "Recommended Template",
+          "type": "string"
+        },
+        "generation_notes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Generation Notes",
+          "type": "array"
+        },
+        "target_specific_hints": {
+          "additionalProperties": true,
+          "title": "Target Specific Hints",
+          "type": "object"
+        }
+      },
+      "title": "GenerationMetadata",
+      "type": "object"
+    },
+    "IOOperation": {
+      "description": "I/O operation (file, database, API).",
+      "properties": {
+        "type": {
+          "title": "Type",
+          "type": "string"
+        },
+        "entity": {
+          "title": "Entity",
+          "type": "string"
+        },
+        "mode": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Mode"
+        },
+        "procedure": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Procedure"
+        },
+        "into_variable": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Into Variable"
+        },
+        "from_variable": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "From Variable"
+        },
+        "access_pattern": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Access Pattern"
+        },
+        "key_field": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Key Field"
+        },
+        "error_handling": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Error Handling"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "line_number": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Line Number"
+        },
+        "target_equivalent": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Target Equivalent"
+        },
+        "confidence": {
+          "default": 0.9,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Confidence",
+          "type": "number"
+        }
+      },
+      "required": [
+        "type",
+        "entity"
+      ],
+      "title": "IOOperation",
+      "type": "object"
+    },
+    "IOOperationsSection": {
+      "description": "All I/O operations in the source program.",
+      "properties": {
+        "operations": {
+          "items": {
+            "$ref": "#/$defs/IOOperation"
+          },
+          "title": "Operations",
+          "type": "array"
+        },
+        "io_patterns": {
+          "items": {
+            "$ref": "#/$defs/IOPattern"
+          },
+          "title": "Io Patterns",
+          "type": "array"
+        },
+        "repository_recommendations": {
+          "items": {
+            "$ref": "#/$defs/RepositoryRecommendation"
+          },
+          "title": "Repository Recommendations",
+          "type": "array"
+        },
+        "file_status_handling": {
+          "items": {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          "title": "File Status Handling",
+          "type": "array"
+        }
+      },
+      "title": "IOOperationsSection",
+      "type": "object"
+    },
+    "IOPattern": {
+      "description": "Detected I/O pattern.",
+      "properties": {
+        "pattern_type": {
+          "title": "Pattern Type",
+          "type": "string"
+        },
+        "pattern_name": {
+          "title": "Pattern Name",
+          "type": "string"
+        },
+        "operations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Operations",
+          "type": "array"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "target_equivalent": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Target Equivalent"
+        },
+        "confidence": {
+          "default": 0.9,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Confidence",
+          "type": "number"
+        }
+      },
+      "required": [
+        "pattern_type",
+        "pattern_name"
+      ],
+      "title": "IOPattern",
+      "type": "object"
+    },
+    "LogicStep": {
+      "description": "Single step in business logic (assignment, call, condition, loop).",
+      "properties": {
+        "step_type": {
+          "title": "Step Type",
+          "type": "string"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "operation": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Operation"
+        },
+        "target": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Target"
+        },
+        "source": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source"
+        },
+        "condition": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Condition"
+        },
+        "code_snippet": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Code Snippet"
+        },
+        "line_number": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Line Number"
+        },
+        "target_equivalent": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Target Equivalent"
+        }
+      },
+      "required": [
+        "step_type",
+        "description"
+      ],
+      "title": "LogicStep",
+      "type": "object"
+    },
+    "Procedure": {
+      "description": "Procedure, method, function, paragraph.",
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "type": {
+          "title": "Type",
+          "type": "string"
+        },
+        "logic_steps": {
+          "items": {
+            "$ref": "#/$defs/LogicStep"
+          },
+          "title": "Logic Steps",
+          "type": "array"
+        },
+        "parameters": {
+          "items": {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          "title": "Parameters",
+          "type": "array"
+        },
+        "return_type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Return Type"
+        },
+        "start_line": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Start Line"
+        },
+        "end_line": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "End Line"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "confidence": {
+          "default": 0.9,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Confidence",
+          "type": "number"
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ],
+      "title": "Procedure",
+      "type": "object"
+    },
+    "RepositoryMapping": {
+      "description": "Mapping of entities to repository interfaces.",
+      "properties": {
+        "entity_name": {
+          "title": "Entity Name",
+          "type": "string"
+        },
+        "repository_name": {
+          "title": "Repository Name",
+          "type": "string"
+        },
+        "repository_type": {
+          "title": "Repository Type",
+          "type": "string"
+        },
+        "operations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Operations",
+          "type": "array"
+        },
+        "custom_queries": {
+          "items": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object"
+          },
+          "title": "Custom Queries",
+          "type": "array"
+        }
+      },
+      "required": [
+        "entity_name",
+        "repository_name",
+        "repository_type"
+      ],
+      "title": "RepositoryMapping",
+      "type": "object"
+    },
+    "RepositoryMappingSection": {
+      "description": "Repository pattern mappings for code generation.",
+      "properties": {
+        "mappings": {
+          "items": {
+            "$ref": "#/$defs/RepositoryMapping"
+          },
+          "title": "Mappings",
+          "type": "array"
+        }
+      },
+      "title": "RepositoryMappingSection",
+      "type": "object"
+    },
+    "RepositoryRecommendation": {
+      "description": "Repository pattern recommendation for target framework.",
+      "properties": {
+        "entity": {
+          "title": "Entity",
+          "type": "string"
+        },
+        "repository_type": {
+          "title": "Repository Type",
+          "type": "string"
+        },
+        "operations_needed": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Operations Needed",
+          "type": "array"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "target_interface": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Target Interface"
+        },
+        "confidence": {
+          "default": 0.85,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Confidence",
+          "type": "number"
+        }
+      },
+      "required": [
+        "entity",
+        "repository_type"
+      ],
+      "title": "RepositoryRecommendation",
+      "type": "object"
+    },
+    "SecurityIssue": {
+      "description": "Detected security issue or vulnerability.",
+      "properties": {
+        "severity": {
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "critical"
+          ],
+          "title": "Severity",
+          "type": "string"
+        },
+        "issue_type": {
+          "title": "Issue Type",
+          "type": "string"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "location": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Location"
+        },
+        "line_number": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Line Number"
+        },
+        "recommendation": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Recommendation"
+        }
+      },
+      "required": [
+        "severity",
+        "issue_type",
+        "description"
+      ],
+      "title": "SecurityIssue",
+      "type": "object"
+    },
+    "SourceMetadata": {
+      "description": "Source file and analysis metadata.\nApplies to all languages.",
+      "properties": {
+        "source_language": {
+          "description": "Source language: VB6, COBOL, PowerBuilder, Delphi, AS400",
+          "title": "Source Language",
+          "type": "string"
+        },
+        "source_file": {
+          "description": "Original source file name",
+          "title": "Source File",
+          "type": "string"
+        },
+        "source_lines_of_code": {
+          "default": 0,
+          "description": "Lines of code in source file",
+          "title": "Source Lines Of Code",
+          "type": "integer"
+        },
+        "source_path": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Full path to source file",
+          "title": "Source Path"
+        },
+        "target_framework": {
+          "description": "Target framework: Angular, SpringBoot, React, .NET",
+          "title": "Target Framework",
+          "type": "string"
+        },
+        "analysis_timestamp": {
+          "title": "Analysis Timestamp",
+          "type": "string"
+        },
+        "analyzer_version": {
+          "default": "1.0.0-universal-ir",
+          "title": "Analyzer Version",
+          "type": "string"
+        },
+        "parser_type": {
+          "default": "universal-parser",
+          "title": "Parser Type",
+          "type": "string"
+        },
+        "confidence": {
+          "default": 0.0,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "ui_agent_confidence": {
+          "anyOf": [
+            {
+              "maximum": 1.0,
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ui Agent Confidence"
+        },
+        "data_agent_confidence": {
+          "anyOf": [
+            {
+              "maximum": 1.0,
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Data Agent Confidence"
+        },
+        "logic_agent_confidence": {
+          "anyOf": [
+            {
+              "maximum": 1.0,
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Logic Agent Confidence"
+        },
+        "io_agent_confidence": {
+          "anyOf": [
+            {
+              "maximum": 1.0,
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Io Agent Confidence"
+        },
+        "complexity": {
+          "default": "medium",
+          "enum": [
+            "simple",
+            "medium",
+            "complex",
+            "very_complex"
+          ],
+          "title": "Complexity",
+          "type": "string"
+        },
+        "complexity_score": {
+          "anyOf": [
+            {
+              "maximum": 10,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Complexity Score"
+        },
+        "subagents_used": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Subagents Used",
+          "type": "array"
+        },
+        "language_specific": {
+          "additionalProperties": true,
+          "title": "Language Specific",
+          "type": "object"
+        }
+      },
+      "required": [
+        "source_language",
+        "source_file",
+        "target_framework"
+      ],
+      "title": "SourceMetadata",
+      "type": "object"
+    },
+    "UIControl": {
+      "description": "UI control definition (VB6, PowerBuilder, Delphi forms).",
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "type": {
+          "title": "Type",
+          "type": "string"
+        },
+        "caption": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Caption"
+        },
+        "text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Text"
+        },
+        "enabled": {
+          "default": true,
+          "title": "Enabled",
+          "type": "boolean"
+        },
+        "visible": {
+          "default": true,
+          "title": "Visible",
+          "type": "boolean"
+        },
+        "tab_index": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Tab Index"
+        },
+        "left": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Left"
+        },
+        "top": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Top"
+        },
+        "width": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Width"
+        },
+        "height": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Height"
+        },
+        "data_field": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Data Field"
+        },
+        "data_source": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Data Source"
+        },
+        "required": {
+          "default": false,
+          "title": "Required",
+          "type": "boolean"
+        },
+        "validation_pattern": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Validation Pattern"
+        },
+        "controls": {
+          "items": {
+            "$ref": "#/$defs/UIControl"
+          },
+          "title": "Controls",
+          "type": "array"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ],
+      "title": "UIControl",
+      "type": "object"
+    },
+    "UIForm": {
+      "description": "UI form/window definition.",
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "title": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Title"
+        },
+        "type": {
+          "default": "form",
+          "enum": [
+            "form",
+            "dialog",
+            "mdi_child",
+            "mdi_parent"
+          ],
+          "title": "Type",
+          "type": "string"
+        },
+        "width": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Width"
+        },
+        "height": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Height"
+        },
+        "startup_position": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Startup Position"
+        },
+        "controls": {
+          "items": {
+            "$ref": "#/$defs/UIControl"
+          },
+          "title": "Controls",
+          "type": "array"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "UIForm",
+      "type": "object"
+    },
+    "UISection": {
+      "description": "All UI components (VB6 forms, PowerBuilder windows).\nNot applicable for COBOL.",
+      "properties": {
+        "forms": {
+          "items": {
+            "$ref": "#/$defs/UIForm"
+          },
+          "title": "Forms",
+          "type": "array"
+        },
+        "has_ui": {
+          "default": false,
+          "title": "Has Ui",
+          "type": "boolean"
+        }
+      },
+      "title": "UISection",
+      "type": "object"
+    },
+    "Workflow": {
+      "description": "Workflow or process flow.",
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "entry_point": {
+          "title": "Entry Point",
+          "type": "string"
+        },
+        "procedures_called": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Procedures Called",
+          "type": "array"
+        },
+        "parallel_execution": {
+          "default": false,
+          "title": "Parallel Execution",
+          "type": "boolean"
+        },
+        "error_handling": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Error Handling"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "confidence": {
+          "default": 0.85,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Confidence",
+          "type": "number"
+        }
+      },
+      "required": [
+        "name",
+        "entry_point"
+      ],
+      "title": "Workflow",
+      "type": "object"
+    }
+  },
+  "description": "Universal Intermediate Representation - Language-Agnostic IR\n\nVersion: 1.0.0\nSchema: universal-ir-v1\n\nSupports: VB6, COBOL, PowerBuilder, Delphi, AS/400\nTargets: Angular, Spring Boot, React, .NET, Vue",
+  "example": {
+    "metadata": {
+      "confidence": 0.87,
+      "source_file": "seq.cbl",
+      "source_language": "COBOL",
+      "target_framework": "SpringBoot"
+    },
+    "schema_version": "universal-ir-v1"
+  },
+  "properties": {
+    "metadata": {
+      "$ref": "#/$defs/SourceMetadata"
+    },
+    "data_structures": {
+      "$ref": "#/$defs/DataStructuresSection"
+    },
+    "business_logic": {
+      "$ref": "#/$defs/BusinessLogicSection"
+    },
+    "io_operations": {
+      "$ref": "#/$defs/IOOperationsSection"
+    },
+    "ui": {
+      "$ref": "#/$defs/UISection"
+    },
+    "data_operations": {
+      "$ref": "#/$defs/DataOperationsSection"
+    },
+    "events": {
+      "$ref": "#/$defs/EventsSection"
+    },
+    "patterns": {
+      "items": {
+        "$ref": "#/$defs/DetectedPattern"
+      },
+      "title": "Patterns",
+      "type": "array"
+    },
+    "external_references": {
+      "$ref": "#/$defs/ExternalReferencesSection"
+    },
+    "security_issues": {
+      "items": {
+        "$ref": "#/$defs/SecurityIssue"
+      },
+      "title": "Security Issues",
+      "type": "array"
+    },
+    "repository_mapping": {
+      "$ref": "#/$defs/RepositoryMappingSection"
+    },
+    "frontend_mapping": {
+      "$ref": "#/$defs/FrontendMappingSection"
+    },
+    "generation_metadata": {
+      "$ref": "#/$defs/GenerationMetadata"
+    },
+    "schema_version": {
+      "default": "universal-ir-v1",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "metadata"
+  ],
+  "title": "UniversalIR",
+  "type": "object"
+}
